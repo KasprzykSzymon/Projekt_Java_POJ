@@ -105,22 +105,15 @@ public class Wypozyczalnia {
             Date currentDate = new Date();
             System.out.println("Dzisiejsza data: " + dateFormat.format(currentDate));
 
-            // konwertowanie daty do kalendarza
-            Calendar c = Calendar.getInstance();
-            c.setTime(currentDate);
+            Calendar dt = Calendar.getInstance();
+            dt.setTime(currentDate);
 
-            // dodawanie do obecnej daty
-            //c.add(Calendar.YEAR, 1);
-            //c.add(Calendar.MONTH, 1);
-            c.add(Calendar.DATE, dni);
+            //dt.add(Calendar.YEAR, 1);
+            //dt.add(Calendar.MONTH, 1);
+            dt.add(Calendar.DATE, dni);
 
-            // konwersacja kalendarza do daty
-            Date currentDatePlusOne = c.getTime();
-
+            Date currentDatePlusOne = dt.getTime();
             System.out.println("Wynajem konczy sie: " + dateFormat.format(currentDatePlusOne));
-
-            //LocalDate myObj = LocalDate.now(); // Create a date object
-            //System.out.println(myObj);
         }
         // Zadanie do zaimplementowania: dodaj funkcjonalność rezerwacji samochodu na określony czas
     }
