@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+
 public class Wypozyczalnia {
     private ArrayList<Samochod> samochody;
     private Scanner scanner;
@@ -91,7 +97,31 @@ public class Wypozyczalnia {
             System.out.println("Nie znaleziono samochodu o podanym ID!");
             return;
         }
+        else{
+            System.out.println("Na ile dni chcesz wypozyczyc auto? ");
+            int dni = scanner.nextInt();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 
+            Date currentDate = new Date();
+            System.out.println("Dzisiejsza data: " + dateFormat.format(currentDate));
+
+            // konwertowanie daty do kalendarza
+            Calendar c = Calendar.getInstance();
+            c.setTime(currentDate);
+
+            // dodawanie do obecnej daty
+            //c.add(Calendar.YEAR, 1);
+            //c.add(Calendar.MONTH, 1);
+            c.add(Calendar.DATE, dni);
+
+            // konwersacja kalendarza do daty
+            Date currentDatePlusOne = c.getTime();
+
+            System.out.println("Wynajem konczy sie: " + dateFormat.format(currentDatePlusOne));
+
+            //LocalDate myObj = LocalDate.now(); // Create a date object
+            //System.out.println(myObj);
+        }
         // Zadanie do zaimplementowania: dodaj funkcjonalność rezerwacji samochodu na określony czas
     }
 
@@ -124,8 +154,14 @@ public class Wypozyczalnia {
         }
 
         System.out.print("Podaj ocene samochodu (od 1 do 5): ");
-        int ocena = scanner.nextInt();
-        scanner.nextLine();
+        int ocena;
+        do{
+            ocena = scanner.nextInt();
+            scanner.nextLine();
+            if(ocena<1 || 5<ocena){
+                System.out.println("Podano zla wartosc. (Podaj ocene od 1 do 5)");
+            }
+        }while(!(ocena>=1 && 5>=ocena));
 
         samochod.dodajOcene(ocena);
         System.out.println("Dodano ocene dla samochodu!");
@@ -198,7 +234,13 @@ public class Wypozyczalnia {
         }
 
         public double obliczKosztWynajmu(int dni) {
-            return cena * dni;
+            if(dni < 7) return cena * dni;
+            if(dni < 14){
+                System.out.println("Dodano rabat 10%. Za wynajem " + dni + " dni ");
+                return cena * dni * 0.9;
+            }
+            System.out.println("Dodano rabat 15%. Za wynajem " + dni + " dni");
+            return cena * dni * 0.85;
         }
 
         public void dodajOcene(int ocena) {
