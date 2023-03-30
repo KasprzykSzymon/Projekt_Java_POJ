@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Wypozyczalnia {
     private ArrayList<Samochod> samochody;
     private Scanner scanner;
+    private static int nextId = 1;
 
     public Wypozyczalnia() {
         samochody = new ArrayList<Samochod>();
@@ -18,8 +19,9 @@ public class Wypozyczalnia {
             System.out.println("2. Wyswietl samochody");
             System.out.println("3. Rezerwuj samochod");
             System.out.println("4. Oblicz koszt wynajmu samochodu");
-            System.out.println("5. Oceń samochod");
-            System.out.println("6. Wyjdz");
+            System.out.println("5. Ocen samochod");
+            System.out.println("6. Wyswietl oceny aut");
+            System.out.println("7. Wyjdz");
             System.out.print("\nWybierz opcje: ");
             wybor = scanner.nextInt();
             scanner.nextLine();
@@ -41,12 +43,15 @@ public class Wypozyczalnia {
                     ocenSamochod();
                     break;
                 case 6:
+                    zobaczOcenyAut();
+                    break;
+                case 7:
                     System.out.println("Koniec programu!");
                     break;
                 default:
                     System.out.println("Nieznana opcja!");
             }
-        } while (wybor != 6);
+        } while (wybor != 7);
     }
 
 
@@ -72,7 +77,7 @@ public class Wypozyczalnia {
 
         System.out.println("\nLista samochodow:");
         for (Samochod samochod : samochody) {
-            System.out.println(samochod);
+            System.out.println("ID: " + samochod.id + "\t" +samochod.marka + "\t  " + samochod.model);
         }
     }
 
@@ -104,7 +109,7 @@ public class Wypozyczalnia {
         int dni = scanner.nextInt();
 
         double koszt = samochod.obliczKosztWynajmu(dni);
-        System.out.println("\nKoszt wynajmu samochodu " + samochod.getMarka() + " " + samochod.getModel() + " wynosi: " + koszt + " zł");
+        System.out.println("\nKoszt wynajmu samochodu " + samochod.getMarka() + " " + samochod.getModel() + " wynosi: " + koszt + " PLN");
     }
 
     private void ocenSamochod() {
@@ -126,6 +131,18 @@ public class Wypozyczalnia {
         System.out.println("Dodano ocene dla samochodu!");
     }
 
+    private void zobaczOcenyAut(){
+        if (samochody.isEmpty()) {
+            System.out.println("Brak samochodow!");
+            return;
+        }
+        else{
+            for (Samochod samochod : samochody) {
+                System.out.println("\t" + samochod.marka + " \t " + samochod.model + "\tOcena: " + samochod.sredniaOcen());
+                }
+        }
+    }
+
     private Samochod znajdzSamochod(int id) {
         for (Samochod samochod : samochody) {
             if (samochod.getId() == id) {
@@ -141,7 +158,7 @@ public class Wypozyczalnia {
     }
 
     class Samochod {
-        private static int nextId = 1;
+        //private static int nextId = 1; // Dałem to jako zmienną globalną wypozyczalni
         private int id;
         private String marka;
         private String model;
@@ -158,9 +175,7 @@ public class Wypozyczalnia {
             this.czyDostepny = true;
         }
 
-        public int getId() {
-            return id;
-        }
+        public int getId() { return id; }
 
         public String getMarka() {
             return marka;
