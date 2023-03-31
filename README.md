@@ -14,7 +14,7 @@
   - Rezerwuj samochód
   - Oblicz koszt wynajmu samochodu
   - Ocen samochod
-  - Wyswitl oceny aut
+  - Wyswietl oceny aut
   - Wyjdz
 
 #### Do dodania:
