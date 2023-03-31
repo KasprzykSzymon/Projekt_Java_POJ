@@ -68,9 +68,11 @@ public class Wypozyczalnia {
         String model = scanner.nextLine();
         System.out.print("Podaj cene za dzien wynajmu: ");
         double cena = scanner.nextDouble();
+        System.out.print("Podaj rok produkcji tego samochodu: ");
+        short rokProdukcji = scanner.nextShort();
         scanner.nextLine();
 
-        Samochod samochod = new Samochod(marka, model, cena);
+        Samochod samochod = new Samochod(marka, model, cena, rokProdukcji);
         samochody.add(samochod);
         System.out.println("Dodano samochod!");
     }
@@ -83,7 +85,7 @@ public class Wypozyczalnia {
 
         System.out.println("\nLista samochodow:");
         for (Samochod samochod : samochody) {
-            System.out.println("ID: " + samochod.id + "\t" +samochod.marka + "\t  " + samochod.model);
+            System.out.println("ID: " + samochod.id + "\t" +samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji);
         }
     }
 
@@ -98,6 +100,7 @@ public class Wypozyczalnia {
             return;
         }
         else{
+            // Zadanie do zaimplementowania: dodaj funkcjonalność rezerwacji samochodu na określony czas
             System.out.println("Na ile dni chcesz wypozyczyc auto? ");
             int dni = scanner.nextInt();
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
@@ -115,7 +118,7 @@ public class Wypozyczalnia {
             Date currentDatePlusOne = dt.getTime();
             System.out.println("Wynajem konczy sie: " + dateFormat.format(currentDatePlusOne));
         }
-        // Zadanie do zaimplementowania: dodaj funkcjonalność rezerwacji samochodu na określony czas
+
     }
 
     private void obliczKosztWynajmu() {
@@ -192,14 +195,16 @@ public class Wypozyczalnia {
         private String marka;
         private String model;
         private double cena;
+        private short rokProdukcji;
         private ArrayList<Integer> oceny;
         private boolean czyDostepny;
 
-        public Samochod(String marka, String model, double cena) {
+        public Samochod(String marka, String model, double cena, short rokProdukcji) {
             this.id = nextId++;
             this.marka = marka;
             this.model = model;
             this.cena = cena;
+            this.rokProdukcji = rokProdukcji;
             this.oceny = new ArrayList<Integer>();
             this.czyDostepny = true;
         }
@@ -217,6 +222,7 @@ public class Wypozyczalnia {
         public double getCena() {
             return cena;
         }
+        public short getRokProdukcji() { return  rokProdukcji;}
 
         public boolean czyDostepny() {
             return czyDostepny;
