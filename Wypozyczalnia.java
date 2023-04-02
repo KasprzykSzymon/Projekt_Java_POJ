@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.text.ParseException;
 
 
 public class Wypozyczalnia {
@@ -98,27 +99,44 @@ public class Wypozyczalnia {
         if (samochod == null) {
             System.out.println("Nie znaleziono samochodu o podanym ID!");
             return;
+        } else {
+            System.out.println("Na ile dni chcesz wypozyczyc samochod?");
+            int days = scanner.nextInt();
+            scanner.nextLine();
+
+            System.out.println("Czy chcesz zaczac wypozyczanie od dzisiaj? (TAK/NIE)");
+            String wybor = scanner.nextLine().toUpperCase();
+
+            Calendar startDate = Calendar.getInstance();
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            if (wybor.equals("TAK")) {
+                System.out.println("Wypozyczanie zaczyna się od dzisiaj: " + dateFormat.format(startDate.getTime()));
+            } else if (wybor.equals("NIE")) {
+                System.out.println("Podaj date rozpoczecia wypozyczenia (w formacie dd/MM/yyyy): ");
+                String dateStr = scanner.nextLine();
+
+
+                try {
+
+                    Date date = dateFormat.parse(dateStr);
+                    startDate.setTime(date);
+                    System.out.println("Wypozyczanie zaczyna sie od: " + dateFormat.format(startDate.getTime()));
+                } catch (ParseException e) {
+                    System.out.println("Nieprawidlowy format daty!");
+                    return;
+                }
+            } else {
+                System.out.println("Nieznana opcja!");
+                return;
+            }
+
+            Calendar endDate = (Calendar) startDate.clone();
+            //endDate.add(Calendar.YEAR, 1);
+            //endDate.add(Calendar.MONTH, 1);
+            endDate.add(Calendar.DATE, days);
+            System.out.println("Wypozyczanie konczy sie dnia: " + dateFormat.format(endDate.getTime()));
         }
-        else{
-            // Zadanie do zaimplementowania: dodaj funkcjonalność rezerwacji samochodu na określony czas
-            System.out.println("Na ile dni chcesz wypozyczyc auto? ");
-            int dni = scanner.nextInt();
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-
-            Date currentDate = new Date();
-            System.out.println("Dzisiejsza data: " + dateFormat.format(currentDate));
-
-            Calendar dt = Calendar.getInstance();
-            dt.setTime(currentDate);
-
-            //dt.add(Calendar.YEAR, 1);
-            //dt.add(Calendar.MONTH, 1);
-            dt.add(Calendar.DATE, dni);
-
-            Date currentDatePlusOne = dt.getTime();
-            System.out.println("Wynajem konczy sie: " + dateFormat.format(currentDatePlusOne));
-        }
-
     }
 
     private void obliczKosztWynajmu() {
