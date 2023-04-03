@@ -17,10 +17,10 @@
   - Wyswietl oceny aut
   - Wyjdz
  
-###Dla mniej ogarniętych:
+### Dla mniej ogarniętych:
  -Aktualnie są dwie funkcje main (Dla GUI i Wypożyczalni) ; 
  
-####Odpalanie konsolowe:
+#### Odpalanie konsolowe:
  
 Do Wypożyczalni consolowej
  -(Scieżka do pliku) javac  Wypozyczalnia.java
