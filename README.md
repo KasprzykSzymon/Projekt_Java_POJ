@@ -8,7 +8,7 @@
  - Klaudia Iwanowicz
  - Oskar Pytlewski
 
-#### Zrobine funkcje:
+ #### Zrobine funkcje:
   - Dodaj samochód
   - Wyświetl samochody
   - Rezerwuj samochód
@@ -17,16 +17,16 @@
   - Wyswietl oceny aut
   - Wyjdz
  
- ###Dla mniej ogarniętych:
+###Dla mniej ogarniętych:
  -Aktualnie są dwie funkcje main (Dla GUI i Wypożyczalni) ; 
  
- ####Odpalanie konsolowe:
+####Odpalanie konsolowe:
  
- Do Wypożyczalni consolowej
+Do Wypożyczalni consolowej
  -(Scieżka do pliku) javac  Wypozyczalnia.java
  -(Scieżka do pliku) java  Wypozyczalnia
  
- Do GUI:
+Do GUI:
  -(Scieżka do pliku) javac  GUI.java
  -(Scieżka do pliku) java  GUI
  
