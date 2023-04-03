@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 
 public class DodajSamochod extends JFrame implements ActionListener {
 
-        JTextField myTextField ;
-        JTextField myTextField2 ;
-        JTextField myTextField3 ;
-        JTextField myTextField4 ;
+        JTextField myTextFieldMarka ;
+        JTextField myTextFieldModel ;
+        JTextField myTextFieldRokProdukcji ;
+        JTextField myTextFieldKwotaZaDzien ;
         JButton buttonPowrot ;
         JButton buttonZatwierdz ;
 
@@ -38,30 +38,55 @@ public class DodajSamochod extends JFrame implements ActionListener {
                 Label1.setBackground(Color.GREEN);
                 panel1.add(Label1);
 
-                myTextField = new JTextField();
-                panel1.add(myTextField);
+                myTextFieldMarka = new JTextField();
+                myTextFieldMarka.setPreferredSize(new Dimension(250,40));
+                myTextFieldMarka.setFont(new Font("Arctic", Font.PLAIN,35));
+                myTextFieldMarka.setForeground(Color.GREEN);
+                myTextFieldMarka.setBackground(Color.BLACK);
+                myTextFieldMarka.setCaretColor(Color.WHITE);
+//                myTextFieldMarka.setText("(Np OPEL)");
+                panel1.add(myTextFieldMarka);
 
 
                 JLabel Label2 = new JLabel("Podaj model samochodu: \t");
                 Label2.setBackground(Color.GREEN);
                 panel1.add(Label2);
 
-                myTextField2 = new JTextField();
-                panel1.add(myTextField2);
-
-                JLabel Label3 = new JLabel("Podaj cene za dzien wynajmu: \t");
-                panel1.add(Label3);
-                Label3.setBackground(Color.GREEN);
-
-                myTextField3 = new JTextField();
-                panel1.add(myTextField3);
+                myTextFieldModel = new JTextField();
+                myTextFieldModel.setPreferredSize(new Dimension(250,40));
+                myTextFieldModel.setFont(new Font("Arctic", Font.PLAIN,35));
+                myTextFieldModel.setForeground(Color.GREEN);
+                myTextFieldModel.setBackground(Color.BLACK);
+                myTextFieldModel.setCaretColor(Color.WHITE);
+//                myTextFieldModel.setText("(Np ASTRA)");
+                panel1.add(myTextFieldModel);
 
                 JLabel Label4 = new JLabel("Podaj rok produkcji: \t");
                 panel1.add(Label4);
                 Label4.setBackground(Color.GREEN);
 
-                myTextField4 = new JTextField();
-                panel1.add(myTextField4);
+                myTextFieldRokProdukcji = new JTextField();
+                myTextFieldRokProdukcji.setPreferredSize(new Dimension(250,40));
+                myTextFieldRokProdukcji.setFont(new Font("Arctic", Font.PLAIN,35));
+                myTextFieldRokProdukcji.setForeground(Color.GREEN);
+                myTextFieldRokProdukcji.setBackground(Color.BLACK);
+                myTextFieldRokProdukcji.setCaretColor(Color.WHITE);
+//                myTextFieldRokProdukcji.setText("(Np 2020)");
+                panel1.add(myTextFieldRokProdukcji);
+
+                JLabel Label3 = new JLabel("Podaj cene za dzien wynajmu: \t");
+                panel1.add(Label3);
+                Label3.setBackground(Color.GREEN);
+
+                myTextFieldKwotaZaDzien = new JTextField();
+                myTextFieldKwotaZaDzien.setPreferredSize(new Dimension(250,40));
+                myTextFieldKwotaZaDzien.setFont(new Font("Arctic", Font.PLAIN,35));
+                myTextFieldKwotaZaDzien.setForeground(Color.GREEN);
+                myTextFieldKwotaZaDzien.setBackground(Color.BLACK);
+                myTextFieldKwotaZaDzien.setCaretColor(Color.WHITE);
+//                myTextFieldKwotaZaDzien.setText("(Np 100)");
+                panel1.add(myTextFieldKwotaZaDzien);
+
 
                 panel1.setBackground(Color.GREEN);
 
@@ -91,9 +116,6 @@ public class DodajSamochod extends JFrame implements ActionListener {
                 buttonZatwierdz.setSize(250,20);
                 buttonZatwierdz.addActionListener(this);
 
-                myTextField.setPreferredSize(new Dimension(250,10));
-
-
 
         }
 
@@ -103,6 +125,11 @@ public class DodajSamochod extends JFrame implements ActionListener {
 
                 }
                 if(e.getSource()==buttonZatwierdz){
+                        myTextFieldMarka.getText();
+                        myTextFieldModel.getText();
+                        myTextFieldKwotaZaDzien.getText();
+                        myTextFieldKwotaZaDzien.getText();
+
 
                 }
 
