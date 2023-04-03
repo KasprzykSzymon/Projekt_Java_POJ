@@ -17,8 +17,6 @@ public class GUI implements ActionListener {
 
         public GUI(){
 
-
-
             JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
             button = new JButton("Dodaj samochod");
             button2 = new JButton("Wyswietl samochody");
