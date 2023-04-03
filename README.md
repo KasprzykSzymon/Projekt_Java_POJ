@@ -16,6 +16,20 @@
   - Ocen samochod
   - Wyswietl oceny aut
   - Wyjdz
+ 
+ ###Dla mniej ogarniętych:
+ -Aktualnie są dwie funkcje main (Dla GUI i Wypożyczalni) ; 
+ 
+ ####Odpalanie konsolowe:
+ 
+ Do Wypożyczalni consolowej
+ -(Scieżka do pliku) javac  Wypozyczalnia.java
+ -(Scieżka do pliku) java  Wypozyczalnia
+ 
+ Do GUI:
+ -(Scieżka do pliku) javac  GUI.java
+ -(Scieżka do pliku) java  GUI
+ 
 
 #### Do dodania:
   - Baza danych, by cały czas nie pisać od zera programu (Zajmę się tym Szymon)
