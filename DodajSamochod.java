@@ -9,6 +9,7 @@ public class DodajSamochod extends JFrame implements ActionListener {
         JTextField myTextFieldModel ;
         JTextField myTextFieldRokProdukcji ;
         JTextField myTextFieldKwotaZaDzien ;
+        JCheckBox checkBox;
         JButton buttonPowrot ;
         JButton buttonZatwierdz ;
 
@@ -86,6 +87,12 @@ public class DodajSamochod extends JFrame implements ActionListener {
                 myTextFieldKwotaZaDzien.setCaretColor(Color.WHITE);
 //                myTextFieldKwotaZaDzien.setText("(Np 100)");
                 panel1.add(myTextFieldKwotaZaDzien);
+
+                checkBox = new JCheckBox();
+                checkBox.setText("Nie jestem robotem :)");
+                checkBox.setBackground(Color.GREEN);
+                checkBox.setFocusable(false);
+                panel1.add(checkBox);
 
 
                 panel1.setBackground(Color.GREEN);
