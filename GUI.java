@@ -12,7 +12,7 @@ public class GUI implements ActionListener {
     JButton button4;
     JButton button5;
     JButton button6;
-    JButton button7;
+    JButton exitButton;
 
 
         public GUI(){
@@ -24,7 +24,7 @@ public class GUI implements ActionListener {
             button4 = new JButton("Oblicz koszt wynajmu samochodu");
             button5 = new JButton("Ocen samochod");
             button6 = new JButton("Wyswietl oceny samochodow");
-            button7 = new JButton("Wyjscie");
+            exitButton = new JButton("Wyjscie");
 
 
             JPanel  panel = new JPanel();
@@ -66,10 +66,10 @@ public class GUI implements ActionListener {
             button6.setBorder(BorderFactory.createEtchedBorder());
             button6.setBackground(new Color(50,120,200));
 
-            panel.add(button7);
-            button7.addActionListener(this);
-            button7.setBorder(BorderFactory.createEtchedBorder());
-            button7.setBackground(new Color(50,120,200));
+            panel.add(exitButton);
+            exitButton.addActionListener(this);
+            exitButton.setBorder(BorderFactory.createEtchedBorder());
+            exitButton.setBackground(new Color(50,120,200));
 
 
 
@@ -84,6 +84,8 @@ public class GUI implements ActionListener {
                 myFrame.dispose();
                 DodajSamochod dodajSamochod = new DodajSamochod();
             }
+            if(e.getSource()==exitButton)
+                System.exit(0);
 
         }
 }
