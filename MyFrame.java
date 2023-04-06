@@ -3,8 +3,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 public class MyFrame extends JFrame implements ActionListener  {
+
+
+    //ImageIcon image = new ImageIcon("TITLE OF FILE WITH LOGO (TITLE.png)"); //Create an ImageIcon
+//this.setIconImage(image.getImage());  //Change icon of frame
+//this.getContentPane().setBackground(new Color(0,200,0)); //change color of background
+
     JMenu fileMenu;
     JMenu editMenu;
     JMenu aboutMenu;
@@ -57,13 +64,7 @@ public class MyFrame extends JFrame implements ActionListener  {
 
         this.setJMenuBar(menuBar);
 
-        
 
-
-
-        //ImageIcon image = new ImageIcon("TITLE OF FILE WITH LOGO (TITLE.png)"); //Create an ImageIcon
-        //this.setIconImage(image.getImage());  //Change icon of frame
-        //this.getContentPane().setBackground(new Color(0,200,0)); //change color of background
     }
 
     @Override

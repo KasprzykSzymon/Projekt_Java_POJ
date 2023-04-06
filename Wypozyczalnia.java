@@ -14,7 +14,7 @@ public class Wypozyczalnia {
     private static int nextId = 1;
 
     public Wypozyczalnia() {
-        samochody = new ArrayList<Samochod>();
+//        samochody = new ArrayList<Samochod>();
         scanner = new Scanner(System.in);
     }
 
@@ -62,7 +62,7 @@ public class Wypozyczalnia {
     }
 
 
-    private void dodajSamochod() {
+    protected void dodajSamochod() {
         System.out.print("\nPodaj marke samochodu: ");
         String marka = scanner.nextLine();
         System.out.print("Podaj model samochodu: ");
@@ -202,12 +202,12 @@ public class Wypozyczalnia {
         return null;
     }
 
-    public static void main(String[] args) {
-        Wypozyczalnia wypozyczalnia = new Wypozyczalnia();
-        wypozyczalnia.menu();
-    }
+//    public static void main(String[] args) {
+//        Wypozyczalnia wypozyczalnia = new Wypozyczalnia();
+//        wypozyczalnia.menu();
+//    }
 
-    class Samochod {
+    static class Samochod {
         //private static int nextId = 1; // Dałem to jako zmienną globalną wypozyczalni
         private int id;
         private String marka;

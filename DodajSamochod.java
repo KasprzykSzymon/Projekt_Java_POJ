@@ -3,8 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DodajSamochod extends JFrame implements ActionListener {
-
+public class DodajSamochod implements ActionListener {
+        MyFrame myFrame = new MyFrame();
         JTextField myTextFieldMarka ;
         JTextField myTextFieldModel ;
         JTextField myTextFieldRokProdukcji ;
@@ -13,24 +13,17 @@ public class DodajSamochod extends JFrame implements ActionListener {
         JButton buttonPowrot ;
         JButton buttonZatwierdz ;
 
-        DodajSamochod(){
-                this.setTitle("Wypozyczalnia Samochodow");  //sets title of frame
-                this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                this.pack();
-                this.setVisible(true); //make frame visible
-                this.setSize(500,500);
-                this.setLayout(new BorderLayout());
-
+        protected DodajSamochod(){
 
                 JPanel panel = new JPanel();
-                this.add(panel, BorderLayout.NORTH);
+                myFrame.add(panel, BorderLayout.NORTH);
                 JLabel titleLabel  = new JLabel("Podaj parametry samochodu:");
                 panel.add(titleLabel);
                 panel.setBackground(Color.GREEN);
 
 
                 JPanel panel1 = new JPanel();
-                this.add(panel1, BorderLayout.CENTER);
+                myFrame.add(panel1, BorderLayout.CENTER);
                 panel1.setBackground(new Color(0, 200, 0));
                 panel1.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
                 panel1.setLayout(new GridLayout(0,2,10,5));
@@ -45,6 +38,7 @@ public class DodajSamochod extends JFrame implements ActionListener {
                 myTextFieldMarka.setForeground(Color.GREEN);
                 myTextFieldMarka.setBackground(Color.BLACK);
                 myTextFieldMarka.setCaretColor(Color.WHITE);
+//                myTextFieldMarka.
 //                myTextFieldMarka.setText("(Np OPEL)");
                 panel1.add(myTextFieldMarka);
 
@@ -99,17 +93,17 @@ public class DodajSamochod extends JFrame implements ActionListener {
 
                 JPanel panel2 = new JPanel();
                 panel2.setBackground(new Color(0,200,0));
-                this.add(panel2, BorderLayout.SOUTH);
+                myFrame.add(panel2, BorderLayout.SOUTH);
 //                panel2.setPreferredSize(new Dimension(100,100));
                 panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
                 panel2.setLayout(new GridLayout(0,4,10,5));
 
                 buttonPowrot = new JButton(" Powrot ");
-                panel2.add(buttonPowrot);
+                buttonPowrot.addActionListener(this);
                 buttonPowrot.setBackground(new Color(255,100,100));
                 buttonPowrot.setBorder(BorderFactory.createEtchedBorder());
                 buttonPowrot.setSize(250,20);
-
+                panel2.add(buttonPowrot);
 
                 JLabel lb1 = new JLabel();
                 panel2.add(lb1);
@@ -117,25 +111,36 @@ public class DodajSamochod extends JFrame implements ActionListener {
                 panel2.add(lb2);
 
                 buttonZatwierdz = new JButton(" Zatwierdz ");
-                panel2.add(buttonZatwierdz);
+                buttonZatwierdz.addActionListener(this);
                 buttonZatwierdz.setBackground(new Color(0,255,0));
                 buttonZatwierdz.setBorder(BorderFactory.createEtchedBorder());
                 buttonZatwierdz.setSize(250,20);
                 buttonZatwierdz.addActionListener(this);
+                panel2.add(buttonZatwierdz);
 
-
+        }
+        public void podswietlOpcje(){
+                System.out.println("Nie ma");
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==buttonPowrot){
-
+                        myFrame.dispose();
+                        GUI gui = new GUI();
                 }
                 if(e.getSource()==buttonZatwierdz){
-                        myTextFieldMarka.getText();
-                        myTextFieldModel.getText();
-                        myTextFieldKwotaZaDzien.getText();
-                        myTextFieldKwotaZaDzien.getText();
+                        if(myTextFieldMarka.getText().isEmpty() & myTextFieldModel.getText().isEmpty() & myTextFieldRokProdukcji.getText().isEmpty() & myTextFieldKwotaZaDzien.getText().isEmpty()){
+
+                        }
+                        else {
+//                                short = myTextFieldRokProdukcji.getText()
+                                Wypozyczalnia.Samochod samochod = new Wypozyczalnia.Samochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
+                                myFrame.dispose();
+                                GUI gui = new GUI();
+                        }
+
+
 
 
                 }
