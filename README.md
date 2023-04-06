@@ -22,9 +22,9 @@
  
 #### Odpalanie konsolowe:
  
-#### Do Wypożyczalni consolowej
+#### (Do Wypożyczalni consolowej
  - (Scieżka do pliku) javac  Wypozyczalnia.java
- - (Scieżka do pliku) java  Wypozyczalnia
+ - (Scieżka do pliku) java  Wypozyczalnia) Aktualnie niedostępne (Skontaktuj się z adminem gdy chcesz coś tam zrobić :))
  
 #### Do GUI:
  - (Scieżka do pliku) javac  GUI.java
