@@ -41,11 +41,10 @@
   - System upustów - umożliwienie klientom otrzymywania zniżek na wynajem samochodów w zależności od długości wynajmu, częstotliwości wynajmu lub innych czynników.
   - Dodanie możliwości wyboru dodatkowego wyposażenia - pozwala klientom na wybór dodatkowego wyposażenia samochodu, takiego jak GPS, fotelik dla dziecka, itp. Wypożyczalnia może dodatkowo zarabiać na wynajmie dodatkowego wyposażenia.
    - System oceny samochodów - umożliwienie klientom oceny samochodów po ich wynajmie. Dzięki temu wypożyczalnia może zbierać informacje zwrotne od klientów i dostosowywać swoją ofertę do potrzeb klientów.
-  
-  -(Miejsce na pomysły)
-  -(Miejsce na pomysły)
-  -(Miejsce na pomysły)
-  -(Miejsce na pomysły)
+  - (Miejsce na pomysły)
+  - (Miejsce na pomysły)
+  - (Miejsce na pomysły)
+  - (Miejsce na pomysły)
   
 #### Zrealizowane pomysły:
   - Dodanie możliwości obliczania kosztów wynajmu samochodu - pozwala klientom na obliczenie kosztów wynajmu samochodu na podstawie czasu wynajmu i ceny za dzień.(Zajmę się tym Szymon)
