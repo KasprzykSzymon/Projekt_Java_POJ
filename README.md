@@ -17,9 +17,6 @@
   - Wyswietl oceny aut
   - Wyjdz
  
-### Dla mniej ogarniętych:
- - Aktualnie są dwie funkcje main (Dla GUI i Wypożyczalni) ; 
- 
 #### Odpalanie konsolowe:
  
 #### (Do Wypożyczalni consolowej
