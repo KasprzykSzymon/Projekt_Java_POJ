@@ -18,67 +18,67 @@ public class Wypozyczalnia {
         scanner = new Scanner(System.in);
     }
 
-    public void menu() {
-        int wybor;
-        do {
-            System.out.println("\n===============================");
-            System.out.println("1. Dodaj samochod");
-            System.out.println("2. Wyswietl samochody");
-            System.out.println("3. Rezerwuj samochod");
-            System.out.println("4. Oblicz koszt wynajmu samochodu");
-            System.out.println("5. Ocen samochod");
-            System.out.println("6. Wyswietl oceny aut");
-            System.out.println("7. Wyjdz");
-            System.out.print("\nWybierz opcje: ");
-            wybor = scanner.nextInt();
-            scanner.nextLine();
+//    public void menu() {
+////        int wybor;
+////        do {
+////            System.out.println("\n===============================");
+////            System.out.println("1. Dodaj samochod");
+////            System.out.println("2. Wyswietl samochody");
+////            System.out.println("3. Rezerwuj samochod");
+////            System.out.println("4. Oblicz koszt wynajmu samochodu");
+////            System.out.println("5. Ocen samochod");
+////            System.out.println("6. Wyswietl oceny aut");
+////            System.out.println("7. Wyjdz");
+////            System.out.print("\nWybierz opcje: ");
+////            wybor = scanner.nextInt();
+////            scanner.nextLine();
+////
+////            switch (wybor) {
+////                case 1:
+////                    dodajSamochod();
+////                    break;
+////                case 2:
+////                    wyswietlSamochody();
+////                    break;
+////                case 3:
+////                    rezerwujSamochod();
+////                    break;
+////                case 4:
+////                    obliczKosztWynajmu();
+////                    break;
+////                case 5:
+////                    ocenSamochod();
+////                    break;
+////                case 6:
+////                    zobaczOcenyAut();
+////                    break;
+////                case 7:
+////                    System.out.println("Koniec programu!");
+////                    break;
+////                default:
+////                    System.out.println("Nieznana opcja!");
+////            }
+////        } while (wybor != 7);
+////    }
 
-            switch (wybor) {
-                case 1:
-                    dodajSamochod();
-                    break;
-                case 2:
-                    wyswietlSamochody();
-                    break;
-                case 3:
-                    rezerwujSamochod();
-                    break;
-                case 4:
-                    obliczKosztWynajmu();
-                    break;
-                case 5:
-                    ocenSamochod();
-                    break;
-                case 6:
-                    zobaczOcenyAut();
-                    break;
-                case 7:
-                    System.out.println("Koniec programu!");
-                    break;
-                default:
-                    System.out.println("Nieznana opcja!");
-            }
-        } while (wybor != 7);
-    }
 
-
-    protected void dodajSamochod() {
-        System.out.print("\nPodaj marke samochodu: ");
-        String marka = scanner.nextLine();
-        System.out.print("Podaj model samochodu: ");
-        String model = scanner.nextLine();
-        System.out.print("Podaj cene za dzien wynajmu: ");
-        double cena = scanner.nextDouble();
-        System.out.print("Podaj rok produkcji tego samochodu: ");
-        short rokProdukcji = scanner.nextShort();
-        scanner.nextLine();
+    protected void dodajSamochod(String marka, String model, double cena, short rokProdukcji) {
+//        System.out.print("\nPodaj marke samochodu: ");
+//        String marka = scanner.nextLine();
+//        System.out.print("Podaj model samochodu: ");
+//        String model = scanner.nextLine();
+//        System.out.print("Podaj cene za dzien wynajmu: ");
+//        double cena = scanner.nextDouble();
+//        System.out.print("Podaj rok produkcji tego samochodu: ");
+//        short rokProdukcji = scanner.nextShort();
+//        scanner.nextLine();
 
         Samochod samochod = new Samochod(marka, model, cena, rokProdukcji);
         samochody.add(samochod);
-        System.out.println("Dodano samochod!");
+//        System.out.println("Dodano samochod!");
     }
 
-    private void wyswietlSamochody() {
+    protected void wyswietlSamochody() {
         if (samochody.isEmpty()) {
             System.out.println("Brak samochodow!");
             return;

@@ -134,10 +134,11 @@ public class DodajSamochod extends GUI implements ActionListener {
 
                         }
                         else {
-//                                short = myTextFieldRokProdukcji.getText()
-//                                Wypozyczalnia.Samochod samochod = new Wypozyczalnia.Samochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
+                                //Funkcja dodaje dwa takie same auta. Do poprawy
+                                firma.dodajSamochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
+                                firma.wyswietlSamochody();
                                 myFrame.dispose();
-//                                GUI gui = new GUI();
+                                GUI gui = new GUI();
                         }
 
 
