@@ -12,10 +12,9 @@ public class GUI implements ActionListener {
     JButton button5;
     JButton button6;
     JButton exitButton;
-
+    Wypozyczalnia firma= new Wypozyczalnia();
 
         public GUI(){
-
 
             JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
             buttonDodajSamochod = new JButton("Dodaj samochod");
@@ -83,13 +82,18 @@ public class GUI implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource()==buttonDodajSamochod){
-                myFrameStart.dispose();
+//                myFrameStart.dispose();
                 DodajSamochod dodajSamochod = new DodajSamochod();
             }
             if(e.getSource()==buttonWyswietlSamochody){
-                myFrameStart.dispose();
+//                myFrameStart.dispose();
                 wyswietlSamochody wyswietlSamochody = new wyswietlSamochody();
             }
+            if(e.getSource()==button4){
+//                myFrameStart.dispose();
+                obliczKwoteWynajmu obliczKwoteWynajmu = new obliczKwoteWynajmu();
+            }
+
             if(e.getSource()==exitButton)
                 System.exit(0);
 

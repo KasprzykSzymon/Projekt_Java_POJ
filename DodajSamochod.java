@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DodajSamochod implements ActionListener {
+public class DodajSamochod extends GUI implements ActionListener {
         MyFrame myFrame = new MyFrame();
         JTextField myTextFieldMarka ;
         JTextField myTextFieldModel ;
@@ -126,7 +126,7 @@ public class DodajSamochod implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
                 if(e.getSource()==buttonPowrot){
-                        myFrame.dispose();
+//                        myFrame.dispose();
                         GUI gui = new GUI();
                 }
                 if(e.getSource()==buttonZatwierdz){
@@ -135,9 +135,9 @@ public class DodajSamochod implements ActionListener {
                         }
                         else {
 //                                short = myTextFieldRokProdukcji.getText()
-                                Wypozyczalnia.Samochod samochod = new Wypozyczalnia.Samochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
+//                                Wypozyczalnia.Samochod samochod = new Wypozyczalnia.Samochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
                                 myFrame.dispose();
-                                GUI gui = new GUI();
+//                                GUI gui = new GUI();
                         }
 
 

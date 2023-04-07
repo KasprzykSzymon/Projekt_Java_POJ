@@ -14,7 +14,7 @@ public class Wypozyczalnia {
     private static int nextId = 1;
 
     public Wypozyczalnia() {
-//        samochody = new ArrayList<Samochod>();
+        samochody = new ArrayList<Samochod>();
         scanner = new Scanner(System.in);
     }
 
@@ -139,7 +139,7 @@ public class Wypozyczalnia {
         }
     }
 
-    private void obliczKosztWynajmu() {
+    protected void obliczKosztWynajmu() {
         System.out.print("\nPodaj ID samochodu: ");
         int id = scanner.nextInt();
         scanner.nextLine();

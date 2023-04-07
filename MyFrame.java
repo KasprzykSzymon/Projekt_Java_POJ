@@ -22,6 +22,8 @@ public class MyFrame extends JFrame implements ActionListener  {
     JMenuItem backItem;
     JMenuItem aboutItem;
 
+
+
     MyFrame(){
         this.setTitle("Wypozyczalnia Samochodow");  //sets title of frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
