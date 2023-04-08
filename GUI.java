@@ -4,11 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI implements ActionListener {
-    MyFrame myFrameStart = new MyFrame(); //creates a myFrane
+    MyFrame myFrame = new MyFrame(); //creates a myFrane
     JButton buttonDodajSamochod;
     JButton buttonWyswietlSamochody;
     JButton button3;
-    JButton button4;
+    JButton buttonCalculateCost;
     JButton button5;
     JButton button6;
     JButton exitButton;
@@ -20,7 +20,7 @@ public class GUI implements ActionListener {
             buttonDodajSamochod = new JButton("Dodaj samochod");
             buttonWyswietlSamochody = new JButton("Wyswietl samochody");
             button3 = new JButton("Rezerwuj samochod");
-            button4 = new JButton("Oblicz koszt wynajmu samochodu");
+            buttonCalculateCost = new JButton("Oblicz koszt wynajmu samochodu");
             button5 = new JButton("Ocen samochod");
             button6 = new JButton("Wyswietl oceny samochodow");
             exitButton = new JButton("Wyjscie");
@@ -28,7 +28,7 @@ public class GUI implements ActionListener {
 
             JPanel  panel = new JPanel();
 
-            myFrameStart.add(panel, BorderLayout.CENTER);
+            myFrame.add(panel, BorderLayout.CENTER);
             panel.setBackground(new Color(0,200,0));
             panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
             panel.setLayout(new GridLayout(0,1,10,5));
@@ -50,10 +50,10 @@ public class GUI implements ActionListener {
             button3.setBorder(BorderFactory.createEtchedBorder());
             button3.setBackground(new Color(50,120,200));
 
-            panel.add(button4);
-            button4.addActionListener(this);
-            button4.setBorder(BorderFactory.createEtchedBorder());
-            button4.setBackground(new Color(50,120,200));
+            panel.add(buttonCalculateCost);
+            buttonCalculateCost.addActionListener(this);
+            buttonCalculateCost.setBorder(BorderFactory.createEtchedBorder());
+            buttonCalculateCost.setBackground(new Color(50,120,200));
 
             panel.add(button5);
             button5.addActionListener(this);
@@ -82,15 +82,15 @@ public class GUI implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource()==buttonDodajSamochod){
-//                myFrameStart.dispose();
+                myFrame.dispose();
                 DodajSamochod dodajSamochod = new DodajSamochod();
             }
             if(e.getSource()==buttonWyswietlSamochody){
-//                myFrameStart.dispose();
+                myFrame.dispose();
                 wyswietlSamochody wyswietlSamochody = new wyswietlSamochody();
             }
-            if(e.getSource()==button4){
-//                myFrameStart.dispose();
+            if(e.getSource()==buttonCalculateCost){
+                myFrame.dispose();
                 obliczKwoteWynajmu obliczKwoteWynajmu = new obliczKwoteWynajmu();
             }
 
