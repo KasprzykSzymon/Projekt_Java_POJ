@@ -38,7 +38,7 @@ public class DodajSamochod extends GUI implements ActionListener {
                 myTextFieldMarka.setForeground(Color.GREEN);
                 myTextFieldMarka.setBackground(Color.BLACK);
                 myTextFieldMarka.setCaretColor(Color.WHITE);
-                myTextFieldMarka.setText("(Np OPEL)");
+                myTextFieldMarka.setText("OPEL");
                 panel1.add(myTextFieldMarka);
 
 
@@ -52,7 +52,7 @@ public class DodajSamochod extends GUI implements ActionListener {
                 myTextFieldModel.setForeground(Color.GREEN);
                 myTextFieldModel.setBackground(Color.BLACK);
                 myTextFieldModel.setCaretColor(Color.WHITE);
-                myTextFieldModel.setText("(Np ASTRA)");
+                myTextFieldModel.setText("ASTRA");
                 panel1.add(myTextFieldModel);
 
                 JLabel Label4 = new JLabel("Podaj rok produkcji: \t");
@@ -65,7 +65,7 @@ public class DodajSamochod extends GUI implements ActionListener {
                 myTextFieldRokProdukcji.setForeground(Color.GREEN);
                 myTextFieldRokProdukcji.setBackground(Color.BLACK);
                 myTextFieldRokProdukcji.setCaretColor(Color.WHITE);
-                myTextFieldRokProdukcji.setText("(Np 2020)");
+                myTextFieldRokProdukcji.setText("2020");
                 panel1.add(myTextFieldRokProdukcji);
 
                 JLabel Label3 = new JLabel("Podaj cene za dzien wynajmu: \t");
@@ -78,7 +78,7 @@ public class DodajSamochod extends GUI implements ActionListener {
                 myTextFieldKwotaZaDzien.setForeground(Color.GREEN);
                 myTextFieldKwotaZaDzien.setBackground(Color.BLACK);
                 myTextFieldKwotaZaDzien.setCaretColor(Color.WHITE);
-                myTextFieldKwotaZaDzien.setText("(Np 100)");
+                myTextFieldKwotaZaDzien.setText("100");
                 panel1.add(myTextFieldKwotaZaDzien);
 
                 checkBox = new JCheckBox();
@@ -129,9 +129,8 @@ public class DodajSamochod extends GUI implements ActionListener {
                 }
                 if(e.getSource()==buttonZatwierdz){
                         if(!(myTextFieldMarka.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldRokProdukcji.getText().isEmpty() | myTextFieldKwotaZaDzien.getText().isEmpty())){
-                                //Funkcja dodaje dwa takie same auta. Do poprawy
                                 firma.dodajSamochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
-                                firma.wyswietlSamochody();
+//                                firma.wyswietlSamochody();
                                 myFrame.dispose();
                                 GUI GUI = new GUI();
                         }

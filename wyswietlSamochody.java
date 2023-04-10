@@ -2,11 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class wyswietlSamochody implements ActionListener {
-    MyFrame myFrame = new MyFrame();
-    JButton buttonPowrot ;
-    JComboBox comboBoxWyswietlSampchody;
+public class wyswietlSamochody extends GUI implements ActionListener {
+    private MyFrame myFrame = new MyFrame();
+    private JLabel listaAut;
+
+    private JButton buttonPowrot ;
     wyswietlSamochody(){
         JPanel panelStart = new JPanel();
         panelStart.setBackground(Color.GREEN);
@@ -19,11 +21,15 @@ public class wyswietlSamochody implements ActionListener {
         JPanel panel1 = new JPanel();
         panel1.setBackground(Color.GREEN);
 
-        comboBoxWyswietlSampchody = new JComboBox();
-        comboBoxWyswietlSampchody.setBackground(Color.GREEN);
+        String listCars = firma.wyswietlSamochody();
+
+        listaAut = new JLabel(listCars);
+//        listaAut.setVerticalTextPosition(JLabel.BOTTOM);
+        listaAut.setHorizontalTextPosition(JLabel.CENTER);
+        panel1.add(listaAut);
+        myFrame.add(panel1, BorderLayout.CENTER);
 
 
-        panel1.add(comboBoxWyswietlSampchody);
 
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));

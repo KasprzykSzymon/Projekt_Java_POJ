@@ -8,7 +8,7 @@ import java.util.Date;
 import java.text.ParseException;
 
 
-public class Wypozyczalnia {
+public class Wypozyczalnia  {
     private ArrayList<Samochod> samochody;
     private Scanner scanner;
     private static int nextId = 1;
@@ -78,16 +78,24 @@ public class Wypozyczalnia {
 //        System.out.println("Dodano samochod!");
     }
 
-    protected void wyswietlSamochody() {
+    protected String wyswietlSamochody() {
+        ArrayList<String> listCars = new ArrayList<String>();
+        String listaAut = "";
         if (samochody.isEmpty()) {
-            System.out.println("Brak samochodow!");
-            return;
+//            System.out.println("Brak samochodow!");
+            listCars.add("Brak samochodow!");
         }
-
-        System.out.println("\nLista samochodow:");
-        for (Samochod samochod : samochody) {
-            System.out.println("ID: " + samochod.id + "\t" +samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji);
+        else {
+            System.out.println("\nLista samochodow:");
+            for (Samochod samochod : samochody) {
+                System.out.println("ID: " + samochod.id + "\t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji);
+                listCars.add("ID: " + samochod.id + "\t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji);
+            }
         }
+        for (String s : listCars){
+            listaAut += s + "\n";
+        }
+        return listaAut;
     }
 
     private void rezerwujSamochod() {
@@ -208,7 +216,6 @@ public class Wypozyczalnia {
 //    }
 
     static class Samochod {
-        //private static int nextId = 1; // Dałem to jako zmienną globalną wypozyczalni
         private int id;
         private String marka;
         private String model;
