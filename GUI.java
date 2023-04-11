@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUI implements ActionListener {
-    MyFrame myFrame = new MyFrame(); //creates a myFrane
+    MyFrame myFrameGUI = new MyFrame(); //creates a myFrane
     JButton buttonDodajSamochod;
     JButton buttonWyswietlSamochody;
     JButton button3;
@@ -12,7 +12,6 @@ public class GUI implements ActionListener {
     JButton button5;
     JButton button6;
     JButton exitButton;
-    Wypozyczalnia firma= new Wypozyczalnia();
 
         public GUI(){
 
@@ -28,7 +27,7 @@ public class GUI implements ActionListener {
 
             JPanel  panel = new JPanel();
 
-            myFrame.add(panel, BorderLayout.CENTER);
+            myFrameGUI.add(panel, BorderLayout.CENTER);
             panel.setBackground(new Color(0,200,0));
             panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
             panel.setLayout(new GridLayout(0,1,10,5));
@@ -82,15 +81,15 @@ public class GUI implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e){
             if(e.getSource()==buttonDodajSamochod){
-                myFrame.dispose();
-                DodajSamochod dodajSamochod = new DodajSamochod();
+                myFrameGUI.dispose();
+                DodajSamochod addCar = new DodajSamochod();
             }
             if(e.getSource()==buttonWyswietlSamochody){
-                myFrame.dispose();
-                wyswietlSamochody wyswietlSamochody = new wyswietlSamochody();
+                myFrameGUI.dispose();
+                wyswietlSamochody viewCars = new wyswietlSamochody();
             }
             if(e.getSource()==buttonCalculateCost){
-                myFrame.dispose();
+                myFrameGUI.dispose();
                 obliczKwoteWynajmu obliczKwoteWynajmu = new obliczKwoteWynajmu();
             }
 

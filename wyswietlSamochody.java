@@ -4,10 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class wyswietlSamochody extends GUI implements ActionListener {
+public class wyswietlSamochody extends Wypozyczalnia implements ActionListener {
     private MyFrame myFrame = new MyFrame();
     private JLabel listaAut;
-
     private JButton buttonPowrot ;
     wyswietlSamochody(){
         JPanel panelStart = new JPanel();
@@ -21,7 +20,7 @@ public class wyswietlSamochody extends GUI implements ActionListener {
         JPanel panel1 = new JPanel();
         panel1.setBackground(Color.GREEN);
 
-        String listCars = firma.wyswietlSamochody();
+        String listCars = wyswietlSamochody();
 
         listaAut = new JLabel(listCars);
 //        listaAut.setVerticalTextPosition(JLabel.BOTTOM);
