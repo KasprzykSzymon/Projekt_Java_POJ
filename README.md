@@ -17,20 +17,14 @@
   - Wyswietl oceny aut
   - Wyjdz
  
-#### Odpalanie konsolowe:
- 
-#### (Do Wypożyczalni consolowej
- - (Scieżka do pliku) javac  Wypozyczalnia.java
- - (Scieżka do pliku) java  Wypozyczalnia) Aktualnie niedostępne (Skontaktuj się z adminem gdy chcesz coś tam zrobić :))
- 
 #### Do GUI:
  - (Scieżka do pliku) javac  GUI.java
  - (Scieżka do pliku) java  GUI
  
 
 #### Do dodania:
-  - Baza danych, by cały czas nie pisać od zera programu (Zajmę się tym Szymon)
-  - GUI (Zaczęte Szymon)
+  - Baza danych, by cały czas nie pisać od zera programu 
+  - GUI (W trakcie Szymon)
   - Implementacja systemu rezerwacji samochodu - umożliwienie klientom dokonania rezerwacji samochodu na określony czas. Rezerwacja może być zrealizowana tylko wtedy, gdy samochód jest dostępny w wybranym przedziale czasowym.
  
 
@@ -44,4 +38,4 @@
   - (Miejsce na pomysły)
   
 #### Zrealizowane pomysły:
-  - Dodanie możliwości obliczania kosztów wynajmu samochodu - pozwala klientom na obliczenie kosztów wynajmu samochodu na podstawie czasu wynajmu i ceny za dzień.(Zajmę się tym Szymon)
+  - Dodanie możliwości obliczania kosztów wynajmu samochodu - pozwala klientom na obliczenie kosztów wynajmu samochodu na podstawie czasu wynajmu i ceny za dzień.(Szymon)
