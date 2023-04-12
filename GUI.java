@@ -11,10 +11,14 @@ import java.util.Date;
 import java.util.Scanner;
 
 //-------------------//
-//Stert GUI//
+//Start GUI//
 //-------------------//
 public class GUI implements ActionListener {
-    ArrayList<Samochod> samochody= new ArrayList<Samochod>();
+    public GUI(){
+        start();
+    }
+    private String listCars = "";
+    private ArrayList<Samochod> samochody = new ArrayList<Samochod>();
     private static int nextId = 1;
 
     MyFrame myFrameGUI ;
@@ -26,63 +30,64 @@ public class GUI implements ActionListener {
     JButton button6;
     JButton exitButton;
 
-        public GUI(){
-
-            myFrameGUI = new MyFrame();  //creates a myFrane
-
-            JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
-            buttonDodajSamochod = new JButton("Dodaj samochod");
-            buttonWyswietlSamochody = new JButton("Wyswietl samochody");
-            button3 = new JButton("Rezerwuj samochod");
-            buttonCalculateCost = new JButton("Oblicz koszt wynajmu samochodu");
-            button5 = new JButton("Ocen samochod");
-            button6 = new JButton("Wyswietl oceny samochodow");
-            exitButton = new JButton("Wyjscie");
+        public void start(){
 
 
-            JPanel  panel = new JPanel();
+                myFrameGUI = new MyFrame();  //creates a myFrane
 
-            myFrameGUI.add(panel, BorderLayout.CENTER);
-            panel.setBackground(new Color(0,200,0));
-            panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-            panel.setLayout(new GridLayout(0,1,10,5));
+                JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
+                buttonDodajSamochod = new JButton("Dodaj samochod");
+                buttonWyswietlSamochody = new JButton("Wyswietl samochody");
+                button3 = new JButton("Rezerwuj samochod");
+                buttonCalculateCost = new JButton("Oblicz koszt wynajmu samochodu");
+                button5 = new JButton("Ocen samochod");
+                button6 = new JButton("Wyswietl oceny samochodow");
+                exitButton = new JButton("Wyjscie");
 
-            panel.add(label, BorderLayout.CENTER);
 
-            panel.add(buttonDodajSamochod);
-            buttonDodajSamochod.addActionListener(this);
-            buttonDodajSamochod.setBorder(BorderFactory.createEtchedBorder());
-            buttonDodajSamochod.setBackground(new Color(50,120,200));
+                JPanel panel = new JPanel();
 
-            panel.add(buttonWyswietlSamochody);
-            buttonWyswietlSamochody.addActionListener(this);
-            buttonWyswietlSamochody.setBorder(BorderFactory.createEtchedBorder());
-            buttonWyswietlSamochody.setBackground(new Color(50,120,200));
+                myFrameGUI.add(panel, BorderLayout.CENTER);
+                panel.setBackground(new Color(0, 200, 0));
+                panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+                panel.setLayout(new GridLayout(0, 1, 10, 5));
 
-            panel.add(button3);
-            button3.addActionListener(this);
-            button3.setBorder(BorderFactory.createEtchedBorder());
-            button3.setBackground(new Color(50,120,200));
+                panel.add(label, BorderLayout.CENTER);
 
-            panel.add(buttonCalculateCost);
-            buttonCalculateCost.addActionListener(this);
-            buttonCalculateCost.setBorder(BorderFactory.createEtchedBorder());
-            buttonCalculateCost.setBackground(new Color(50,120,200));
+                panel.add(buttonDodajSamochod);
+                buttonDodajSamochod.addActionListener(this);
+                buttonDodajSamochod.setBorder(BorderFactory.createEtchedBorder());
+                buttonDodajSamochod.setBackground(new Color(50, 120, 200));
 
-            panel.add(button5);
-            button5.addActionListener(this);
-            button5.setBorder(BorderFactory.createEtchedBorder());
-            button5.setBackground(new Color(50,120,200));
+                panel.add(buttonWyswietlSamochody);
+                buttonWyswietlSamochody.addActionListener(this);
+                buttonWyswietlSamochody.setBorder(BorderFactory.createEtchedBorder());
+                buttonWyswietlSamochody.setBackground(new Color(50, 120, 200));
 
-            panel.add(button6);
-            button6.addActionListener(this);
-            button6.setBorder(BorderFactory.createEtchedBorder());
-            button6.setBackground(new Color(50,120,200));
+                panel.add(button3);
+                button3.addActionListener(this);
+                button3.setBorder(BorderFactory.createEtchedBorder());
+                button3.setBackground(new Color(50, 120, 200));
 
-            panel.add(exitButton);
-            exitButton.addActionListener(this);
-            exitButton.setBorder(BorderFactory.createEtchedBorder());
-            exitButton.setBackground(new Color(50,120,200));
+                panel.add(buttonCalculateCost);
+                buttonCalculateCost.addActionListener(this);
+                buttonCalculateCost.setBorder(BorderFactory.createEtchedBorder());
+                buttonCalculateCost.setBackground(new Color(50, 120, 200));
+
+                panel.add(button5);
+                button5.addActionListener(this);
+                button5.setBorder(BorderFactory.createEtchedBorder());
+                button5.setBackground(new Color(50, 120, 200));
+
+                panel.add(button6);
+                button6.addActionListener(this);
+                button6.setBorder(BorderFactory.createEtchedBorder());
+                button6.setBackground(new Color(50, 120, 200));
+
+                panel.add(exitButton);
+                exitButton.addActionListener(this);
+                exitButton.setBorder(BorderFactory.createEtchedBorder());
+                exitButton.setBackground(new Color(50, 120, 200));
 
 
 
@@ -348,27 +353,25 @@ public class GUI implements ActionListener {
 
         Samochod samochod = new Samochod(marka, model, cena, rokProdukcji);
         samochody.add(samochod);
+        listCars += "ID:   " + samochod.id + "   \t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji + "\n";
         System.out.println("Dodano samochod!");
     }
 
     private String wyswietlSamochody() {
-        ArrayList<String> listCars = new ArrayList<String>();
-        String listaAut = "";
-        if (samochody.isEmpty()) {
-//            System.out.println("Brak samochodow!");
-            listCars.add("Brak samochodow!");
-        }
-        else {
-            System.out.println("\nLista samochodow:");
-            for (Samochod samochod : samochody) {
-                System.out.println("ID: " + samochod.id + "\t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji);
-                listCars.add("ID: " + samochod.id + "\t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji);
-            }
-        }
-        for (String s : listCars){
-            listaAut += s + "\n";
-        }
-        return listaAut;
+
+//        String listaAut = "";
+//        if (samochody.isEmpty()) {
+////            System.out.println("Brak samochodow!");
+//            listCars = "Brak samochodow!");
+//        }
+//        else {
+//            System.out.println("\nLista samochodow:");
+//            for (Samochod samochod : samochody) {
+//                listCars += "ID: " + samochod.id + "\t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji + "\n";
+//            }
+//        }
+//        return listaAut;
+          return listCars;
     }
 
 //    private void rezerwujSamochod() {
@@ -554,7 +557,6 @@ public class GUI implements ActionListener {
             return suma / oceny.size();
         }
     }
-
     public static void main(String[] args){
         new GUI();
     }
@@ -577,7 +579,7 @@ public class GUI implements ActionListener {
             }
             if(e.getSource()==buttonPowrot){
                 myFrameNext.dispose();
-                GUI gui = new GUI();
+                start();
             }
             if(e.getSource()==buttonIdPass){
                 //Miejsce na instrukcje od sprawdzenia czy jest takie ID samochodu
@@ -591,14 +593,14 @@ public class GUI implements ActionListener {
 
             if(e.getSource()==buttonPowrot){
                 myFrameNext.dispose();
-                GUI gui = new GUI();
+                start();
             }
             if(e.getSource()==buttonZatwierdz){
                 if(!(myTextFieldMarka.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldRokProdukcji.getText().isEmpty() | myTextFieldKwotaZaDzien.getText().isEmpty())){
                     dodajSamochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
                     wyswietlSamochody();
                     myFrameNext.dispose();
-                    GUI GUI = new GUI();
+                    start();
                 }
                 else
                     System.out.println("Wypelnij puste pola.");
