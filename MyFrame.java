@@ -24,12 +24,19 @@ public class MyFrame extends JFrame implements ActionListener  {
 
 
 
+    //Przyciski funkcyjne dolne
+
+    JButton buttonPowrot ;
+    JButton buttonZatwierdz ;
+
+
+
     MyFrame(){
         this.setTitle("Wypozyczalnia Samochodow");  //sets title of frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true); //make frame visible
-        this.setSize(500,500);
+        this.setSize(600,600);
 
         menuBar = new JMenuBar();
         
@@ -65,8 +72,6 @@ public class MyFrame extends JFrame implements ActionListener  {
         menuBar.add(aboutMenu);
 
         this.setJMenuBar(menuBar);
-
-
     }
 
     @Override

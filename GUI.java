@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 //-------------------//
 //Start GUI//
 //-------------------//
 public class GUI implements ActionListener {
     public GUI(){
+
         start();
     }
     private String listCars = "";
@@ -29,6 +31,11 @@ public class GUI implements ActionListener {
     JButton button5;
     JButton button6;
     JButton exitButton;
+
+    //Przyciski funkcyjne dolne
+
+    JButton buttonPowrot ;
+    JButton buttonZatwierdz ;
 
         public void start(){
 
@@ -103,8 +110,7 @@ public class GUI implements ActionListener {
     JTextField myTextFieldRokProdukcji ;
     JTextField myTextFieldKwotaZaDzien ;
     JCheckBox checkBox;
-    JButton buttonPowrot ;
-    JButton buttonZatwierdz ;
+
 
     private void addCars(){
         myFrameNext = new MyFrame();
@@ -234,7 +240,6 @@ public class GUI implements ActionListener {
         String listCars = wyswietlSamochody();
 
         listaAut = new JLabel(listCars);
-//        listaAut.setVerticalTextPosition(JLabel.BOTTOM);
         listaAut.setHorizontalTextPosition(JLabel.CENTER);
         panel1.add(listaAut);
         myFrameNext.add(panel1, BorderLayout.CENTER);
@@ -244,7 +249,6 @@ public class GUI implements ActionListener {
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));
         myFrameNext.add(panel2, BorderLayout.SOUTH);
-//                panel2.setPreferredSize(new Dimension(100,100));
         panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panel2.setLayout(new GridLayout(0,4,10,5));
 
@@ -264,11 +268,15 @@ public class GUI implements ActionListener {
     JButton buttonIdPass;
     JTextField textFieldIloscDni;
     JButton buttonOblicz;
+    JLabel labelSprawdz;
+    JLabel LBOblicz;
+    JLabel labelIloscDni;
+    JLabel labelCost;
+
 
     private void obliczKwoteWynajmu() {
         myFrameNext = new MyFrame(); //creates a myFrame
 
-//             String obecnySamochod = "";
         JLabel label = new JLabel("Oblicz kwote wynajmu: ");
 
         JPanel panelStart = new JPanel();
@@ -303,10 +311,8 @@ public class GUI implements ActionListener {
         buttonIdPass.setBackground(new Color(50, 120, 200));
         panel.add(buttonIdPass);
 
-
-        JLabel labelDni = new JLabel("Podaj na ile dni chcesz wypozyczyc: ");
-        labelDni.setVisible(false);
-        panel.add(labelDni);
+        labelSprawdz = new JLabel("");
+        panel.add(labelSprawdz);
 
         textFieldIloscDni = new JTextField();
         textFieldIloscDni.setSize(new Dimension(250, 40));
@@ -318,16 +324,23 @@ public class GUI implements ActionListener {
         panel.add(textFieldIloscDni);
 
 
-        JLabel LBOblicz = new JLabel("");
-        LBOblicz.setVisible(false);
+        LBOblicz = new JLabel("");
         panel.add(LBOblicz);
 
-        buttonOblicz = new JButton(" Sprawdz ");
+        buttonOblicz = new JButton(" Oblicz ");
         buttonOblicz.addActionListener(this);
         buttonOblicz.setBorder(BorderFactory.createEtchedBorder());
         buttonOblicz.setBackground(new Color(50, 120, 200));
         buttonOblicz.setVisible(false);
         panel.add(buttonOblicz);
+
+        labelIloscDni = new JLabel("");
+        panel.add(labelIloscDni);
+        labelCost = new JLabel("");
+        panel.add(labelCost);
+
+
+
 
         myFrameNext.add(panel, BorderLayout.CENTER);
 
@@ -337,11 +350,6 @@ public class GUI implements ActionListener {
         panel2.setLayout(new GridLayout(0, 4, 10, 5));
 
 
-        buttonPowrot = new JButton(" Powrot ");
-        buttonPowrot.addActionListener(this);
-        buttonPowrot.setBackground(new Color(255, 100, 100));
-        buttonPowrot.setBorder(BorderFactory.createEtchedBorder());
-        buttonPowrot.setSize(250, 20);
         panel2.add(buttonPowrot);
 
         myFrameNext.add(panel2, BorderLayout.SOUTH);
@@ -423,23 +431,8 @@ public class GUI implements ActionListener {
 //        }
 //    }
 //
-//    protected void obliczKosztWynajmu() {
-//        System.out.print("\nPodaj ID samochodu: ");
-//        int id = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        Samochod samochod = znajdzSamochod(id);
-//        if (samochod == null) {
-//            System.out.println("Nie znaleziono samochodu o podanym ID!");
-//            return;
-//        }
-//        System.out.print("Podaj liczbe dni wynajmu: ");
-//        int dni = scanner.nextInt();
-//
-//        double koszt = samochod.obliczKosztWynajmu(dni);
-//        System.out.println("\nKoszt wynajmu samochodu " + samochod.getMarka() + " " + samochod.getModel() + " wynosi: " + koszt + " PLN");
-//    }
-//
+
+
 //    private void ocenSamochod() {
 //        System.out.print("\nPodaj ID samochodu: ");
 //        int id = scanner.nextInt();
@@ -577,16 +570,49 @@ public class GUI implements ActionListener {
                 myFrameGUI.dispose();
                 obliczKwoteWynajmu();
             }
-            if(e.getSource()==buttonPowrot){
-                myFrameNext.dispose();
-                start();
-            }
-            if(e.getSource()==buttonIdPass){
-                //Miejsce na instrukcje od sprawdzenia czy jest takie ID samochodu
-            }
+
 
             if(e.getSource()==exitButton)
                 System.exit(0);
+
+            //calculateCost
+
+            if(e.getSource()==buttonIdPass) {
+                if (textFieldID.getText().isEmpty()) {
+                    textFieldIloscDni.setVisible(false);
+                    buttonOblicz.setVisible(false);
+                    labelSprawdz.setText("Podaj liczbe identyfikatora");
+                    labelIloscDni.setText("");
+                    labelCost.setText("");
+                }
+                else {
+                    int ID = Integer.parseInt(textFieldID.getText());
+                    if (znajdzSamochod(ID) != null) {
+
+                        labelSprawdz.setText("Na ile dni chcesz wypozyczyc: ");
+                        textFieldIloscDni.setVisible(true);
+                        buttonOblicz.setVisible(true);
+
+                    }
+                    else {
+                        labelSprawdz.setText("Nie ma takiego ID ");
+                        textFieldIloscDni.setVisible(false);
+                        buttonOblicz.setVisible(false);
+                        labelIloscDni.setText("");
+                        labelCost.setText("");
+                    }
+                }
+            }
+
+            if(e.getSource()==buttonOblicz){
+                int ID = Integer.parseInt(textFieldID.getText());
+                Samochod samochod = znajdzSamochod(ID);
+                int dni = Integer.parseInt(textFieldIloscDni.getText());
+                double kwota = samochod.obliczKosztWynajmu(dni);
+                labelIloscDni.setText("Kwota za " + samochod.getMarka() + " " + samochod.getModel() + " wynosi: ");
+                labelCost.setText(String.format("%.2f PLN", kwota));
+            }
+
 
 
             //Lower buttons
@@ -597,7 +623,9 @@ public class GUI implements ActionListener {
             }
             if(e.getSource()==buttonZatwierdz){
                 if(!(myTextFieldMarka.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldRokProdukcji.getText().isEmpty() | myTextFieldKwotaZaDzien.getText().isEmpty())){
-                    dodajSamochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),100.0,(short)2022);
+                    double cena = Double.parseDouble(myTextFieldKwotaZaDzien.getText());
+                    short rok = Short.parseShort(myTextFieldRokProdukcji.getText());
+                    dodajSamochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),cena,rok);
                     wyswietlSamochody();
                     myFrameNext.dispose();
                     start();
