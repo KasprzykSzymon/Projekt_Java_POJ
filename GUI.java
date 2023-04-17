@@ -25,11 +25,10 @@ public class GUI implements ActionListener {
 
     MyFrame myFrameGUI ;
     JButton buttonDodajSamochod;
-    JButton buttonWyswietlSamochody;
-    JButton button3;
+    JButton buttonWyswietlSamochody;JButton buttonRezerwojSamochod;
     JButton buttonCalculateCost;
-    JButton button5;
-    JButton button6;
+    JButton buttonAddRatingCar;
+    JButton buttonWyswietlOcenySamochodow;
     JButton exitButton;
 
     //Przyciski funkcyjne dolne
@@ -45,10 +44,10 @@ public class GUI implements ActionListener {
                 JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
                 buttonDodajSamochod = new JButton("Dodaj samochod");
                 buttonWyswietlSamochody = new JButton("Wyswietl samochody");
-                button3 = new JButton("Rezerwuj samochod");
+                buttonRezerwojSamochod = new JButton("Rezerwuj samochod");
                 buttonCalculateCost = new JButton("Oblicz koszt wynajmu samochodu");
-                button5 = new JButton("Ocen samochod");
-                button6 = new JButton("Wyswietl oceny samochodow");
+                buttonAddRatingCar = new JButton("Ocen samochod");
+                buttonWyswietlOcenySamochodow = new JButton("Wyswietl oceny samochodow");
                 exitButton = new JButton("Wyjscie");
 
 
@@ -71,25 +70,25 @@ public class GUI implements ActionListener {
                 buttonWyswietlSamochody.setBorder(BorderFactory.createEtchedBorder());
                 buttonWyswietlSamochody.setBackground(new Color(50, 120, 200));
 
-                panel.add(button3);
-                button3.addActionListener(this);
-                button3.setBorder(BorderFactory.createEtchedBorder());
-                button3.setBackground(new Color(50, 120, 200));
+                panel.add(buttonRezerwojSamochod);
+                buttonRezerwojSamochod.addActionListener(this);
+                buttonRezerwojSamochod.setBorder(BorderFactory.createEtchedBorder());
+                buttonRezerwojSamochod.setBackground(new Color(50, 120, 200));
 
                 panel.add(buttonCalculateCost);
                 buttonCalculateCost.addActionListener(this);
                 buttonCalculateCost.setBorder(BorderFactory.createEtchedBorder());
                 buttonCalculateCost.setBackground(new Color(50, 120, 200));
 
-                panel.add(button5);
-                button5.addActionListener(this);
-                button5.setBorder(BorderFactory.createEtchedBorder());
-                button5.setBackground(new Color(50, 120, 200));
+                panel.add(buttonAddRatingCar);
+                buttonAddRatingCar.addActionListener(this);
+                buttonAddRatingCar.setBorder(BorderFactory.createEtchedBorder());
+                buttonAddRatingCar.setBackground(new Color(50, 120, 200));
 
-                panel.add(button6);
-                button6.addActionListener(this);
-                button6.setBorder(BorderFactory.createEtchedBorder());
-                button6.setBackground(new Color(50, 120, 200));
+                panel.add(buttonWyswietlOcenySamochodow);
+                buttonWyswietlOcenySamochodow.addActionListener(this);
+                buttonWyswietlOcenySamochodow.setBorder(BorderFactory.createEtchedBorder());
+                buttonWyswietlOcenySamochodow.setBackground(new Color(50, 120, 200));
 
                 panel.add(exitButton);
                 exitButton.addActionListener(this);
@@ -134,7 +133,7 @@ public class GUI implements ActionListener {
 
         myTextFieldMarka = new JTextField();
         myTextFieldMarka.setPreferredSize(new Dimension(250,40));
-        myTextFieldMarka.setFont(new Font("Arctic", Font.PLAIN,35));
+        myTextFieldMarka.setFont(new Font("Arctic", Font.PLAIN,50));
         myTextFieldMarka.setForeground(Color.GREEN);
         myTextFieldMarka.setBackground(Color.BLACK);
         myTextFieldMarka.setCaretColor(Color.WHITE);
@@ -148,7 +147,7 @@ public class GUI implements ActionListener {
 
         myTextFieldModel = new JTextField();
         myTextFieldModel.setPreferredSize(new Dimension(250,40));
-        myTextFieldModel.setFont(new Font("Arctic", Font.PLAIN,35));
+        myTextFieldModel.setFont(new Font("Arctic", Font.PLAIN,50));
         myTextFieldModel.setForeground(Color.GREEN);
         myTextFieldModel.setBackground(Color.BLACK);
         myTextFieldModel.setCaretColor(Color.WHITE);
@@ -161,7 +160,7 @@ public class GUI implements ActionListener {
 
         myTextFieldRokProdukcji = new JTextField();
         myTextFieldRokProdukcji.setPreferredSize(new Dimension(250,40));
-        myTextFieldRokProdukcji.setFont(new Font("Arctic", Font.PLAIN,35));
+        myTextFieldRokProdukcji.setFont(new Font("Arctic", Font.PLAIN,50));
         myTextFieldRokProdukcji.setForeground(Color.GREEN);
         myTextFieldRokProdukcji.setBackground(Color.BLACK);
         myTextFieldRokProdukcji.setCaretColor(Color.WHITE);
@@ -174,7 +173,7 @@ public class GUI implements ActionListener {
 
         myTextFieldKwotaZaDzien = new JTextField();
         myTextFieldKwotaZaDzien.setPreferredSize(new Dimension(250,40));
-        myTextFieldKwotaZaDzien.setFont(new Font("Arctic", Font.PLAIN,35));
+        myTextFieldKwotaZaDzien.setFont(new Font("Arctic", Font.PLAIN,50));
         myTextFieldKwotaZaDzien.setForeground(Color.GREEN);
         myTextFieldKwotaZaDzien.setBackground(Color.BLACK);
         myTextFieldKwotaZaDzien.setCaretColor(Color.WHITE);
@@ -295,7 +294,7 @@ public class GUI implements ActionListener {
 
         textFieldID = new JTextField();
         textFieldID.setSize(new Dimension(250, 40));
-        textFieldID.setFont(new Font("Arctic", Font.PLAIN, 35));
+        textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
         textFieldID.setForeground(Color.GREEN);
         textFieldID.setBackground(Color.BLACK);
         textFieldID.setCaretColor(Color.WHITE);
@@ -316,7 +315,7 @@ public class GUI implements ActionListener {
 
         textFieldIloscDni = new JTextField();
         textFieldIloscDni.setSize(new Dimension(250, 40));
-        textFieldIloscDni.setFont(new Font("Arctic", Font.PLAIN, 35));
+        textFieldIloscDni.setFont(new Font("Arctic", Font.PLAIN, 50));
         textFieldIloscDni.setForeground(Color.GREEN);
         textFieldIloscDni.setBackground(Color.BLACK);
         textFieldIloscDni.setCaretColor(Color.WHITE);
@@ -351,6 +350,90 @@ public class GUI implements ActionListener {
 
 
         panel2.add(buttonPowrot);
+
+        myFrameNext.add(panel2, BorderLayout.SOUTH);
+    }
+
+//----------------------------------//
+// Dodaj ocene samochodu
+//----------------------------------//
+
+    JButton buttonAddRating;
+    JButton buttonIdPassRating;
+    JLabel labelSprawdzIdOcene;
+    JLabel labelSprawdzOcene;
+    JComboBox comboBoxRating;
+    private void addCarRating(){
+        myFrameNext = new MyFrame(); //creates a myFrame
+
+        JLabel label = new JLabel("Dodaj ocene samochodu: ");
+
+        JPanel panelStart = new JPanel();
+        panelStart.setBackground(new Color(0, 200, 0));
+        panelStart.add(label, BorderLayout.CENTER);
+        myFrameNext.add(panelStart, BorderLayout.NORTH);
+
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(0, 200, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panel.setLayout(new GridLayout(0, 2, 10, 5));
+
+
+        JLabel LabelId = new JLabel("Wybierz ID Samochodu: ");
+        panel.add(LabelId);
+
+        textFieldID = new JTextField();
+        textFieldID.setSize(new Dimension(250, 40));
+        textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
+        textFieldID.setForeground(Color.GREEN);
+        textFieldID.setBackground(Color.BLACK);
+        textFieldID.setCaretColor(Color.WHITE);
+        panel.add(textFieldID);
+
+
+        JLabel LB = new JLabel("");
+        panel.add(LB);
+
+        buttonIdPassRating = new JButton(" Sprawdz ");
+        buttonIdPassRating.addActionListener(this);
+        buttonIdPassRating.setBorder(BorderFactory.createEtchedBorder());
+        buttonIdPassRating.setBackground(new Color(50, 120, 200));
+        panel.add(buttonIdPassRating);
+
+        labelSprawdzIdOcene = new JLabel("");
+        panel.add(labelSprawdzIdOcene);
+
+        String[] ocena1_5 = {"1","2","3","4","5"};
+        comboBoxRating = new JComboBox(ocena1_5);
+        comboBoxRating.setBackground(Color.BLACK);
+        comboBoxRating.setForeground(Color.GREEN);
+        comboBoxRating.setFont(new Font("Arctic", Font.PLAIN, 50));
+        comboBoxRating.setSize(new Dimension(250, 40));
+        comboBoxRating.setVisible(false);
+        panel.add(comboBoxRating);
+
+        labelSprawdzOcene = new JLabel("");
+
+        myFrameNext.add(panel,BorderLayout.CENTER);
+
+        JPanel panel2 = new JPanel();
+        panel2.setBackground(new Color(0, 200, 0));
+        panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panel2.setLayout(new GridLayout(0, 4, 10, 5));
+        panel2.add(buttonPowrot);
+
+        JLabel lb1 = new JLabel();
+        panel2.add(lb1);
+        JLabel lb2 = new JLabel();
+        panel2.add(lb2);
+
+        buttonAddRating = new JButton(" Dodaj ocene: ");
+        buttonAddRating.setBackground(new Color(0,255,0));
+        buttonAddRating.setBorder(BorderFactory.createEtchedBorder());
+        buttonAddRating.setSize(250,20);
+        buttonAddRating.addActionListener(this);
+        buttonAddRating.setVisible(false);
+        panel2.add(buttonAddRating);
 
         myFrameNext.add(panel2, BorderLayout.SOUTH);
     }
@@ -570,6 +653,10 @@ public class GUI implements ActionListener {
                 myFrameGUI.dispose();
                 obliczKwoteWynajmu();
             }
+            if(e.getSource()==buttonAddRatingCar){
+                myFrameGUI.dispose();
+                addCarRating();
+            }
 
 
             if(e.getSource()==exitButton)
@@ -613,6 +700,34 @@ public class GUI implements ActionListener {
                 labelCost.setText(String.format("%.2f PLN", kwota));
             }
 
+            //addCarRating
+
+            if(e.getSource()==buttonIdPassRating){
+                    if (textFieldID.getText().isEmpty()) {
+                        textFieldIloscDni.setVisible(false);
+                        buttonOblicz.setVisible(false);
+                        labelSprawdz.setText("Podaj liczbe identyfikatora");
+                    }
+                    else {
+                        int ID = Integer.parseInt(textFieldID.getText());
+                        if (znajdzSamochod(ID) != null) {
+
+                            labelSprawdzIdOcene.setText("Na ile oceniasz pojazd? ");
+                            comboBoxRating.setVisible(true);
+                            buttonAddRating.setVisible(true);
+
+                        }
+                        else {
+                            labelSprawdz.setText("Nie ma takiego ID ");
+                            comboBoxRating.setVisible(false);
+                            buttonAddRating.setVisible(false);
+                        }
+                    }
+            }
+            if(e.getSource()==buttonAddRating){
+
+
+            }
 
 
             //Lower buttons
