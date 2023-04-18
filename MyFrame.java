@@ -6,12 +6,9 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 public class MyFrame extends JFrame implements ActionListener  {
-
-
     //ImageIcon image = new ImageIcon("TITLE OF FILE WITH LOGO (TITLE.png)"); //Create an ImageIcon
 //this.setIconImage(image.getImage());  //Change icon of frame
 //this.getContentPane().setBackground(new Color(0,200,0)); //change color of background
-
     JMenu fileMenu;
     JMenu editMenu;
     JMenu aboutMenu;
@@ -21,16 +18,6 @@ public class MyFrame extends JFrame implements ActionListener  {
     JMenuItem exitItem;
     JMenuItem backItem;
     JMenuItem aboutItem;
-
-
-
-    //Przyciski funkcyjne dolne
-
-    JButton buttonPowrot ;
-    JButton buttonZatwierdz ;
-
-
-
     MyFrame(){
         this.setTitle("Wypozyczalnia Samochodow");  //sets title of frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,41 +26,30 @@ public class MyFrame extends JFrame implements ActionListener  {
         this.setSize(600,600);
 
         menuBar = new JMenuBar();
-        
         fileMenu = new JMenu("File");
         editMenu = new JMenu("Edit");
         aboutMenu = new JMenu("About");
-
         loadItem = new JMenuItem("Load");
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
-
         loadItem.addActionListener(this);
         saveItem.addActionListener(this);
         exitItem.addActionListener(this);
-
         saveItem.setMnemonic(KeyEvent.VK_S & KeyEvent.VK_CONTROL);
-
         fileMenu.add(loadItem);
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
-
         backItem = new JMenuItem("Back");
         backItem.addActionListener(this);
         editMenu.add(backItem);
-
-
         aboutItem = new JMenuItem("About");
         aboutItem.addActionListener(this);
         aboutMenu.add(aboutItem);
-
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         menuBar.add(aboutMenu);
-
         this.setJMenuBar(menuBar);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==loadItem)

@@ -16,135 +16,104 @@ import java.text.DecimalFormat;
 //-------------------//
 public class GUI implements ActionListener {
     public GUI(){
-
         start();
     }
     private String listCars = "";
-    private ArrayList<Samochod> samochody = new ArrayList<Samochod>();
+    private ArrayList<Car> Cars = new ArrayList<Car>();
     private static int nextId = 1;
-
     MyFrame myFrameGUI ;
-    JButton buttonDodajSamochod;
-    JButton buttonWyswietlSamochody;JButton buttonRezerwojSamochod;
+    JButton buttonAddCar;
+    JButton buttonShowCar;
+    JButton buttonReserveACars;
     JButton buttonCalculateCost;
     JButton buttonAddRatingCar;
-    JButton buttonWyswietlOcenySamochodow;
+    JButton buttonShowCarsRating;
     JButton exitButton;
 
-    //Przyciski funkcyjne dolne
-
-    JButton buttonPowrot ;
-    JButton buttonZatwierdz ;
-
+    //Defoult lower buttons
+    JButton buttonBack ;
+    JButton buttonConfirm ;
         public void start(){
-
-
                 myFrameGUI = new MyFrame();  //creates a myFrane
-
                 JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
-                buttonDodajSamochod = new JButton("Dodaj samochod");
-                buttonWyswietlSamochody = new JButton("Wyswietl samochody");
-                buttonRezerwojSamochod = new JButton("Rezerwuj samochod");
+                buttonAddCar = new JButton("Dodaj samochod");
+                buttonShowCar = new JButton("Wyswietl samochody");
+                buttonReserveACars = new JButton("Rezerwuj samochod");
                 buttonCalculateCost = new JButton("Oblicz koszt wynajmu samochodu");
                 buttonAddRatingCar = new JButton("Ocen samochod");
-                buttonWyswietlOcenySamochodow = new JButton("Wyswietl oceny samochodow");
+                buttonShowCarsRating = new JButton("Wyswietl ratings samochodow");
                 exitButton = new JButton("Wyjscie");
-
-
                 JPanel panel = new JPanel();
-
                 myFrameGUI.add(panel, BorderLayout.CENTER);
                 panel.setBackground(new Color(0, 200, 0));
                 panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
                 panel.setLayout(new GridLayout(0, 1, 10, 5));
-
                 panel.add(label, BorderLayout.CENTER);
-
-                panel.add(buttonDodajSamochod);
-                buttonDodajSamochod.addActionListener(this);
-                buttonDodajSamochod.setBorder(BorderFactory.createEtchedBorder());
-                buttonDodajSamochod.setBackground(new Color(50, 120, 200));
-
-                panel.add(buttonWyswietlSamochody);
-                buttonWyswietlSamochody.addActionListener(this);
-                buttonWyswietlSamochody.setBorder(BorderFactory.createEtchedBorder());
-                buttonWyswietlSamochody.setBackground(new Color(50, 120, 200));
-
-                panel.add(buttonRezerwojSamochod);
-                buttonRezerwojSamochod.addActionListener(this);
-                buttonRezerwojSamochod.setBorder(BorderFactory.createEtchedBorder());
-                buttonRezerwojSamochod.setBackground(new Color(50, 120, 200));
-
+                panel.add(buttonAddCar);
+                buttonAddCar.addActionListener(this);
+                buttonAddCar.setBorder(BorderFactory.createEtchedBorder());
+                buttonAddCar.setBackground(new Color(50, 120, 200));
+                panel.add(buttonShowCar);
+                buttonShowCar.addActionListener(this);
+                buttonShowCar.setBorder(BorderFactory.createEtchedBorder());
+                buttonShowCar.setBackground(new Color(50, 120, 200));
+                panel.add(buttonReserveACars);
+                buttonReserveACars.addActionListener(this);
+                buttonReserveACars.setBorder(BorderFactory.createEtchedBorder());
+                buttonReserveACars.setBackground(new Color(50, 120, 200));
                 panel.add(buttonCalculateCost);
                 buttonCalculateCost.addActionListener(this);
                 buttonCalculateCost.setBorder(BorderFactory.createEtchedBorder());
                 buttonCalculateCost.setBackground(new Color(50, 120, 200));
-
                 panel.add(buttonAddRatingCar);
                 buttonAddRatingCar.addActionListener(this);
                 buttonAddRatingCar.setBorder(BorderFactory.createEtchedBorder());
                 buttonAddRatingCar.setBackground(new Color(50, 120, 200));
-
-                panel.add(buttonWyswietlOcenySamochodow);
-                buttonWyswietlOcenySamochodow.addActionListener(this);
-                buttonWyswietlOcenySamochodow.setBorder(BorderFactory.createEtchedBorder());
-                buttonWyswietlOcenySamochodow.setBackground(new Color(50, 120, 200));
-
+                panel.add(buttonShowCarsRating);
+                buttonShowCarsRating.addActionListener(this);
+                buttonShowCarsRating.setBorder(BorderFactory.createEtchedBorder());
+                buttonShowCarsRating.setBackground(new Color(50, 120, 200));
                 panel.add(exitButton);
                 exitButton.addActionListener(this);
                 exitButton.setBorder(BorderFactory.createEtchedBorder());
                 exitButton.setBackground(new Color(50, 120, 200));
-
-
-
         }
 
 //----------------------------------//
-// Dodaj samochów
+// Add cars
 //----------------------------------//
-
     MyFrame myFrameNext;
-    JTextField myTextFieldMarka ;
+    JTextField myTextFieldMark ;
     JTextField myTextFieldModel ;
-    JTextField myTextFieldRokProdukcji ;
-    JTextField myTextFieldKwotaZaDzien ;
+    JTextField myTextFieldYearOfProduction ;
+    JTextField myTextFieldPriceForDay ;
     JCheckBox checkBox;
-
-
     private void addCars(){
         myFrameNext = new MyFrame();
-
         JPanel panel = new JPanel();
         myFrameNext.add(panel, BorderLayout.NORTH);
         JLabel titleLabel  = new JLabel("Podaj parametry samochodu:");
         panel.add(titleLabel);
         panel.setBackground(Color.GREEN);
-
-
         JPanel panel1 = new JPanel();
         myFrameNext.add(panel1, BorderLayout.CENTER);
         panel1.setBackground(new Color(0, 200, 0));
         panel1.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panel1.setLayout(new GridLayout(0,2,10,5));
-
-        JLabel Label1 = new JLabel("Podaj marke samochodu:  \t");
+        JLabel Label1 = new JLabel("Podaj marke samochoduu:  \t");
         Label1.setBackground(Color.GREEN);
         panel1.add(Label1);
-
-        myTextFieldMarka = new JTextField();
-        myTextFieldMarka.setPreferredSize(new Dimension(250,40));
-        myTextFieldMarka.setFont(new Font("Arctic", Font.PLAIN,50));
-        myTextFieldMarka.setForeground(Color.GREEN);
-        myTextFieldMarka.setBackground(Color.BLACK);
-        myTextFieldMarka.setCaretColor(Color.WHITE);
-        myTextFieldMarka.setText("OPEL");
-        panel1.add(myTextFieldMarka);
-
-
+        myTextFieldMark = new JTextField();
+        myTextFieldMark.setPreferredSize(new Dimension(250,40));
+        myTextFieldMark.setFont(new Font("Arctic", Font.PLAIN,50));
+        myTextFieldMark.setForeground(Color.GREEN);
+        myTextFieldMark.setBackground(Color.BLACK);
+        myTextFieldMark.setCaretColor(Color.WHITE);
+        myTextFieldMark.setText("OPEL");
+        panel1.add(myTextFieldMark);
         JLabel Label2 = new JLabel("Podaj model samochodu: \t");
         Label2.setBackground(Color.GREEN);
         panel1.add(Label2);
-
         myTextFieldModel = new JTextField();
         myTextFieldModel.setPreferredSize(new Dimension(250,40));
         myTextFieldModel.setFont(new Font("Arctic", Font.PLAIN,50));
@@ -153,145 +122,113 @@ public class GUI implements ActionListener {
         myTextFieldModel.setCaretColor(Color.WHITE);
         myTextFieldModel.setText("ASTRA");
         panel1.add(myTextFieldModel);
-
         JLabel Label4 = new JLabel("Podaj rok produkcji: \t");
         panel1.add(Label4);
         Label4.setBackground(Color.GREEN);
-
-        myTextFieldRokProdukcji = new JTextField();
-        myTextFieldRokProdukcji.setPreferredSize(new Dimension(250,40));
-        myTextFieldRokProdukcji.setFont(new Font("Arctic", Font.PLAIN,50));
-        myTextFieldRokProdukcji.setForeground(Color.GREEN);
-        myTextFieldRokProdukcji.setBackground(Color.BLACK);
-        myTextFieldRokProdukcji.setCaretColor(Color.WHITE);
-        myTextFieldRokProdukcji.setText("2020");
-        panel1.add(myTextFieldRokProdukcji);
-
+        myTextFieldYearOfProduction = new JTextField();
+        myTextFieldYearOfProduction.setPreferredSize(new Dimension(250,40));
+        myTextFieldYearOfProduction.setFont(new Font("Arctic", Font.PLAIN,50));
+        myTextFieldYearOfProduction.setForeground(Color.GREEN);
+        myTextFieldYearOfProduction.setBackground(Color.BLACK);
+        myTextFieldYearOfProduction.setCaretColor(Color.WHITE);
+        myTextFieldYearOfProduction.setText("2020");
+        panel1.add(myTextFieldYearOfProduction);
         JLabel Label3 = new JLabel("Podaj cene za dzien wynajmu: \t");
         panel1.add(Label3);
         Label3.setBackground(Color.GREEN);
-
-        myTextFieldKwotaZaDzien = new JTextField();
-        myTextFieldKwotaZaDzien.setPreferredSize(new Dimension(250,40));
-        myTextFieldKwotaZaDzien.setFont(new Font("Arctic", Font.PLAIN,50));
-        myTextFieldKwotaZaDzien.setForeground(Color.GREEN);
-        myTextFieldKwotaZaDzien.setBackground(Color.BLACK);
-        myTextFieldKwotaZaDzien.setCaretColor(Color.WHITE);
-        myTextFieldKwotaZaDzien.setText("100");
-        panel1.add(myTextFieldKwotaZaDzien);
-
+        myTextFieldPriceForDay = new JTextField();
+        myTextFieldPriceForDay.setPreferredSize(new Dimension(250,40));
+        myTextFieldPriceForDay.setFont(new Font("Arctic", Font.PLAIN,50));
+        myTextFieldPriceForDay.setForeground(Color.GREEN);
+        myTextFieldPriceForDay.setBackground(Color.BLACK);
+        myTextFieldPriceForDay.setCaretColor(Color.WHITE);
+        myTextFieldPriceForDay.setText("100");
+        panel1.add(myTextFieldPriceForDay);
         checkBox = new JCheckBox();
         checkBox.setText("Nie jestem robotem :)");
         checkBox.setBackground(Color.GREEN);
         checkBox.setFocusable(false);
         panel1.add(checkBox);
-
-
         panel1.setBackground(Color.GREEN);
-
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));
         myFrameNext.add(panel2, BorderLayout.SOUTH);
-//                panel2.setPreferredSize(new Dimension(100,100));
         panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panel2.setLayout(new GridLayout(0,4,10,5));
-
-        buttonPowrot = new JButton(" Powrot ");
-        buttonPowrot.addActionListener(this);
-        buttonPowrot.setBackground(new Color(255,100,100));
-        buttonPowrot.setBorder(BorderFactory.createEtchedBorder());
-        buttonPowrot.setSize(250,20);
-        panel2.add(buttonPowrot);
-
+        buttonBack = new JButton(" Powrot ");
+        buttonBack.addActionListener(this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
+        panel2.add(buttonBack);
         JLabel lb1 = new JLabel();
         panel2.add(lb1);
         JLabel lb2 = new JLabel();
         panel2.add(lb2);
-
-        buttonZatwierdz = new JButton(" Zatwierdz ");
-        buttonZatwierdz.setBackground(new Color(0,255,0));
-        buttonZatwierdz.setBorder(BorderFactory.createEtchedBorder());
-        buttonZatwierdz.setSize(250,20);
-        buttonZatwierdz.addActionListener(this);
-        panel2.add(buttonZatwierdz);
-
+        buttonConfirm = new JButton(" Zatwierdz ");
+        buttonConfirm.setBackground(new Color(0,255,0));
+        buttonConfirm.setBorder(BorderFactory.createEtchedBorder());
+        buttonConfirm.setSize(250,20);
+        buttonConfirm.addActionListener(this);
+        panel2.add(buttonConfirm);
     }
 
-
 //----------------------------------//
-// Wyświetl auta
+// Show cars
 //----------------------------------//
-    private JLabel listaAut;
+    private JLabel labelListCars;
     protected void showCars(){
         myFrameNext = new MyFrame();
-
         JPanel panelStart = new JPanel();
         panelStart.setBackground(Color.GREEN);
-
         myFrameNext.add(panelStart, BorderLayout.NORTH);
-
         JLabel centerLabel = new JLabel("Obecne samochody:");
         panelStart.add(centerLabel);
-
         JPanel panel1 = new JPanel();
         panel1.setBackground(Color.GREEN);
-
-        String listCars = wyswietlSamochody();
-
-        listaAut = new JLabel(listCars);
-        listaAut.setHorizontalTextPosition(JLabel.CENTER);
-        panel1.add(listaAut);
+        String listCars = funcShowCars();
+        labelListCars = new JLabel(listCars);
+        labelListCars.setHorizontalTextPosition(JLabel.CENTER);
+        panel1.add(labelListCars);
         myFrameNext.add(panel1, BorderLayout.CENTER);
-
-
-
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));
         myFrameNext.add(panel2, BorderLayout.SOUTH);
         panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panel2.setLayout(new GridLayout(0,4,10,5));
-
-        buttonPowrot = new JButton(" Powrot ");
-        buttonPowrot.addActionListener(this);
-        buttonPowrot.setBackground(new Color(255,100,100));
-        buttonPowrot.setBorder(BorderFactory.createEtchedBorder());
-        buttonPowrot.setSize(250,20);
-        panel2.add(buttonPowrot);
-
+        buttonBack = new JButton(" Powrot ");
+        buttonBack.addActionListener(this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
+        panel2.add(buttonBack);
     }
 
 //----------------------------------//
-// Oblicz Kwotę Wynajmu
+// Calculate amount of rent
 //----------------------------------//
     JTextField textFieldID;
     JButton buttonIdPass;
-    JTextField textFieldIloscDni;
-    JButton buttonOblicz;
-    JLabel labelSprawdz;
-    JLabel LBOblicz;
-    JLabel labelIloscDni;
+    JTextField textFieldDays;
+    JButton buttonCalculate;
+    JLabel labelCheck;
+    JLabel LBCalculate;
+    JLabel labelDays;
     JLabel labelCost;
 
-
-    private void obliczKwoteWynajmu() {
+    private void funcCalculateAmountOfRent() {
         myFrameNext = new MyFrame(); //creates a myFrame
-
         JLabel label = new JLabel("Oblicz kwote wynajmu: ");
-
         JPanel panelStart = new JPanel();
         panelStart.setBackground(new Color(0, 200, 0));
         panelStart.add(label, BorderLayout.CENTER);
         myFrameNext.add(panelStart, BorderLayout.NORTH);
-
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 200, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel.setLayout(new GridLayout(0, 2, 10, 5));
-
-
-        JLabel LabelId = new JLabel("Wybierz ID Samochodu: ");
+        JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         panel.add(LabelId);
-
         textFieldID = new JTextField();
         textFieldID.setSize(new Dimension(250, 40));
         textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
@@ -299,89 +236,65 @@ public class GUI implements ActionListener {
         textFieldID.setBackground(Color.BLACK);
         textFieldID.setCaretColor(Color.WHITE);
         panel.add(textFieldID);
-
-
         JLabel LB = new JLabel("");
         panel.add(LB);
-
         buttonIdPass = new JButton(" Sprawdz ");
         buttonIdPass.addActionListener(this);
         buttonIdPass.setBorder(BorderFactory.createEtchedBorder());
         buttonIdPass.setBackground(new Color(50, 120, 200));
         panel.add(buttonIdPass);
-
-        labelSprawdz = new JLabel("");
-        panel.add(labelSprawdz);
-
-        textFieldIloscDni = new JTextField();
-        textFieldIloscDni.setSize(new Dimension(250, 40));
-        textFieldIloscDni.setFont(new Font("Arctic", Font.PLAIN, 50));
-        textFieldIloscDni.setForeground(Color.GREEN);
-        textFieldIloscDni.setBackground(Color.BLACK);
-        textFieldIloscDni.setCaretColor(Color.WHITE);
-        textFieldIloscDni.setVisible(false);
-        panel.add(textFieldIloscDni);
-
-
-        LBOblicz = new JLabel("");
-        panel.add(LBOblicz);
-
-        buttonOblicz = new JButton(" Oblicz ");
-        buttonOblicz.addActionListener(this);
-        buttonOblicz.setBorder(BorderFactory.createEtchedBorder());
-        buttonOblicz.setBackground(new Color(50, 120, 200));
-        buttonOblicz.setVisible(false);
-        panel.add(buttonOblicz);
-
-        labelIloscDni = new JLabel("");
-        panel.add(labelIloscDni);
+        labelCheck = new JLabel("");
+        panel.add(labelCheck);
+        textFieldDays = new JTextField();
+        textFieldDays.setSize(new Dimension(250, 40));
+        textFieldDays.setFont(new Font("Arctic", Font.PLAIN, 50));
+        textFieldDays.setForeground(Color.GREEN);
+        textFieldDays.setBackground(Color.BLACK);
+        textFieldDays.setCaretColor(Color.WHITE);
+        textFieldDays.setVisible(false);
+        panel.add(textFieldDays);
+        LBCalculate = new JLabel("");
+        panel.add(LBCalculate);
+        buttonCalculate = new JButton(" Oblicz ");
+        buttonCalculate.addActionListener(this);
+        buttonCalculate.setBorder(BorderFactory.createEtchedBorder());
+        buttonCalculate.setBackground(new Color(50, 120, 200));
+        buttonCalculate.setVisible(false);
+        panel.add(buttonCalculate);
+        labelDays = new JLabel("");
+        panel.add(labelDays);
         labelCost = new JLabel("");
         panel.add(labelCost);
-
-
-
-
         myFrameNext.add(panel, BorderLayout.CENTER);
-
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0, 200, 0));
         panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel2.setLayout(new GridLayout(0, 4, 10, 5));
-
-
-        panel2.add(buttonPowrot);
-
+        panel2.add(buttonBack);
         myFrameNext.add(panel2, BorderLayout.SOUTH);
     }
 
 //----------------------------------//
-// Dodaj ocene samochodu
+// Add Car Rating
 //----------------------------------//
-
     JButton buttonAddRating;
     JButton buttonIdPassRating;
-    JLabel labelSprawdzIdOcene;
-    JLabel labelSprawdzOcene;
+    JLabel labelCheckIdRating;
+    JLabel labelCheckRating;
     JComboBox comboBoxRating;
     private void addCarRating(){
         myFrameNext = new MyFrame(); //creates a myFrame
-
-        JLabel label = new JLabel("Dodaj ocene samochodu: ");
-
+        JLabel label = new JLabel("Dodaj ocene samochoduu: ");
         JPanel panelStart = new JPanel();
         panelStart.setBackground(new Color(0, 200, 0));
         panelStart.add(label, BorderLayout.CENTER);
         myFrameNext.add(panelStart, BorderLayout.NORTH);
-
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 200, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel.setLayout(new GridLayout(0, 2, 10, 5));
-
-
-        JLabel LabelId = new JLabel("Wybierz ID Samochodu: ");
+        JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         panel.add(LabelId);
-
         textFieldID = new JTextField();
         textFieldID.setSize(new Dimension(250, 40));
         textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
@@ -389,44 +302,34 @@ public class GUI implements ActionListener {
         textFieldID.setBackground(Color.BLACK);
         textFieldID.setCaretColor(Color.WHITE);
         panel.add(textFieldID);
-
-
         JLabel LB = new JLabel("");
         panel.add(LB);
-
         buttonIdPassRating = new JButton(" Sprawdz ");
         buttonIdPassRating.addActionListener(this);
         buttonIdPassRating.setBorder(BorderFactory.createEtchedBorder());
         buttonIdPassRating.setBackground(new Color(50, 120, 200));
         panel.add(buttonIdPassRating);
-
-        labelSprawdzIdOcene = new JLabel("");
-        panel.add(labelSprawdzIdOcene);
-
-        String[] ocena1_5 = {"1","2","3","4","5"};
-        comboBoxRating = new JComboBox(ocena1_5);
+        labelCheckIdRating = new JLabel("");
+        panel.add(labelCheckIdRating);
+        String[] rating1_5 = {"1","2","3","4","5"};
+        comboBoxRating = new JComboBox<String>(rating1_5);
         comboBoxRating.setBackground(Color.BLACK);
         comboBoxRating.setForeground(Color.GREEN);
         comboBoxRating.setFont(new Font("Arctic", Font.PLAIN, 50));
         comboBoxRating.setSize(new Dimension(250, 40));
         comboBoxRating.setVisible(false);
         panel.add(comboBoxRating);
-
-        labelSprawdzOcene = new JLabel("");
-
+        labelCheckRating = new JLabel("");
         myFrameNext.add(panel,BorderLayout.CENTER);
-
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0, 200, 0));
         panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel2.setLayout(new GridLayout(0, 4, 10, 5));
-        panel2.add(buttonPowrot);
-
+        panel2.add(buttonBack);
         JLabel lb1 = new JLabel();
         panel2.add(lb1);
         JLabel lb2 = new JLabel();
         panel2.add(lb2);
-
         buttonAddRating = new JButton(" Dodaj ocene: ");
         buttonAddRating.setBackground(new Color(0,255,0));
         buttonAddRating.setBorder(BorderFactory.createEtchedBorder());
@@ -434,48 +337,43 @@ public class GUI implements ActionListener {
         buttonAddRating.addActionListener(this);
         buttonAddRating.setVisible(false);
         panel2.add(buttonAddRating);
-
         myFrameNext.add(panel2, BorderLayout.SOUTH);
     }
 
-
-
-    private void dodajSamochod(String marka, String model, double cena, short rokProdukcji) {
-
-        Samochod samochod = new Samochod(marka, model, cena, rokProdukcji);
-        samochody.add(samochod);
-        listCars += "ID:   " + samochod.id + "   \t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji + "\n";
+    private void funcAddCar(String mark, String model, double price, short yearOfProduction) {
+        Car Car = new Car(mark, model, price, yearOfProduction);
+        Cars.add(Car);
+        listCars += "ID:   " + Car.id + "   \t" + Car.mark + "\t  " + Car.model + "\t " + Car.yearOfProduction + "\n";
         System.out.println("Dodano samochod!");
     }
 
-    private String wyswietlSamochody() {
-
-//        String listaAut = "";
-//        if (samochody.isEmpty()) {
-////            System.out.println("Brak samochodow!");
-//            listCars = "Brak samochodow!");
+    private String funcShowCars() {
+//        String labelListCars = "";
+//        if (Cars.isEmpty()) {
+////            System.out.println("Brak Carow!");
+//            listCars = "Brak Carow!");
 //        }
 //        else {
-//            System.out.println("\nLista samochodow:");
-//            for (Samochod samochod : samochody) {
-//                listCars += "ID: " + samochod.id + "\t" + samochod.marka + "\t  " + samochod.model + "\t " + samochod.rokProdukcji + "\n";
+//            System.out.println("\nLista Carow:");
+//            for (Car Car : Cars) {
+//                listCars += "ID: " + Car.id + "\t" + Car.mark + "\t  " + Car.model + "\t " + Car.yearOfProduction + "\n";
 //            }
 //        }
-//        return listaAut;
+//        return labelListCars;
           return listCars;
     }
 
-//    private void rezerwujSamochod() {
-//        System.out.print("\nPodaj ID samochodu do rezerwacji: ");
+//    private void rezerwujCar() {
+//        System.out.print("\nPodaj ID Caru do rezerwacji: ");
 //        int id = scanner.nextInt();
 ////        scanner.nextLine();
 //
-//        Samochod samochod = znajdzSamochod(id);
-//        if (samochod == null) {
-//            System.out.println("Nie znaleziono samochodu o podanym ID!");
+//        Car Car = funcSearchCar(id);
+//        if (Car == null) {
+//            System.out.println("Nie znaleziono Caru o podanym ID!");
 //            return;
 //        } else {
-//            System.out.println("Na ile dni chcesz wypozyczyc samochod?");
+//            System.out.println("Na ile days chcesz wypozyczyc Car?");
 //            int days = scanner.nextInt();
 //            scanner.nextLine();
 //
@@ -490,7 +388,6 @@ public class GUI implements ActionListener {
 //            } else if (wybor.equals("NIE")) {
 //                System.out.println("Podaj date rozpoczecia wypozyczenia (w formacie dd/MM/yyyy): ");
 //                String dateStr = scanner.nextLine();
-//
 //
 //                try {
 //
@@ -510,238 +407,206 @@ public class GUI implements ActionListener {
 //            //endDate.add(Calendar.YEAR, 1);
 //            //endDate.add(Calendar.MONTH, 1);
 //            endDate.add(Calendar.DATE, days);
-//            System.out.println("Wypozyczanie konczy sie dnia: " + dateFormat.format(endDate.getTime()));
+//            System.out.println("Wypozyczanie konczy sie daysa: " + dateFormat.format(endDate.getTime()));
 //        }
 //    }
 //
-
-
-//    private void ocenSamochod() {
-//        System.out.print("\nPodaj ID samochodu: ");
+//    private void ocenCar() {
+//        System.out.print("\nPodaj ID Caru: ");
 //        int id = scanner.nextInt();
 //        scanner.nextLine();
 //
-//        Samochod samochod = znajdzSamochod(id);
-//        if (samochod == null) {
-//            System.out.println("Nie znaleziono samochodu o podanym ID!");
+//        Car Car = funcSearchCar(id);
+//        if (Car == null) {
+//            System.out.println("Nie znaleziono Caru o podanym ID!");
 //            return;
 //        }
 //
-//        System.out.print("Podaj ocene samochodu (od 1 do 5): ");
-//        int ocena;
+//        System.out.print("Podaj ocene Caru (od 1 do 5): ");
+//        int oprice;
 //        do{
-//            ocena = scanner.nextInt();
+//            oprice = scanner.nextInt();
 //            scanner.nextLine();
-//            if(ocena<1 || 5<ocena){
+//            if(oprice<1 || 5<oprice){
 //                System.out.println("Podano zla wartosc. (Podaj ocene od 1 do 5)");
 //            }
-//        }while(!(ocena>=1 && 5>=ocena));
+//        }while(!(oprice>=1 && 5>=oprice));
 //
-//        samochod.dodajOcene(ocena);
-//        System.out.println("Dodano ocene dla samochodu!");
+//        Car.dodajOcene(oprice);
+//        System.out.println("Dodano ocene dla Caru!");
 //    }
 
-    private void zobaczOcenyAut(){
-        if (samochody.isEmpty()) {
+    private void seeCarRatings(){
+        if (Cars.isEmpty()) {
             System.out.println("Brak samochodow!");
             return;
         }
         else{
-            for (Samochod samochod : samochody) {
-                System.out.println("\t" + samochod.marka + " \t " + samochod.model + "\tOcena: " + samochod.sredniaOcen());
+            for (Car Car : Cars) {
+                System.out.println("\t" + Car.mark + " \t " + Car.model + "\tOcena: " + Car.averageRating());
             }
         }
     }
 
-    private Samochod znajdzSamochod(int id) {
-        for (Samochod samochod : samochody) {
-            if (samochod.getId() == id) {
-                return samochod;
+    private Car funcSearchCar(int id) {
+        for (Car Car : Cars) {
+            if (Car.getId() == id) {
+                return Car;
             }
         }
         return null;
     }
-
-
-
-    static class Samochod {
+    static class Car {
         private int id;
-        private String marka;
+        private String mark;
         private String model;
-        private double cena;
-        private short rokProdukcji;
-        private ArrayList<Integer> oceny;
-        private boolean czyDostepny;
-
-        public Samochod(String marka, String model, double cena, short rokProdukcji) {
+        private double price;
+        private short yearOfProduction;
+        private ArrayList<Integer> ratings;
+        private boolean availability;
+        public Car(String mark, String model, double price, short yearOfProduction) {
             this.id = nextId++;
-            this.marka = marka;
+            this.mark = mark;
             this.model = model;
-            this.cena = cena;
-            this.rokProdukcji = rokProdukcji;
-            this.oceny = new ArrayList<Integer>();
-            this.czyDostepny = true;
+            this.price = price;
+            this.yearOfProduction = yearOfProduction;
+            this.ratings = new ArrayList<Integer>();
+            this.availability = true;
         }
-
         public int getId() { return id; }
-
-        public String getMarka() {
-            return marka;
+        public String getMark() {
+            return mark;
         }
-
         public String getModel() {
             return model;
         }
-
-        public double getCena() {
-            return cena;
+        public double getprice() {
+            return price;
         }
-        public short getRokProdukcji() { return  rokProdukcji;}
-
-        public boolean czyDostepny() {
-            return czyDostepny;
+        public short getYearOfProduction() { return  yearOfProduction;}
+        public boolean availability() {
+            return availability;
         }
-
-        public void zarezerwuj() {
-            czyDostepny = false;
+        public void Rent() {
+            availability = false;
         }
-
-        public double obliczKosztWynajmu(int dni) {
-            if(dni < 7) return cena * dni;
-            if(dni < 14){
-                System.out.println("Dodano rabat 10%. Za wynajem " + dni + " dni ");
-                return cena * dni * 0.9;
+        public double funcCalculateTheCostOfRent(int days) {
+            if(days < 7) return price * days;
+            if(days < 14){
+                System.out.println("Dodano rabat 10%. Za wynajem " + days + " days ");
+                return price * days * 0.9;
             }
-            System.out.println("Dodano rabat 15%. Za wynajem " + dni + " dni");
-            return cena * dni * 0.85;
+            System.out.println("Dodano rabat 15%. Za wynajem " + days + " days");
+            return price * days * 0.85;
         }
-
-        public void dodajOcene(int ocena) {
-            oceny.add(ocena);
+        public void dodajOcene(int price) {
+            ratings.add(price);
         }
-
-        public double sredniaOcen() {
-            if (oceny.isEmpty()) {
+        public double averageRating() {
+            if (ratings.isEmpty()) {
                 return 0;
             }
-
-            double suma = 0;
-            for (int ocena : oceny) {
-                suma += ocena;
+            double sum = 0;
+            for (int price : ratings) {
+                sum += price;
             }
-
-            return suma / oceny.size();
+            return sum / ratings.size();
         }
     }
     public static void main(String[] args){
         new GUI();
     }
 
-
         @Override
         public void actionPerformed(ActionEvent e){
-            if(e.getSource()==buttonDodajSamochod){
+            if(e.getSource()==buttonAddCar){
                 myFrameGUI.dispose();
                 addCars();
             }
-
-            if(e.getSource()==buttonWyswietlSamochody){
+            if(e.getSource()==buttonShowCar){
                 myFrameGUI.dispose();
                 showCars();
             }
             if(e.getSource()==buttonCalculateCost){
                 myFrameGUI.dispose();
-                obliczKwoteWynajmu();
+                funcCalculateAmountOfRent();
             }
             if(e.getSource()==buttonAddRatingCar){
                 myFrameGUI.dispose();
                 addCarRating();
             }
-
-
             if(e.getSource()==exitButton)
                 System.exit(0);
-
             //calculateCost
-
             if(e.getSource()==buttonIdPass) {
                 if (textFieldID.getText().isEmpty()) {
-                    textFieldIloscDni.setVisible(false);
-                    buttonOblicz.setVisible(false);
-                    labelSprawdz.setText("Podaj liczbe identyfikatora");
-                    labelIloscDni.setText("");
+                    textFieldDays.setVisible(false);
+                    buttonCalculate.setVisible(false);
+                    labelCheck.setText("Podaj liczbe identyfikatora");
+                    labelDays.setText("");
                     labelCost.setText("");
                 }
                 else {
                     int ID = Integer.parseInt(textFieldID.getText());
-                    if (znajdzSamochod(ID) != null) {
+                    if (funcSearchCar(ID) != null) {
 
-                        labelSprawdz.setText("Na ile dni chcesz wypozyczyc: ");
-                        textFieldIloscDni.setVisible(true);
-                        buttonOblicz.setVisible(true);
+                        labelCheck.setText("Na ile days chcesz wypozyczyc: ");
+                        textFieldDays.setVisible(true);
+                        buttonCalculate.setVisible(true);
 
                     }
                     else {
-                        labelSprawdz.setText("Nie ma takiego ID ");
-                        textFieldIloscDni.setVisible(false);
-                        buttonOblicz.setVisible(false);
-                        labelIloscDni.setText("");
+                        labelCheck.setText("Nie ma takiego ID ");
+                        textFieldDays.setVisible(false);
+                        buttonCalculate.setVisible(false);
+                        labelDays.setText("");
                         labelCost.setText("");
                     }
                 }
             }
-
-            if(e.getSource()==buttonOblicz){
+            if(e.getSource()==buttonCalculate){
                 int ID = Integer.parseInt(textFieldID.getText());
-                Samochod samochod = znajdzSamochod(ID);
-                int dni = Integer.parseInt(textFieldIloscDni.getText());
-                double kwota = samochod.obliczKosztWynajmu(dni);
-                labelIloscDni.setText("Kwota za " + samochod.getMarka() + " " + samochod.getModel() + " wynosi: ");
-                labelCost.setText(String.format("%.2f PLN", kwota));
+                Car Car = funcSearchCar(ID);
+                int days = Integer.parseInt(textFieldDays.getText());
+                double price = Car.funcCalculateTheCostOfRent(days);
+                labelDays.setText("Kwota za " + Car.getMark() + " " + Car.getModel() + " wynosi: ");
+                labelCost.setText(String.format("%.2f PLN", price));
             }
-
             //addCarRating
-
             if(e.getSource()==buttonIdPassRating){
                     if (textFieldID.getText().isEmpty()) {
-                        textFieldIloscDni.setVisible(false);
-                        buttonOblicz.setVisible(false);
-                        labelSprawdz.setText("Podaj liczbe identyfikatora");
+                        textFieldDays.setVisible(false);
+                        buttonCalculate.setVisible(false);
+                        labelCheck.setText("Podaj liczbe identyfikatora");
                     }
                     else {
                         int ID = Integer.parseInt(textFieldID.getText());
-                        if (znajdzSamochod(ID) != null) {
-
-                            labelSprawdzIdOcene.setText("Na ile oceniasz pojazd? ");
+                        if (funcSearchCar(ID) != null) {
+                            labelCheckIdRating.setText("Na ile oceniasz pojazd? ");
                             comboBoxRating.setVisible(true);
                             buttonAddRating.setVisible(true);
-
                         }
                         else {
-                            labelSprawdz.setText("Nie ma takiego ID ");
+                            labelCheck.setText("Nie ma takiego ID ");
                             comboBoxRating.setVisible(false);
                             buttonAddRating.setVisible(false);
                         }
                     }
             }
             if(e.getSource()==buttonAddRating){
-
-
+                //Miejsce na funkcje od dodania textFielda do danych oceny konkretnego auta
             }
-
-
             //Lower buttons
-
-            if(e.getSource()==buttonPowrot){
+            if(e.getSource()==buttonBack){
                 myFrameNext.dispose();
                 start();
             }
-            if(e.getSource()==buttonZatwierdz){
-                if(!(myTextFieldMarka.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldRokProdukcji.getText().isEmpty() | myTextFieldKwotaZaDzien.getText().isEmpty())){
-                    double cena = Double.parseDouble(myTextFieldKwotaZaDzien.getText());
-                    short rok = Short.parseShort(myTextFieldRokProdukcji.getText());
-                    dodajSamochod(myTextFieldMarka.getText(), myTextFieldModel.getText(),cena,rok);
-                    wyswietlSamochody();
+            if(e.getSource()==buttonConfirm){
+                if(!(myTextFieldMark.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldYearOfProduction.getText().isEmpty() | myTextFieldPriceForDay.getText().isEmpty())){
+                    double price = Double.parseDouble(myTextFieldPriceForDay.getText());
+                    short year = Short.parseShort(myTextFieldYearOfProduction.getText());
+                    funcAddCar(myTextFieldMark.getText(), myTextFieldModel.getText(),price,year);
+                    funcShowCars();
                     myFrameNext.dispose();
                     start();
                 }
