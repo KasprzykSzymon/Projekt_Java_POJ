@@ -2,14 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
-import java.text.DecimalFormat;
 
 //-------------------//
 //Start GUI//
@@ -18,30 +15,29 @@ public class GUI implements ActionListener {
     public GUI(){
         start();
     }
-    private String listCars = "";
     private ArrayList<Car> Cars = new ArrayList<Car>();
     private static int nextId = 1;
-    MyFrame myFrameGUI ;
-    JButton buttonAddCar;
-    JButton buttonShowCar;
-    JButton buttonReserveACars;
-    JButton buttonCalculateCost;
-    JButton buttonAddRatingCar;
-    JButton buttonShowCarsRating;
-    JButton exitButton;
+    private MyFrame myFrameGUI ;
+    private JButton buttonAddCar;
+    private JButton buttonShowCar;
+    private JButton buttonReserveACars;
+    private JButton buttonCalculateCost;
+    private JButton buttonAddRatingCar;
+    private JButton buttonShowCarsRating;
+    private JButton exitButton;
 
     //Defoult lower buttons
-    JButton buttonBack ;
-    JButton buttonConfirm ;
+    private JButton buttonBack ;
+    private JButton buttonConfirm ;
         public void start(){
                 myFrameGUI = new MyFrame();  //creates a myFrane
-                JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma");
+                JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma ");
                 buttonAddCar = new JButton("Dodaj samochod");
                 buttonShowCar = new JButton("Wyswietl samochody");
                 buttonReserveACars = new JButton("Rezerwuj samochod");
                 buttonCalculateCost = new JButton("Oblicz koszt wynajmu samochodu");
                 buttonAddRatingCar = new JButton("Ocen samochod");
-                buttonShowCarsRating = new JButton("Wyswietl ratings samochodow");
+                buttonShowCarsRating = new JButton("Wyswietl oceny samochodow");
                 exitButton = new JButton("Wyjscie");
                 JPanel panel = new JPanel();
                 myFrameGUI.add(panel, BorderLayout.CENTER);
@@ -82,12 +78,12 @@ public class GUI implements ActionListener {
 //----------------------------------//
 // Add cars
 //----------------------------------//
-    MyFrame myFrameNext;
-    JTextField myTextFieldMark ;
-    JTextField myTextFieldModel ;
-    JTextField myTextFieldYearOfProduction ;
-    JTextField myTextFieldPriceForDay ;
-    JCheckBox checkBox;
+    private MyFrame myFrameNext;
+    private JTextField myTextFieldMark ;
+    private JTextField myTextFieldModel ;
+    private JTextField myTextFieldYearOfProduction ;
+    private JTextField myTextFieldPriceForDay ;
+    private JCheckBox checkBox;
     private void addCars(){
         myFrameNext = new MyFrame();
         JPanel panel = new JPanel();
@@ -203,20 +199,94 @@ public class GUI implements ActionListener {
         buttonBack.setSize(250,20);
         panel2.add(buttonBack);
     }
+//----------------------------------//
+// Car rent
+//----------------------------------//
+    private JButton buttonRentIdPass;
+    private JCheckBox checkBoxFromToday;
+    private JTextField textFieldRentDays;
+    private JButton buttonRentCalculate;
+    private JLabel labelRentCheck;
+    private JLabel labelRentStart;
+    private JLabel labelRentEnd;
+
+    private void rentCar() {
+        myFrameNext = new MyFrame(); //creates a myFrame
+        JLabel label = new JLabel("Rezerwoj samochod: ");
+        JPanel panelStart = new JPanel();
+        panelStart.setBackground(new Color(0, 200, 0));
+        panelStart.add(label, BorderLayout.CENTER);
+        myFrameNext.add(panelStart, BorderLayout.NORTH);
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(0, 200, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panel.setLayout(new GridLayout(0, 2, 10, 5));
+        JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
+        panel.add(LabelId);
+        textFieldID = new JTextField();
+        textFieldID.setSize(new Dimension(250, 40));
+        textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
+        textFieldID.setForeground(Color.GREEN);
+        textFieldID.setBackground(Color.BLACK);
+        textFieldID.setCaretColor(Color.WHITE);
+        panel.add(textFieldID);
+        JLabel LB = new JLabel("");
+        panel.add(LB);
+        buttonRentIdPass = new JButton(" Sprawdz ");
+        buttonRentIdPass.addActionListener(this);
+        buttonRentIdPass.setBorder(BorderFactory.createEtchedBorder());
+        buttonRentIdPass.setBackground(new Color(50, 120, 200));
+        panel.add(buttonRentIdPass);
+        labelRentCheck = new JLabel("");
+        panel.add(labelRentCheck);
+        textFieldRentDays = new JTextField();
+        textFieldRentDays.setSize(new Dimension(250, 40));
+        textFieldRentDays.setFont(new Font("Arctic", Font.PLAIN, 50));
+        textFieldRentDays.setForeground(Color.GREEN);
+        textFieldRentDays.setBackground(Color.BLACK);
+        textFieldRentDays.setCaretColor(Color.WHITE);
+        textFieldRentDays.setVisible(false);
+        panel.add(textFieldRentDays);
+        LBCalculate = new JLabel("");
+        panel.add(LBCalculate);
+        buttonRentCalculate = new JButton(" Oblicz ");
+        buttonRentCalculate.addActionListener(this);
+        buttonRentCalculate.setBorder(BorderFactory.createEtchedBorder());
+        buttonRentCalculate.setBackground(new Color(50, 120, 200));
+        buttonRentCalculate.setVisible(false);
+        panel.add(buttonRentCalculate);
+        checkBoxFromToday = new JCheckBox("Czy wypozyczasz od dziasiejszego dnia?");
+        checkBoxFromToday.setBackground(new Color(0, 200, 0));
+        checkBoxFromToday.setVisible(false);
+        panel.add(checkBoxFromToday);
+        JLabel LBcheckB = new JLabel("");
+        panel.add(LBcheckB);
+        labelDays = new JLabel("");
+        panel.add(labelDays);
+        labelCost = new JLabel("");
+        panel.add(labelCost);
+        myFrameNext.add(panel, BorderLayout.CENTER);
+        JPanel panel2 = new JPanel();
+        panel2.setBackground(new Color(0, 200, 0));
+        panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panel2.setLayout(new GridLayout(0, 4, 10, 5));
+        panel2.add(buttonBack);
+        myFrameNext.add(panel2, BorderLayout.SOUTH);
+    }
 
 //----------------------------------//
 // Calculate amount of rent
 //----------------------------------//
-    JTextField textFieldID;
-    JButton buttonIdPass;
-    JTextField textFieldDays;
-    JButton buttonCalculate;
-    JLabel labelCheck;
-    JLabel LBCalculate;
-    JLabel labelDays;
-    JLabel labelCost;
+    private JTextField textFieldID;
+    private JButton buttonIdPass;
+    private JTextField textFieldDays;
+    private JButton buttonCalculate;
+    private JLabel labelCheck;
+    private JLabel LBCalculate;
+    private JLabel labelDays;
+    private JLabel labelCost;
 
-    private void funcCalculateAmountOfRent() {
+    private void calculateAmountOfRent() {
         myFrameNext = new MyFrame(); //creates a myFrame
         JLabel label = new JLabel("Oblicz kwote wynajmu: ");
         JPanel panelStart = new JPanel();
@@ -277,11 +347,10 @@ public class GUI implements ActionListener {
 //----------------------------------//
 // Add Car Rating
 //----------------------------------//
-    JButton buttonAddRating;
-    JButton buttonIdPassRating;
-    JLabel labelCheckIdRating;
-    JLabel labelCheckRating;
-    JComboBox comboBoxRating;
+    private JButton buttonAddRating;
+    private JButton buttonIdPassRating;
+    private JLabel labelCheckIdRating;
+    private JComboBox comboBoxRating;
     private void addCarRating(){
         myFrameNext = new MyFrame(); //creates a myFrame
         JLabel label = new JLabel("Dodaj ocene samochoduu: ");
@@ -319,7 +388,7 @@ public class GUI implements ActionListener {
         comboBoxRating.setSize(new Dimension(250, 40));
         comboBoxRating.setVisible(false);
         panel.add(comboBoxRating);
-        labelCheckRating = new JLabel("");
+        JLabel labelCheckRating = new JLabel("");
         myFrameNext.add(panel,BorderLayout.CENTER);
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0, 200, 0));
@@ -340,113 +409,97 @@ public class GUI implements ActionListener {
         myFrameNext.add(panel2, BorderLayout.SOUTH);
     }
 
+//----------------------------------//
+// Show cars
+//----------------------------------//
+    private JLabel labelRatingsCars;
+    protected void showRatingsCars(){
+        myFrameNext = new MyFrame();
+        JPanel panelStart = new JPanel();
+        panelStart.setBackground(Color.GREEN);
+        myFrameNext.add(panelStart, BorderLayout.NORTH);
+        JLabel centerLabel = new JLabel("Oceny samochodow:");
+        panelStart.add(centerLabel);
+        JPanel panel1 = new JPanel();
+        panel1.setBackground(Color.GREEN);
+        String ratingCars = funcRatingsCars();
+        labelListCars = new JLabel(ratingCars);
+        labelListCars.setHorizontalTextPosition(JLabel.CENTER);
+        panel1.add(labelListCars);
+        myFrameNext.add(panel1, BorderLayout.CENTER);
+        JPanel panel2 = new JPanel();
+        panel2.setBackground(new Color(0,200,0));
+        myFrameNext.add(panel2, BorderLayout.SOUTH);
+        panel2.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
+        panel2.setLayout(new GridLayout(0,4,10,5));
+        buttonBack = new JButton(" Powrot ");
+        buttonBack.addActionListener(this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
+        panel2.add(buttonBack);
+    }
+
     private void funcAddCar(String mark, String model, double price, short yearOfProduction) {
         Car Car = new Car(mark, model, price, yearOfProduction);
         Cars.add(Car);
-        listCars += "ID:   " + Car.id + "   \t" + Car.mark + "\t  " + Car.model + "\t " + Car.yearOfProduction + "\n";
         System.out.println("Dodano samochod!");
     }
 
     private String funcShowCars() {
-//        String labelListCars = "";
-//        if (Cars.isEmpty()) {
-////            System.out.println("Brak Carow!");
-//            listCars = "Brak Carow!");
-//        }
-//        else {
-//            System.out.println("\nLista Carow:");
-//            for (Car Car : Cars) {
-//                listCars += "ID: " + Car.id + "\t" + Car.mark + "\t  " + Car.model + "\t " + Car.yearOfProduction + "\n";
-//            }
-//        }
-//        return labelListCars;
+        String listCars = "";
+        for(Car car : Cars) {
+            listCars += "ID:   " + car.id + "   \t" + car.mark + "\t  " + car.model + "\t " + car.yearOfProduction + "\n";
+        }
           return listCars;
     }
 
-//    private void rezerwujCar() {
-//        System.out.print("\nPodaj ID Caru do rezerwacji: ");
-//        int id = scanner.nextInt();
-////        scanner.nextLine();
-//
-//        Car Car = funcSearchCar(id);
-//        if (Car == null) {
-//            System.out.println("Nie znaleziono Caru o podanym ID!");
-//            return;
-//        } else {
-//            System.out.println("Na ile days chcesz wypozyczyc Car?");
-//            int days = scanner.nextInt();
-//            scanner.nextLine();
-//
-//            System.out.println("Czy chcesz zaczac wypozyczanie od dzisiaj? (TAK/NIE)");
-//            String wybor = scanner.nextLine().toUpperCase();
-//
+    private String funcRatingsCars(){
+        String ratingsCars = "";
+        double averageRatings;
+        for(Car car : Cars) {
+            averageRatings = car.averageRating();
+            ratingsCars += String.format("ID:   %d   \t%s\t %s \t Ocena: %1.2f \n",car.id, car.mark, car.model, averageRatings);
+        }
+        return ratingsCars;
+
+    }
+
+//    private String[] funcRentCar(Boolean fromToday, int days) {
 //            Calendar startDate = Calendar.getInstance();
 //            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 //
-//            if (wybor.equals("TAK")) {
+//            if (fromToday) {
 //                System.out.println("Wypozyczanie zaczyna się od dzisiaj: " + dateFormat.format(startDate.getTime()));
-//            } else if (wybor.equals("NIE")) {
-//                System.out.println("Podaj date rozpoczecia wypozyczenia (w formacie dd/MM/yyyy): ");
-//                String dateStr = scanner.nextLine();
-//
-//                try {
-//
-//                    Date date = dateFormat.parse(dateStr);
-//                    startDate.setTime(date);
-//                    System.out.println("Wypozyczanie zaczyna sie od: " + dateFormat.format(startDate.getTime()));
-//                } catch (ParseException e) {
-//                    System.out.println("Nieprawidlowy format daty!");
-//                    return;
-//                }
-//            } else {
-//                System.out.println("Nieznana opcja!");
-//                return;
 //            }
+////            else
+////                if (wybor.equals("NIE")) {
+////                System.out.println("Podaj date rozpoczecia wypozyczenia (w formacie dd/MM/yyyy): ");
+////
+////                    try {
+////
+////                        Date date = dateFormat.parse(dateStr);
+////                        startDate.setTime(date);
+////                        System.out.println("Wypozyczanie zaczyna sie od: " + dateFormat.format(startDate.getTime()));
+////                    }
+////                    catch (ParseException e) {
+////                    System.out.println("Nieprawidlowy format daty!");
+////                    return "";
+////                    }
+////                }
+////                else {
+////                System.out.println("Nieznana opcja!");
+////                return "";
+////            }
 //
 //            Calendar endDate = (Calendar) startDate.clone();
 //            //endDate.add(Calendar.YEAR, 1);
 //            //endDate.add(Calendar.MONTH, 1);
 //            endDate.add(Calendar.DATE, days);
 //            System.out.println("Wypozyczanie konczy sie daysa: " + dateFormat.format(endDate.getTime()));
-//        }
-//    }
-//
-//    private void ocenCar() {
-//        System.out.print("\nPodaj ID Caru: ");
-//        int id = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        Car Car = funcSearchCar(id);
-//        if (Car == null) {
-//            System.out.println("Nie znaleziono Caru o podanym ID!");
-//            return;
-//        }
-//
-//        System.out.print("Podaj ocene Caru (od 1 do 5): ");
-//        int oprice;
-//        do{
-//            oprice = scanner.nextInt();
-//            scanner.nextLine();
-//            if(oprice<1 || 5<oprice){
-//                System.out.println("Podano zla wartosc. (Podaj ocene od 1 do 5)");
-//            }
-//        }while(!(oprice>=1 && 5>=oprice));
-//
-//        Car.dodajOcene(oprice);
-//        System.out.println("Dodano ocene dla Caru!");
+//            return dateFormat.format(startDate.getTime()), dateFormat.format(endDate.getTime());
 //    }
 
-    private void seeCarRatings(){
-        if (Cars.isEmpty()) {
-            System.out.println("Brak samochodow!");
-            return;
-        }
-        else{
-            for (Car Car : Cars) {
-                System.out.println("\t" + Car.mark + " \t " + Car.model + "\tOcena: " + Car.averageRating());
-            }
-        }
-    }
 
     private Car funcSearchCar(int id) {
         for (Car Car : Cars) {
@@ -480,11 +533,11 @@ public class GUI implements ActionListener {
         public String getModel() {
             return model;
         }
-        public double getprice() {
+        public double getPrice() {
             return price;
         }
         public short getYearOfProduction() { return  yearOfProduction;}
-        public boolean availability() {
+        public boolean getAvailability() {
             return availability;
         }
         public void Rent() {
@@ -499,8 +552,8 @@ public class GUI implements ActionListener {
             System.out.println("Dodano rabat 15%. Za wynajem " + days + " days");
             return price * days * 0.85;
         }
-        public void dodajOcene(int price) {
-            ratings.add(price);
+        public void addRating(int rating) {
+            ratings.add(rating);
         }
         public double averageRating() {
             if (ratings.isEmpty()) {
@@ -527,16 +580,56 @@ public class GUI implements ActionListener {
                 myFrameGUI.dispose();
                 showCars();
             }
+            if(e.getSource()==buttonReserveACars){
+                myFrameGUI.dispose();
+                rentCar();
+            }
             if(e.getSource()==buttonCalculateCost){
                 myFrameGUI.dispose();
-                funcCalculateAmountOfRent();
+                calculateAmountOfRent();
             }
             if(e.getSource()==buttonAddRatingCar){
                 myFrameGUI.dispose();
                 addCarRating();
             }
+            if(e.getSource()==buttonShowCarsRating){
+                myFrameGUI.dispose();
+                showRatingsCars();
+            }
             if(e.getSource()==exitButton)
                 System.exit(0);
+            //rentCar
+            if(e.getSource()==buttonRentIdPass) {
+                if (textFieldID.getText().isEmpty()) {
+                    textFieldRentDays.setVisible(false);
+                    buttonRentCalculate.setVisible(false);
+                    checkBoxFromToday.setVisible(false);
+                    labelRentCheck.setText("Podaj liczbe identyfikatora");
+                    labelRentStart.setText("");
+                    labelRentEnd.setText("");
+                }
+                else {
+                    int ID = Integer.parseInt(textFieldID.getText());
+                    if (funcSearchCar(ID) != null) {
+                        labelRentCheck.setText("Na ile dni wypozyczasz: ");
+                        textFieldRentDays.setVisible(true);
+                        buttonRentCalculate.setVisible(true);
+                        checkBoxFromToday.setVisible(true);
+
+                        labelRentStart.setText("Rezerwacja zaczyna sie od:" );
+                        labelRentEnd.setText("Rezerwacja konczy sie: ");
+
+                    }
+                    else {
+                        labelRentCheck.setText("Nie ma takiego ID ");
+                        textFieldRentDays.setVisible(false);
+                        buttonRentCalculate.setVisible(false);
+                        checkBoxFromToday.setVisible(false);
+                        labelRentStart.setText("");
+                        labelRentEnd.setText("");
+                    }
+                }
+            }
             //calculateCost
             if(e.getSource()==buttonIdPass) {
                 if (textFieldID.getText().isEmpty()) {
@@ -594,7 +687,11 @@ public class GUI implements ActionListener {
                     }
             }
             if(e.getSource()==buttonAddRating){
-                //Miejsce na funkcje od dodania textFielda do danych oceny konkretnego auta
+                int ID = Integer.parseInt(textFieldID.getText());
+                Car car = funcSearchCar(ID);
+                car.addRating(comboBoxRating.getSelectedIndex()+1);
+                myFrameNext.dispose();
+                start();
             }
             //Lower buttons
             if(e.getSource()==buttonBack){
