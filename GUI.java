@@ -83,7 +83,7 @@ public class GUI implements ActionListener {
     private JTextField myTextFieldModel ;
     private JTextField myTextFieldYearOfProduction ;
     private JTextField myTextFieldPriceForDay ;
-    private JCheckBox checkBox;
+    private JCheckBox checkBoxAddCar;
     private void addCars(){
         myFrameNext = new MyFrame();
         JPanel panel = new JPanel();
@@ -140,11 +140,11 @@ public class GUI implements ActionListener {
         myTextFieldPriceForDay.setCaretColor(Color.WHITE);
         myTextFieldPriceForDay.setText("100");
         panel1.add(myTextFieldPriceForDay);
-        checkBox = new JCheckBox();
-        checkBox.setText("Nie jestem robotem :)");
-        checkBox.setBackground(Color.GREEN);
-        checkBox.setFocusable(false);
-        panel1.add(checkBox);
+        checkBoxAddCar = new JCheckBox();
+        checkBoxAddCar.setText("Nie jestem robotem :)");
+        checkBoxAddCar.setBackground(Color.GREEN);
+        checkBoxAddCar.setFocusable(false);
+        panel1.add(checkBoxAddCar);
         panel1.setBackground(Color.GREEN);
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));
@@ -203,7 +203,7 @@ public class GUI implements ActionListener {
 // Car rent
 //----------------------------------//
     private JButton buttonRentIdPass;
-    private JCheckBox checkBoxFromToday;
+    private JCheckBox checkBoxAddCarFromToday;
     private JTextField textFieldRentDays;
     private JButton buttonRentCalculate;
     private JLabel labelRentCheck;
@@ -220,7 +220,7 @@ public class GUI implements ActionListener {
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 200, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel.setLayout(new GridLayout(0, 2, 10, 5));
+        panel.setLayout(new GridLayout(0, 1, 10, 5));
         JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         panel.add(LabelId);
         textFieldID = new JTextField();
@@ -230,9 +230,11 @@ public class GUI implements ActionListener {
         textFieldID.setBackground(Color.BLACK);
         textFieldID.setCaretColor(Color.WHITE);
         panel.add(textFieldID);
-        JLabel LB = new JLabel("");
-        panel.add(LB);
+//        JLabel LB = new JLabel("");
+//        LB.setSize(new Dimension(250,20));
+//        panel.add(LB);
         buttonRentIdPass = new JButton(" Sprawdz ");
+        buttonRentIdPass.setSize(new Dimension(250, 20));
         buttonRentIdPass.addActionListener(this);
         buttonRentIdPass.setBorder(BorderFactory.createEtchedBorder());
         buttonRentIdPass.setBackground(new Color(50, 120, 200));
@@ -247,31 +249,37 @@ public class GUI implements ActionListener {
         textFieldRentDays.setCaretColor(Color.WHITE);
         textFieldRentDays.setVisible(false);
         panel.add(textFieldRentDays);
-        LBCalculate = new JLabel("");
-        panel.add(LBCalculate);
+//        LBCalculate = new JLabel("");
+//        LBCalculate.setSize(new Dimension(250, 20));
+//        panel.add(LBCalculate);
+        myFrameNext.add(panel, BorderLayout.CENTER);
         buttonRentCalculate = new JButton(" Oblicz ");
+        buttonRentCalculate.setSize(new Dimension(250, 20));
         buttonRentCalculate.addActionListener(this);
         buttonRentCalculate.setBorder(BorderFactory.createEtchedBorder());
         buttonRentCalculate.setBackground(new Color(50, 120, 200));
         buttonRentCalculate.setVisible(false);
         panel.add(buttonRentCalculate);
-        checkBoxFromToday = new JCheckBox("Czy wypozyczasz od dziasiejszego dnia?");
-        checkBoxFromToday.setBackground(new Color(0, 200, 0));
-        checkBoxFromToday.setVisible(false);
-        panel.add(checkBoxFromToday);
+        checkBoxAddCarFromToday = new JCheckBox("Czy wypozyczasz od dziasiejszego dnia?");
+        checkBoxAddCarFromToday.setBackground(new Color(0, 200, 0));
+        checkBoxAddCarFromToday.setVisible(false);
+        checkBoxAddCarFromToday.setSize(new Dimension(250, 20));
+        panel.add(checkBoxAddCarFromToday);
         JLabel LBcheckB = new JLabel("");
+        LBcheckB.setSize(new Dimension(250 , 20));
         panel.add(LBcheckB);
-        labelDays = new JLabel("");
-        panel.add(labelDays);
-        labelCost = new JLabel("");
-        panel.add(labelCost);
-        myFrameNext.add(panel, BorderLayout.CENTER);
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(new Color(0, 200, 0));
-        panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel2.setLayout(new GridLayout(0, 4, 10, 5));
-        panel2.add(buttonBack);
-        myFrameNext.add(panel2, BorderLayout.SOUTH);
+        labelRentStart = new JLabel("");
+        panel.add(labelRentStart);
+        JLabel LBRent = new JLabel("");
+        panel.add(LBRent);
+        labelRentEnd = new JLabel("");
+        panel.add(labelRentEnd);
+        JPanel panel3 = new JPanel();
+        panel3.setBackground(new Color(0, 200, 0));
+        panel3.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panel3.setLayout(new GridLayout(0, 4, 10, 5));
+        panel3.add(buttonBack);
+        myFrameNext.add(panel3, BorderLayout.SOUTH);
     }
 
 //----------------------------------//
@@ -598,12 +606,27 @@ public class GUI implements ActionListener {
             }
             if(e.getSource()==exitButton)
                 System.exit(0);
+            //addCar
+            if(e.getSource()==buttonConfirm){
+                if(!(!checkBoxAddCar.isSelected() | myTextFieldMark.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldYearOfProduction.getText().isEmpty() | myTextFieldPriceForDay.getText().isEmpty())){
+                    double price = Double.parseDouble(myTextFieldPriceForDay.getText());
+                    short year = Short.parseShort(myTextFieldYearOfProduction.getText());
+                    funcAddCar(myTextFieldMark.getText(), myTextFieldModel.getText(),price,year);
+                    if(checkBoxAddCar.isSelected())
+                    myFrameNext.dispose();
+                    start();
+                }
+                else
+                    System.out.println("Wypelnij puste pola.");
+
+
+            }
             //rentCar
             if(e.getSource()==buttonRentIdPass) {
                 if (textFieldID.getText().isEmpty()) {
                     textFieldRentDays.setVisible(false);
                     buttonRentCalculate.setVisible(false);
-                    checkBoxFromToday.setVisible(false);
+                    checkBoxAddCarFromToday.setVisible(false);
                     labelRentCheck.setText("Podaj liczbe identyfikatora");
                     labelRentStart.setText("");
                     labelRentEnd.setText("");
@@ -614,7 +637,7 @@ public class GUI implements ActionListener {
                         labelRentCheck.setText("Na ile dni wypozyczasz: ");
                         textFieldRentDays.setVisible(true);
                         buttonRentCalculate.setVisible(true);
-                        checkBoxFromToday.setVisible(true);
+                        checkBoxAddCarFromToday.setVisible(true);
 
                         labelRentStart.setText("Rezerwacja zaczyna sie od:" );
                         labelRentEnd.setText("Rezerwacja konczy sie: ");
@@ -624,7 +647,7 @@ public class GUI implements ActionListener {
                         labelRentCheck.setText("Nie ma takiego ID ");
                         textFieldRentDays.setVisible(false);
                         buttonRentCalculate.setVisible(false);
-                        checkBoxFromToday.setVisible(false);
+                        checkBoxAddCarFromToday.setVisible(false);
                         labelRentStart.setText("");
                         labelRentEnd.setText("");
                     }
@@ -698,19 +721,6 @@ public class GUI implements ActionListener {
                 myFrameNext.dispose();
                 start();
             }
-            if(e.getSource()==buttonConfirm){
-                if(!(myTextFieldMark.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldYearOfProduction.getText().isEmpty() | myTextFieldPriceForDay.getText().isEmpty())){
-                    double price = Double.parseDouble(myTextFieldPriceForDay.getText());
-                    short year = Short.parseShort(myTextFieldYearOfProduction.getText());
-                    funcAddCar(myTextFieldMark.getText(), myTextFieldModel.getText(),price,year);
-                    funcShowCars();
-                    myFrameNext.dispose();
-                    start();
-                }
-                else
-                    System.out.println("Wypelnij puste pola.");
-
-
-            }
+            
         }
 }
