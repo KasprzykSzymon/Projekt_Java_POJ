@@ -8,18 +8,12 @@
  - Klaudia Iwanowicz
  - Oskar Pytlewski
 
- #### Zrobine funkcje:
-  - Dodaj samochód
-  - Wyświetl samochody
-  - Rezerwuj samochód
-  - Oblicz koszt wynajmu samochodu
-  - Ocen samochod
-  - Wyswietl oceny aut
-  - Wyjdz
- 
-#### Do GUI:
- - (Scieżka do pliku) javac  GUI.java
- - (Scieżka do pliku) java  GUI
+#### Do pierwszego uruchomienia GUI (Dwa pierwsze myślniki są dla tych co nie mają zainstalowanej javy):
+ - Należy mieć pobrany plik GUI.java i MyFrame.java
+ ##### W termilalu wpisać:
+ - pip install install-jdk
+ - (Scieżka do pliku do projektu) javac  GUI.java
+ - (Scieżka do pliku do projektu) java  GUI
  
 
 #### Do dodania:
@@ -36,6 +30,3 @@
   - (Miejsce na pomysły)
   - (Miejsce na pomysły)
   - (Miejsce na pomysły)
-  
-#### Zrealizowane pomysły:
-  - Dodanie możliwości obliczania kosztów wynajmu samochodu - pozwala klientom na obliczenie kosztów wynajmu samochodu na podstawie czasu wynajmu i ceny za dzień.(Szymon)
