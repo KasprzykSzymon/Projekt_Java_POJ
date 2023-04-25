@@ -50,6 +50,9 @@ public class MyFrame extends JFrame implements ActionListener  {
         menuBar.add(aboutMenu);
         this.setJMenuBar(menuBar);
     }
+    private void about(){
+        JOptionPane.showMessageDialog(this, "Program o nazwie Wypozyczalnia Samochodow zostal napisany na cele projektu na studia. \nSklad zespolu: \n Szymon Kasprzyk, Michal gruszczynski, Klaudia Iwanowicz, Oskar Pytlewki");
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==loadItem)
@@ -57,9 +60,9 @@ public class MyFrame extends JFrame implements ActionListener  {
         if(e.getSource()==saveItem)
             System.out.println("Miejsce na instrukcje zapisu danych! ");
         if(e.getSource()==backItem)
-            System.out.println("Miejsce na instruckje powrotu! ");
+            System.out.println("Miejsce na instrukcje powrotu! ");
         if(e.getSource()==aboutItem)
-            System.out.println("Miejsce na instrukcje od wyswietlenia informacji o programie! ");
+            about();
         if(e.getSource()==exitItem)
             System.exit(0);
     }
