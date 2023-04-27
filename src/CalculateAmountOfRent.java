@@ -4,16 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CalculateAmountOfRent implements ActionListener {
-    private MyFrame myFrameNext;
-    private JTextField textFieldID;
-    private JButton buttonIdPass;
-    private JTextField textFieldDays;
-    private JButton buttonCalculate;
-    private JLabel labelCheck;
-    private JLabel LBCalculate;
-    private JLabel labelDays;
-    private JLabel labelCost;
-    private JButton buttonBack;
+    private final MyFrame myFrameNext;
+    private final JTextField textFieldID;
+    private final JButton buttonIdPass;
+    private final JTextField textFieldDays;
+    private final JButton buttonCalculate;
+    private final JLabel labelCheck;
+    private final JLabel labelDays;
+    private final JLabel labelCost;
+    private final JButton buttonBack;
 
     CalculateAmountOfRent() {
         myFrameNext = new MyFrame();
@@ -52,7 +51,7 @@ public class CalculateAmountOfRent implements ActionListener {
         textFieldDays.setCaretColor(Color.WHITE);
         textFieldDays.setVisible(false);
         panel.add(textFieldDays);
-        LBCalculate = new JLabel("");
+        JLabel LBCalculate = new JLabel("");
         panel.add(LBCalculate);
         buttonCalculate = new JButton(" Oblicz ");
         buttonCalculate.addActionListener(this);

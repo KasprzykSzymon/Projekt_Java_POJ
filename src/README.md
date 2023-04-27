@@ -5,20 +5,18 @@
 
  - Michał Gruszczyński
  - Szymon Kasprzyk
- - Klaudia Iwanowicz
- - Oskar Pytlewski
+ - Klaudia Iwanowicz (Próżniak)
+ - Oskar Pytlewski (Próźniak)
 
 #### Do pierwszego uruchomienia GUI (Dwa pierwsze myślniki są dla tych co nie mają zainstalowanej javy):
- - Należy mieć pobrany plik GUI.java i MyFrame.java
+ - Należy mieć pobrane i zaaktualizowane pliki programu.
  ##### W termilalu wpisać:
- - pip install install-jdk
- - (Scieżka do pliku do projektu) javac  GUI.java
- - (Scieżka do pliku do projektu) java  GUI
+ - pip install install-jdk //By zainstalować java 11
+ - W środowisku IntelliJ IDEA prawym przyciskiem myszy wcisnąć plik GUI i wybrać 'Run 'GUI.main()''
  
 
 #### Do dodania:
   - Baza danych, by cały czas nie pisać od zera programu 
-  - GUI (W trakcie Szymon)
   - Implementacja systemu rezerwacji samochodu - umożliwienie klientom dokonania rezerwacji samochodu na określony czas. Rezerwacja może być zrealizowana tylko wtedy, gdy samochód jest dostępny w wybranym przedziale czasowym.
  
 

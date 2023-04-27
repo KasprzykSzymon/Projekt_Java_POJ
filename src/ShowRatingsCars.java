@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ShowRatingsCars implements ActionListener {
-    private MyFrame myFrameNext;
-    private JLabel labelRatingsCars;
-    private JButton buttonBack;
+    private final MyFrame myFrameNext;
+    private final JButton buttonBack;
     ShowRatingsCars(){
         myFrameNext = new MyFrame();
         JPanel panelStart = new JPanel();
@@ -16,11 +16,15 @@ public class ShowRatingsCars implements ActionListener {
         panelStart.add(centerLabel);
         JPanel panel1 = new JPanel();
         panel1.setBackground(Color.GREEN);
-        String ratingCars = funcRatingsCars();
-        labelRatingsCars = new JLabel(ratingCars);
-        labelRatingsCars.setHorizontalTextPosition(JLabel.CENTER);
-        panel1.add(labelRatingsCars);
-        myFrameNext.add(panel1, BorderLayout.CENTER);
+        panel1.setLayout(new BoxLayout(panel1,BoxLayout.Y_AXIS));
+        ArrayList<String> ratingCars = funcRatingsCars();
+        ArrayList<JLabel> labelRatingsCars = new ArrayList<>();
+        for (String car : ratingCars){
+            JLabel labelRatingCar = new JLabel(car);
+            labelRatingsCars.add(labelRatingCar);
+            panel1.add(labelRatingCar);
+        }
+        myFrameNext.add(panel1,BorderLayout.CENTER);
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));
         myFrameNext.add(panel2, BorderLayout.SOUTH);
@@ -33,12 +37,16 @@ public class ShowRatingsCars implements ActionListener {
         buttonBack.setSize(250,20);
         panel2.add(buttonBack);
     }
-    private static String funcRatingsCars(){
-        String ratingsCars = "";
+    private static ArrayList<String> funcRatingsCars(){
+        ArrayList<String> ratingsCars = new ArrayList<>();
         double averageRatings;
-        for(GUI.Car car : GUI.Cars) {
-            averageRatings = car.averageRating();
-            ratingsCars += String.format("ID:   %d   \t%s\t %s \t Ocena: %1.2f \n",car.getId(), car.getMark(), car.getModel(), averageRatings);
+        if (GUI.Cars.isEmpty())
+            ratingsCars.add("Nie dodano samochodow do bazy");
+        else{
+            for(GUI.Car car : GUI.Cars) {
+                averageRatings = car.averageRating();
+                ratingsCars.add(String.format("ID:   %d   \t%s\t %s \t Ocena: %1.2f \n",car.getId(), car.getMark(), car.getModel(), averageRatings));
+            }
         }
         return ratingsCars;
     }

@@ -2,12 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ShowCars implements ActionListener {
-
-    private MyFrame myFrameNext;
-    private JButton buttonBack ;
-    private JLabel labelListCars;
+    private final MyFrame myFrameNext;
+    private final JButton buttonBack;
+    final ArrayList<String> listCars;
+    final ArrayList<JLabel> labelListCars;
     ShowCars(){
         myFrameNext = new MyFrame();
         JPanel panelStart = new JPanel();
@@ -17,11 +18,15 @@ public class ShowCars implements ActionListener {
         panelStart.add(centerLabel);
         JPanel panel1 = new JPanel();
         panel1.setBackground(Color.GREEN);
-        String listCars = GUI.funcShowCars();
-        labelListCars = new JLabel(listCars);
-        labelListCars.setHorizontalTextPosition(JLabel.CENTER);
-        panel1.add(labelListCars);
-        myFrameNext.add(panel1, BorderLayout.CENTER);
+        panel1.setLayout(new BoxLayout(panel1,BoxLayout.Y_AXIS));
+        listCars = funcShowCars();
+        labelListCars = new ArrayList<>();
+        for (String car : listCars) {
+            JLabel labelCar = new JLabel(car);
+            labelListCars.add(labelCar);
+            panel1.add(labelCar);
+        }
+        myFrameNext.add(panel1,BorderLayout.CENTER);
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0,200,0));
         myFrameNext.add(panel2, BorderLayout.SOUTH);
@@ -34,6 +39,17 @@ public class ShowCars implements ActionListener {
         buttonBack.setSize(250,20);
         panel2.add(buttonBack);
     }
+    public static ArrayList<String> funcShowCars() {
+        ArrayList<String> listCars = new ArrayList<>();
+        if (GUI.Cars.isEmpty())
+            listCars.add("Nie dodano samochodow do bazy");
+        else{
+            for(GUI.Car car : GUI.Cars) {
+                listCars.add("ID:  " + car.getId() + "  " + car.getMark() + "  " + car.getModel() + "  " + car.getYearOfProduction()) ;
+            }
+        }
+        return listCars;
+    }
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==buttonBack){
@@ -42,3 +58,4 @@ public class ShowCars implements ActionListener {
         }
     }
 }
+

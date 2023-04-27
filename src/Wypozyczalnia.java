@@ -9,8 +9,8 @@ import java.text.ParseException;
 
 
 public class Wypozyczalnia  {
-    private Scanner scanner;
-    private ArrayList<Samochod> samochody;
+    private final Scanner scanner;
+    private final ArrayList<Samochod> samochody;
     private static int nextId = 1;
 
     public Wypozyczalnia() {

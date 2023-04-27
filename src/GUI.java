@@ -4,15 +4,9 @@ public class GUI{
     public static void main(String[] args){ new GUI(); }
     public GUI(){ new MenuGui(); }
 
-    public static ArrayList<Car> Cars = new ArrayList<Car>();
+    public static ArrayList<Car> Cars = new ArrayList<>();
     private static int nextId = 1;
-    public static String funcShowCars() {
-        String listCars = "";
-        for(Car car : Cars) {
-            listCars += "ID:   " + car.id + "   \t" + car.mark + "\t  " + car.model + "\t " + car.yearOfProduction + "\n";
-        }
-          return listCars;
-    }
+
     public static Car funcSearchCar(int id) {
         for (Car Car : Cars) {
             if (Car.getId() == id) {
@@ -22,12 +16,12 @@ public class GUI{
         return null;
     }
     static class Car {
-        private int id;
-        private String mark;
-        private String model;
-        private double price;
-        private short yearOfProduction;
-        private ArrayList<Integer> ratings;
+        private final int id;
+        private final String mark;
+        private final String model;
+        private final double price;
+        private final short yearOfProduction;
+        private final ArrayList<Integer> ratings;
         private boolean availability;
         public Car(String mark, String model, double price, short yearOfProduction) {
             this.id = nextId++;
@@ -35,7 +29,7 @@ public class GUI{
             this.model = model;
             this.price = price;
             this.yearOfProduction = yearOfProduction;
-            this.ratings = new ArrayList<Integer>();
+            this.ratings = new ArrayList<>();
             this.availability = true;
         }
         public int getId() { return id; }

@@ -1,15 +1,13 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 public class MyFrame extends JFrame implements ActionListener  {
     //ImageIcon image = new ImageIcon("TITLE OF FILE WITH LOGO (TITLE.png)"); //Create an ImageIcon
 //this.setIconImage(image.getImage());  //Change icon of frame
 //this.getContentPane().setBackground(new Color(0,200,0)); //change color of background
-    JMenu fileMenu;
+    final JMenu fileMenu;
     JMenu editMenu;
     JMenu aboutMenu;
     JMenuBar menuBar;
@@ -24,7 +22,6 @@ public class MyFrame extends JFrame implements ActionListener  {
         this.pack();
         this.setVisible(true); //make frame visible
         this.setSize(600,600);
-
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
         editMenu = new JMenu("Edit");
@@ -51,7 +48,7 @@ public class MyFrame extends JFrame implements ActionListener  {
         this.setJMenuBar(menuBar);
     }
     private void about(){
-        JOptionPane.showMessageDialog(this, "Program o nazwie Wypozyczalnia Samochodow zostal napisany na cele projektu na studia. \nSklad zespolu: \n Szymon Kasprzyk, Michal gruszczynski, Klaudia Iwanowicz, Oskar Pytlewki");
+        JOptionPane.showMessageDialog(this, "Program o nazwie Wypozyczalnia Samochodow zostal napisany na cele projektu na studia. \nSklad zespolu: \n Lider: <Szymon Kasprzyk>, \nPomocnik: <Michal gruszczynski>, \nProzniak: Klaudia Iwanowicz, \nProzniak: Oskar Pytlewki");
     }
     @Override
     public void actionPerformed(ActionEvent e) {

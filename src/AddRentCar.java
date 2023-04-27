@@ -8,21 +8,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static javax.swing.JOptionPane.showMessageDialog;
+
 public class AddRentCar implements ActionListener {
-    private MyFrame myFrameNext;
-    private JTextField textFieldID;
-    private JButton buttonRentIdPass;
-    private JCheckBox checkBoxAddCarFromToday;
-    private JTextField textFieldRentDays;
-    private JButton buttonRentCalculate;
-    private JLabel labelRentCheck;
-    private JTextField textFieldStartRent;
-    private JLabel labelRentStart;
-    private JLabel labelRentEnd;
-    private JButton buttonBack;
+    private final MyFrame myFrameNext;
+    private final JTextField textFieldID;
+    private final JButton buttonRentIdPass;
+    private final JCheckBox checkBoxAddCarFromToday;
+    private final JTextField textFieldRentDays;
+    private final JButton buttonRentCalculate;
+    private final JLabel labelRentCheck;
+    private final JTextField textFieldStartRent;
+    private final JLabel labelRentStart;
+    private final JLabel labelRentEnd;
+    private final JButton buttonBack;
 
     AddRentCar() {
-        myFrameNext = new MyFrame(); //creates a myFrame
+        myFrameNext = new MyFrame();
         JLabel label = new JLabel("Rezerwuj samochod: ");
         JPanel panelStart = new JPanel();
         panelStart.setBackground(new Color(0, 200, 0));
@@ -94,29 +96,31 @@ public class AddRentCar implements ActionListener {
         panel3.add(buttonBack);
         myFrameNext.add(panel3, BorderLayout.SOUTH);
     }
-    private String[] funcRentCar(Boolean fromToday,String textFieldStartRent, int days) {
+    private String[] funcRentCar(Boolean fromToday,String textFieldStartRent, String day) {
         Calendar startDate = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        if (fromToday) {
-            System.out.println("Wypozyczanie zaczyna się od dzisiaj: " + dateFormat.format(startDate.getTime()));
+        int days;
+        if(day.isEmpty()){
+            days=0;
         }
-        else
+        else {
+            days = Integer.parseInt(day);
+        }
+        if (fromToday){}
+        else{
             try {
                 Date date = dateFormat.parse(textFieldStartRent);
                 startDate.setTime(date);
-                System.out.println("Wypozyczanie zaczyna sie od: " + dateFormat.format(startDate.getTime()));
+                startDate.add(Calendar.DATE, days);
             }
             catch (ParseException e) {
-                System.out.println("Nieprawidlowy format daty!");
+                showMessageDialog(myFrameNext,"Nieprawidlowy format daty!");
                 return null;
             }
+        }
         Calendar endDate = (Calendar) startDate.clone();
-        //endDate.add(Calendar.YEAR, 1);
-        //endDate.add(Calendar.MONTH, 1);
         endDate.add(Calendar.DATE, days);
-        System.out.println("Wypozyczanie konczy sie daysa: " + dateFormat.format(endDate.getTime()));
-        String[] ret={dateFormat.format(startDate.getTime()), dateFormat.format(endDate.getTime())};
-        return ret;
+        return new String[] {dateFormat.format(startDate.getTime()), dateFormat.format(endDate.getTime())};
     }
     @Override
     public void actionPerformed(ActionEvent e){
@@ -130,18 +134,18 @@ public class AddRentCar implements ActionListener {
                 labelRentStart.setText("");
                 labelRentEnd.setText("");
             }
-            else {
+            //Do poprawy na jutro (  lub zrób michał  na dole jest błąd że zczytuje id i od razu szuka daty, a powinno być dopiero po wciśnięciu sprawdz)
+            /*else {
                 int ID = Integer.parseInt(textFieldID.getText());
                 if (GUI.funcSearchCar(ID) != null) {
-//                    int days = Integer.parseInt(textFieldRentDays.getText());
-//                    String[] date = funcRentCar(checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),days);
+                    String[] date = funcRentCar(checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
                     labelRentCheck.setText("Na ile dni wypozyczasz: ");
                     textFieldRentDays.setVisible(true);
                     buttonRentCalculate.setVisible(true);
                     checkBoxAddCarFromToday.setVisible(true);
                     textFieldStartRent.setVisible(true);
-//                    labelRentStart.setText("Rezerwacja zaczyna sie od:"  +date[0]);
-//                    labelRentEnd.setText("Rezerwacja konczy sie: " +date[1]);
+//                    labelRentStart.setText("Rezerwacja zaczyna sie od:"  + date[0]);
+//                    labelRentEnd.setText("Rezerwacja konczy sie: " + date[1]);
 
                 }
                 else {
@@ -153,7 +157,7 @@ public class AddRentCar implements ActionListener {
                     labelRentStart.setText("");
                     labelRentEnd.setText("");
                 }
-            }
+            }*/
         }
 
         if(e.getSource()==buttonBack){

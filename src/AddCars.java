@@ -6,14 +6,14 @@ import java.awt.event.ActionListener;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCars implements ActionListener {
-    private JButton buttonConfirm;
-    private MyFrame myFrameNext;
-    private JTextField myTextFieldMark;
-    private JTextField myTextFieldModel;
-    private JTextField myTextFieldYearOfProduction;
-    private JTextField myTextFieldPriceForDay;
-    private JCheckBox checkBoxAddCar;
-    private JButton buttonBack;
+    private final JButton buttonConfirm;
+    private final MyFrame myFrameNext;
+    private final JTextField myTextFieldMark;
+    private final JTextField myTextFieldModel;
+    private final JTextField myTextFieldYearOfProduction;
+    private final JTextField myTextFieldPriceForDay;
+    private final JCheckBox checkBoxAddCar;
+    private final JButton buttonBack;
 
     AddCars() {
         myFrameNext = new MyFrame();

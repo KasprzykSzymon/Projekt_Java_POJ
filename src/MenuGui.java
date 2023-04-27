@@ -4,14 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuGui implements ActionListener {
-    private MyFrame myFrameGUI;
-    private JButton buttonAddCar;
-    private JButton buttonShowCar;
-    private JButton buttonReserveACars;
-    private JButton buttonCalculateCost;
-    private JButton buttonAddRatingCar;
-    private JButton buttonShowCarsRating;
-    private JButton exitButton;
+    private final MyFrame myFrameGUI;
+    private final JButton buttonAddCar;
+    private final JButton buttonShowCar;
+    private final JButton buttonReserveACars;
+    private final JButton buttonCalculateCost;
+    private final JButton buttonAddRatingCar;
+    private final JButton buttonShowCarsRating;
+    private final JButton exitButton;
 
     MenuGui() {
         myFrameGUI = new MyFrame();

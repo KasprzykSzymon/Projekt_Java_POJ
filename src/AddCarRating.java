@@ -6,13 +6,13 @@ import java.awt.event.ActionListener;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCarRating implements ActionListener {
-    private MyFrame myFrameNext;
-    private JButton buttonAddRating;
-    private JTextField textFieldID;
-    private JButton buttonIdPassRating;
-    private JLabel labelCheckIdRating;
-    private JComboBox comboBoxRating;
-    private JButton buttonBack;
+    private final MyFrame myFrameNext;
+    private final JButton buttonAddRating;
+    private final JTextField textFieldID;
+    private final JButton buttonIdPassRating;
+    private final JLabel labelCheckIdRating;
+    private final JComboBox comboBoxRating;
+    private final JButton buttonBack;
     AddCarRating(){
         myFrameNext = new MyFrame();
         JLabel label = new JLabel("Dodaj ocene samochoduu: ");
@@ -50,7 +50,7 @@ public class AddCarRating implements ActionListener {
         comboBoxRating.setSize(new Dimension(250, 40));
         comboBoxRating.setVisible(false);
         panel.add(comboBoxRating);
-        JLabel labelCheckRating = new JLabel("");
+//        JLabel labelCheckRating = new JLabel("");
         myFrameNext.add(panel,BorderLayout.CENTER);
         JPanel panel2 = new JPanel();
         panel2.setBackground(new Color(0, 200, 0));
@@ -74,6 +74,7 @@ public class AddCarRating implements ActionListener {
         panel2.add(buttonAddRating);
         myFrameNext.add(panel2, BorderLayout.SOUTH);
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -101,6 +102,7 @@ public class AddCarRating implements ActionListener {
             int ID = Integer.parseInt(textFieldID.getText());
             GUI.Car car = GUI.funcSearchCar(ID);
             car.addRating(comboBoxRating.getSelectedIndex()+1);
+            showMessageDialog(myFrameNext,"Dodano ocene samochodu do bazy");
             myFrameNext.dispose();
             new MenuGui();
         }
