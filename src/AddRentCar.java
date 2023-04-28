@@ -11,6 +11,7 @@ import java.util.Date;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddRentCar implements ActionListener {
+    private final JLabel labelStart;
     private final MyFrame myFrameNext;
     private final JTextField textFieldID;
     private final JButton buttonRentIdPass;
@@ -18,17 +19,19 @@ public class AddRentCar implements ActionListener {
     private final JTextField textFieldRentDays;
     private final JButton buttonRentCalculate;
     private final JLabel labelRentCheck;
+    private final JLabel labelStartRent;
     private final JTextField textFieldStartRent;
     private final JLabel labelRentStart;
     private final JLabel labelRentEnd;
     private final JButton buttonBack;
+    private final JButton buttonConfirm;
 
     AddRentCar() {
         myFrameNext = new MyFrame();
-        JLabel label = new JLabel("Rezerwuj samochod: ");
+        labelStart = new JLabel("Rezerwuj samochod: ");
         JPanel panelStart = new JPanel();
         panelStart.setBackground(new Color(0, 200, 0));
-        panelStart.add(label, BorderLayout.CENTER);
+        panelStart.add(labelStart, BorderLayout.CENTER);
         myFrameNext.add(panelStart, BorderLayout.NORTH);
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 200, 0));
@@ -43,7 +46,7 @@ public class AddRentCar implements ActionListener {
         textFieldID.setBackground(Color.BLACK);
         textFieldID.setCaretColor(Color.WHITE);
         panel.add(textFieldID);
-        buttonRentIdPass = new JButton(" Sprawdz ");
+        buttonRentIdPass = new JButton(" Sprawdz dostepnosc samochodu ");
         buttonRentIdPass.setSize(new Dimension(250, 20));
         buttonRentIdPass.addActionListener(this);
         buttonRentIdPass.setBorder(BorderFactory.createEtchedBorder());
@@ -53,7 +56,7 @@ public class AddRentCar implements ActionListener {
         panel.add(labelRentCheck);
         textFieldRentDays = new JTextField();
         textFieldRentDays.setSize(new Dimension(250, 50));
-        textFieldRentDays.setFont(new Font("Arctic", Font.PLAIN, 40));
+        textFieldRentDays.setFont(new Font("Arctic", Font.PLAIN, 30));
         textFieldRentDays.setForeground(Color.GREEN);
         textFieldRentDays.setBackground(Color.BLACK);
         textFieldRentDays.setCaretColor(Color.WHITE);
@@ -65,15 +68,18 @@ public class AddRentCar implements ActionListener {
         checkBoxAddCarFromToday.setVisible(false);
         checkBoxAddCarFromToday.setSize(new Dimension(250, 20));
         panel.add(checkBoxAddCarFromToday);
+        labelStartRent = new JLabel("*Data poczatkowa: (format daty dd.MM.yyyy)");
+        labelStartRent.setVisible(false);
+        panel.add(labelStartRent);
         textFieldStartRent = new JTextField();
         textFieldStartRent.setSize(new Dimension(250, 40));
-        textFieldStartRent.setFont(new Font("Arctic", Font.PLAIN, 40));
+        textFieldStartRent.setFont(new Font("Arctic", Font.PLAIN, 30));
         textFieldStartRent.setForeground(Color.GREEN);
         textFieldStartRent.setBackground(Color.BLACK);
         textFieldStartRent.setCaretColor(Color.WHITE);
         textFieldStartRent.setVisible(false);
         panel.add(textFieldStartRent);
-        buttonRentCalculate = new JButton(" Sprawdz ");
+        buttonRentCalculate = new JButton(" Sprawdz dni w wypozyczeniu ");
         buttonRentCalculate.setSize(new Dimension(250, 20));
         buttonRentCalculate.addActionListener(this);
         buttonRentCalculate.setBorder(BorderFactory.createEtchedBorder());
@@ -94,11 +100,22 @@ public class AddRentCar implements ActionListener {
         buttonBack.setBorder(BorderFactory.createEtchedBorder());
         buttonBack.setSize(250,20);
         panel3.add(buttonBack);
+        JLabel lb1 = new JLabel();
+        panel3.add(lb1);
+        JLabel lb2 = new JLabel();
+        panel3.add(lb2);
+        buttonConfirm = new JButton(" Dodaj rezerwacje ");
+        buttonConfirm.addActionListener(this);
+        buttonConfirm.setBackground(new Color(0, 255, 0));
+        buttonConfirm.setBorder(BorderFactory.createEtchedBorder());
+        buttonConfirm.setSize(250,20);
+        buttonConfirm.setVisible(false);
+        panel3.add(buttonConfirm);
         myFrameNext.add(panel3, BorderLayout.SOUTH);
     }
     private String[] funcRentCar(Boolean fromToday,String textFieldStartRent, String day) {
         Calendar startDate = Calendar.getInstance();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         int days;
         if(day.isEmpty()){
             days=0;
@@ -125,44 +142,56 @@ public class AddRentCar implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==buttonRentIdPass) {
+            labelStart.setText("Rezerwuj samochod: ");
+            buttonConfirm.setVisible(false);
             if (textFieldID.getText().isEmpty()) {
                 textFieldRentDays.setVisible(false);
                 buttonRentCalculate.setVisible(false);
                 checkBoxAddCarFromToday.setVisible(false);
+                labelStartRent.setVisible(false);
                 textFieldStartRent.setVisible(false);
                 labelRentCheck.setText("Podaj liczbe identyfikatora");
                 labelRentStart.setText("");
                 labelRentEnd.setText("");
             }
-            //Do poprawy na jutro (  lub zrób michał  na dole jest błąd że zczytuje id i od razu szuka daty, a powinno być dopiero po wciśnięciu sprawdz)
-            /*else {
+            else {
                 int ID = Integer.parseInt(textFieldID.getText());
-                if (GUI.funcSearchCar(ID) != null) {
-                    String[] date = funcRentCar(checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
+                GUI.Car car = GUI.funcSearchCar(ID);
+                if ( GUI.funcSearchCar(ID)!= null) {
+                    labelStart.setText("Rezerwuj samochod: " + car.getMark()+" "+car.getModel()+ " " + car.getYearOfProduction());
                     labelRentCheck.setText("Na ile dni wypozyczasz: ");
                     textFieldRentDays.setVisible(true);
                     buttonRentCalculate.setVisible(true);
                     checkBoxAddCarFromToday.setVisible(true);
+                    labelStartRent.setVisible(true);
                     textFieldStartRent.setVisible(true);
-//                    labelRentStart.setText("Rezerwacja zaczyna sie od:"  + date[0]);
-//                    labelRentEnd.setText("Rezerwacja konczy sie: " + date[1]);
-
                 }
                 else {
                     labelRentCheck.setText("Nie ma takiego ID ");
                     textFieldRentDays.setVisible(false);
                     buttonRentCalculate.setVisible(false);
                     checkBoxAddCarFromToday.setVisible(false);
+                    labelStartRent.setVisible(false);
                     textFieldStartRent.setVisible(false);
                     labelRentStart.setText("");
                     labelRentEnd.setText("");
                 }
-            }*/
+            }
+        }
+
+        if(e.getSource()==buttonRentCalculate){
+            String[] date = funcRentCar(!checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
+            labelRentStart.setText("Rezerwacja zaczyna sie od:  "  + date[0]);
+            labelRentEnd.setText("Rezerwacja konczy sie:  " + date[1]);
+            buttonConfirm.setVisible(true);
         }
 
         if(e.getSource()==buttonBack){
             myFrameNext.dispose();
             new MenuGui();
+        }
+        if (e.getSource() == buttonConfirm) {
+            System.out.println("Instrukcja dodawania rezerwacji samochodu! " );
         }
     }
 }
