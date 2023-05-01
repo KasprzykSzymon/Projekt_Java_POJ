@@ -1,4 +1,8 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class GUI{
     public static void main(String[] args){ new GUI(); }
@@ -22,7 +26,7 @@ public class GUI{
         private final double price;
         private final short yearOfProduction;
         private final ArrayList<Integer> ratings;
-        private boolean availability;
+        private ArrayList<String> rentCar = new ArrayList<>();
         public Car(String mark, String model, double price, short yearOfProduction) {
             this.id = nextId++;
             this.mark = mark;
@@ -30,7 +34,6 @@ public class GUI{
             this.price = price;
             this.yearOfProduction = yearOfProduction;
             this.ratings = new ArrayList<>();
-            this.availability = true;
         }
         public int getId() { return id; }
         public String getMark() {
@@ -43,19 +46,15 @@ public class GUI{
             return price;
         }
         public short getYearOfProduction() { return  yearOfProduction;}
-        public boolean getAvailability() {
-            return availability;
-        }
-        public void Rent() {
-            availability = false;
-        }
-        public double funcCalculateTheCostOfRent(int days) {
+        public double funcCalculateTheCostOfRent(MyFrame frame, int days) {
             if(days < 7) return price * days;
             if(days < 14){
-                System.out.println("Dodano rabat 10%. Za wynajem " + days + " dni ");
+                String messege = "Dodano rabat 10%. Za wynajem \" + days + \" dni  ";
+                showMessageDialog(frame, messege);
                 return price * days * 0.9;
             }
-            System.out.println("Dodano rabat 15%. Za wynajem " + days + " dni");
+            String messege = "Dodano rabat 15%. Za wynajem \" + days + \" dni";
+            showMessageDialog(frame, messege);
             return price * days * 0.85;
         }
         public void addRating(int rating) {
@@ -71,5 +70,33 @@ public class GUI{
             }
             return sum / ratings.size();
         }
+/*
+    W trakcie dodawania
+    public void AddRentCar(MyFrame frame, String rentDays, int days){
+            for(String daysInRent : rentCar){
+                if(checkTheDate(daysInRent)){
+                    String rent = daysInRent;
+                    showMessageDialog(frame, rent);
+                  return;
+                }
+            }
+            String add = rentDays + " " + String.format("%4d", days);
+        rentCar.add(add);
+    }
+
+    public boolean checkTheDate(String startRentDays){
+        String start = startRentDays;
+        int days = Integer.parseInt(startRentDays);
+        Calendar startDate = Calendar.getInstance();
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Calendar endDate = (Calendar) startDate.clone();
+        endDate.add(Calendar.DATE, days);
+        for(int i=0;i<days;i++){
+            endDate.add(Calendar.DATE, 1);
+        }
+        return true;
+    }
+
+ */
     }
 }

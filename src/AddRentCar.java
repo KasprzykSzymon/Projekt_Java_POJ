@@ -180,18 +180,22 @@ public class AddRentCar implements ActionListener {
         }
 
         if(e.getSource()==buttonRentCalculate){
-            String[] date = funcRentCar(!checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
-            labelRentStart.setText("Rezerwacja zaczyna sie od:  "  + date[0]);
-            labelRentEnd.setText("Rezerwacja konczy sie:  " + date[1]);
-            buttonConfirm.setVisible(true);
+            if(textFieldRentDays.getText().isEmpty()){
+                showMessageDialog(myFrameNext,"Podaj ilosc dni! ");
+            }
+            else{
+                String[] date = funcRentCar(!checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
+                labelRentStart.setText("Rezerwacja zaczyna sie od:  "  + date[0]);
+                labelRentEnd.setText("Rezerwacja konczy sie:  " + date[1]);
+                buttonConfirm.setVisible(true);
+            }
         }
-
         if(e.getSource()==buttonBack){
             myFrameNext.dispose();
             new MenuGui();
         }
         if (e.getSource() == buttonConfirm) {
-            System.out.println("Instrukcja dodawania rezerwacji samochodu! " );
+            showMessageDialog(myFrameNext, "Instrukcja dodawania rezerwacji samochodu! ");
         }
     }
 }

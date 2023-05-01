@@ -2,9 +2,8 @@
 # Nazwa projektu: Wypożyczalnia aut
 
  ### Skład zespołu:
-
- - Michał Gruszczyński
  - Szymon Kasprzyk
+ - Michał Gruszczyński
  - Klaudia Iwanowicz (Próżniak)
  - Oskar Pytlewski (Próźniak)
 
@@ -24,7 +23,3 @@
   - System upustów - umożliwienie klientom otrzymywania zniżek na wynajem samochodów w zależności od długości wynajmu, częstotliwości wynajmu lub innych czynników.
   - Dodanie możliwości wyboru dodatkowego wyposażenia - pozwala klientom na wybór dodatkowego wyposażenia samochodu, takiego jak GPS, fotelik dla dziecka, itp. Wypożyczalnia może dodatkowo zarabiać na wynajmie dodatkowego wyposażenia.
    - System oceny samochodów - umożliwienie klientom oceny samochodów po ich wynajmie. Dzięki temu wypożyczalnia może zbierać informacje zwrotne od klientów i dostosowywać swoją ofertę do potrzeb klientów.
-  - (Miejsce na pomysły)
-  - (Miejsce na pomysły)
-  - (Miejsce na pomysły)
-  - (Miejsce na pomysły)

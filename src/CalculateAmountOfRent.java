@@ -108,7 +108,7 @@ public class CalculateAmountOfRent implements ActionListener {
             int ID = Integer.parseInt(textFieldID.getText());
             GUI.Car Car = GUI.funcSearchCar(ID);
             int days = Integer.parseInt(textFieldDays.getText());
-            double price = Car.funcCalculateTheCostOfRent(days);
+            double price = Car.funcCalculateTheCostOfRent(myFrameNext, days);
             labelDays.setText("Kwota za " + Car.getMark() + " " + Car.getModel() + " wynosi: ");
             labelCost.setText(String.format("%.2f PLN", price));
         }
