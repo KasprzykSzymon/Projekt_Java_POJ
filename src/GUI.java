@@ -1,7 +1,11 @@
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class GUI{
@@ -70,11 +74,10 @@ public class GUI{
             }
             return sum / ratings.size();
         }
-/*
-    W trakcie dodawania
+
     public void AddRentCar(MyFrame frame, String rentDays, int days){
             for(String daysInRent : rentCar){
-                if(checkTheDate(daysInRent)){
+                if(checkTheDate(frame, daysInRent)){
                     String rent = daysInRent;
                     showMessageDialog(frame, rent);
                   return;
@@ -84,12 +87,19 @@ public class GUI{
         rentCar.add(add);
     }
 
-    public boolean checkTheDate(String startRentDays){
-        String start = startRentDays;
-        int days = Integer.parseInt(startRentDays);
-        Calendar startDate = Calendar.getInstance();
+    public boolean checkTheDate(MyFrame frame,String startRentDays){
+        String start = startRentDays.substring(0, 10);
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        Date startDate = null;
+        try {
+            startDate = dateFormat.parse(startRentDays.substring(0, 10));
+        }
+        catch (ParseException e) {
+            showMessageDialog(frame, "Ten termin jest zajety!");
+            throw new RuntimeException(e);
+        }
         Calendar endDate = (Calendar) startDate.clone();
+        int days = Integer.parseInt(startRentDays.substring(startRentDays. length() - 4));
         endDate.add(Calendar.DATE, days);
         for(int i=0;i<days;i++){
             endDate.add(Calendar.DATE, 1);
@@ -97,6 +107,5 @@ public class GUI{
         return true;
     }
 
- */
     }
 }

@@ -139,44 +139,46 @@ public class AddRentCar implements ActionListener {
         endDate.add(Calendar.DATE, days);
         return new String[] {dateFormat.format(startDate.getTime()), dateFormat.format(endDate.getTime())};
     }
+
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource()==buttonRentIdPass) {
-            labelStart.setText("Rezerwuj samochod: ");
-            buttonConfirm.setVisible(false);
-            if (textFieldID.getText().isEmpty()) {
+            try{
+                labelStart.setText("Rezerwuj samochod: ");
+                buttonConfirm.setVisible(false);
                 textFieldRentDays.setVisible(false);
                 buttonRentCalculate.setVisible(false);
                 checkBoxAddCarFromToday.setVisible(false);
                 labelStartRent.setVisible(false);
                 textFieldStartRent.setVisible(false);
-                labelRentCheck.setText("Podaj liczbe identyfikatora");
                 labelRentStart.setText("");
                 labelRentEnd.setText("");
-            }
-            else {
-                int ID = Integer.parseInt(textFieldID.getText());
-                GUI.Car car = GUI.funcSearchCar(ID);
-                if ( GUI.funcSearchCar(ID)!= null) {
-                    labelStart.setText("Rezerwuj samochod: " + car.getMark()+" "+car.getModel()+ " " + car.getYearOfProduction());
-                    labelRentCheck.setText("Na ile dni wypozyczasz: ");
-                    textFieldRentDays.setVisible(true);
-                    buttonRentCalculate.setVisible(true);
-                    checkBoxAddCarFromToday.setVisible(true);
-                    labelStartRent.setVisible(true);
-                    textFieldStartRent.setVisible(true);
+                if (textFieldID.getText().isEmpty()) {
+                    labelRentCheck.setText("Podaj liczbe identyfikatora");
+
                 }
                 else {
-                    labelRentCheck.setText("Nie ma takiego ID ");
-                    textFieldRentDays.setVisible(false);
-                    buttonRentCalculate.setVisible(false);
-                    checkBoxAddCarFromToday.setVisible(false);
-                    labelStartRent.setVisible(false);
-                    textFieldStartRent.setVisible(false);
-                    labelRentStart.setText("");
-                    labelRentEnd.setText("");
+                    int ID = Integer.parseInt(textFieldID.getText());
+                    GUI.Car car = GUI.funcSearchCar(ID);
+                    if ( GUI.funcSearchCar(ID)!= null) {
+                        labelStart.setText("Rezerwuj samochod: " + car.getMark()+" "+car.getModel()+ " " + car.getYearOfProduction());
+                        labelRentCheck.setText("Na ile dni wypozyczasz: ");
+                        textFieldRentDays.setVisible(true);
+                        buttonRentCalculate.setVisible(true);
+                        checkBoxAddCarFromToday.setVisible(true);
+                        labelStartRent.setVisible(true);
+                        textFieldStartRent.setVisible(true);
+                    }
+                    else {
+                        labelRentCheck.setText("Nie ma takiego ID ");
+                    }
                 }
             }
+            catch (Exception e1){
+                showMessageDialog(myFrameNext, "To nie jest liczba!");
+                throw new RuntimeException(e1);
+            }
+
         }
 
         if(e.getSource()==buttonRentCalculate){
@@ -184,10 +186,16 @@ public class AddRentCar implements ActionListener {
                 showMessageDialog(myFrameNext,"Podaj ilosc dni! ");
             }
             else{
-                String[] date = funcRentCar(!checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
-                labelRentStart.setText("Rezerwacja zaczyna sie od:  "  + date[0]);
-                labelRentEnd.setText("Rezerwacja konczy sie:  " + date[1]);
-                buttonConfirm.setVisible(true);
+                try{
+                    String[] date = funcRentCar(!checkBoxAddCarFromToday.isSelected(),textFieldStartRent.getText(),textFieldRentDays.getText());
+                    labelRentStart.setText("Rezerwacja zaczyna sie od:  "  + date[0]);
+                    labelRentEnd.setText("Rezerwacja konczy sie:  " + date[1]);
+                    buttonConfirm.setVisible(true);
+                }
+                catch (Exception e1){
+                    showMessageDialog(myFrameNext, "To nie jest liczba!");
+                    throw new RuntimeException(e1);
+                }
             }
         }
         if(e.getSource()==buttonBack){
@@ -195,7 +203,12 @@ public class AddRentCar implements ActionListener {
             new MenuGui();
         }
         if (e.getSource() == buttonConfirm) {
-            showMessageDialog(myFrameNext, "Instrukcja dodawania rezerwacji samochodu! ");
+            int ID = Integer.parseInt(textFieldID.getText());
+            GUI.Car car = GUI.funcSearchCar(ID);
+            car.AddRentCar(myFrameNext,labelRentStart.getText(),Integer.parseInt(textFieldRentDays.getText()));
+            showMessageDialog(myFrameNext,"Dodano rezerwacje! ");
+            myFrameNext.dispose();
+            new MenuGui();
         }
     }
 }
