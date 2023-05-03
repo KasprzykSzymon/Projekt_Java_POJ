@@ -128,7 +128,6 @@ public class AddRentCar implements ActionListener {
             try {
                 Date date = dateFormat.parse(textFieldStartRent);
                 startDate.setTime(date);
-                startDate.add(Calendar.DATE, days);
             }
             catch (ParseException e) {
                 showMessageDialog(myFrameNext,"Nieprawidlowy format daty!");
@@ -151,6 +150,7 @@ public class AddRentCar implements ActionListener {
                 checkBoxAddCarFromToday.setVisible(false);
                 labelStartRent.setVisible(false);
                 textFieldStartRent.setVisible(false);
+                buttonConfirm.setVisible(false);
                 labelRentStart.setText("");
                 labelRentEnd.setText("");
                 if (textFieldID.getText().isEmpty()) {
@@ -182,6 +182,7 @@ public class AddRentCar implements ActionListener {
         }
 
         if(e.getSource()==buttonRentCalculate){
+            buttonConfirm.setVisible(false);
             if(textFieldRentDays.getText().isEmpty()){
                 showMessageDialog(myFrameNext,"Podaj ilosc dni! ");
             }
