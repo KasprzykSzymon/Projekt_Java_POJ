@@ -1,3 +1,4 @@
+/*
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,7 @@ import java.awt.event.ActionListener;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCars implements ActionListener {
+
     private final JButton buttonConfirm;
     private final MyFrame myFrameNext;
     private final JTextField myTextFieldMark;
@@ -125,3 +127,195 @@ public class AddCars implements ActionListener {
         }
     }
 }
+*//*
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class AddCars extends JFrame implements ActionListener {
+
+    private JLabel labelMark, labelModel, labelYearOfProduction, labelPriceForDay;
+    private JTextField myTextFieldMark, myTextFieldModel, myTextFieldYearOfProduction, myTextFieldPriceForDay;
+    private JButton myButtonAdd;
+
+    private Connection connection;
+
+    public AddCars() {
+        this.connection = connection;
+        setTitle("Add Car");
+        setLayout(new GridLayout(5, 2));
+
+        labelMark = new JLabel("Mark: ");
+        add(labelMark);
+        myTextFieldMark = new JTextField(20);
+        add(myTextFieldMark);
+
+        labelModel = new JLabel("Model: ");
+        add(labelModel);
+        myTextFieldModel = new JTextField(20);
+        add(myTextFieldModel);
+
+        labelYearOfProduction = new JLabel("Year of Production: ");
+        add(labelYearOfProduction);
+        myTextFieldYearOfProduction = new JTextField(20);
+        add(myTextFieldYearOfProduction);
+
+        labelPriceForDay = new JLabel("Price for Day: ");
+        add(labelPriceForDay);
+        myTextFieldPriceForDay = new JTextField(20);
+        add(myTextFieldPriceForDay);
+
+        myButtonAdd = new JButton("Add");
+        add(myButtonAdd);
+        myButtonAdd.addActionListener(this);
+
+        setSize(400, 200);
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == myButtonAdd) {
+            try {
+                addCarToDatabase();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error adding car to database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void addCarToDatabase() throws SQLException {
+        String mark = myTextFieldMark.getText();
+        String model = myTextFieldModel.getText();
+        int yearOfProduction = Integer.parseInt(myTextFieldYearOfProduction.getText());
+        double priceForDay = Double.parseDouble(myTextFieldPriceForDay.getText());
+
+        String query = "INSERT INTO cars (mark, model, year_of_production, price_for_day) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, mark);
+        preparedStatement.setString(2, model);
+        preparedStatement.setInt(3, yearOfProduction);
+        preparedStatement.setDouble(4, priceForDay);
+        preparedStatement.executeUpdate();
+
+        JOptionPane.showMessageDialog(this, "Car added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        clearFields();
+    }
+
+    private void clearFields() {
+        myTextFieldMark.setText("");
+        myTextFieldModel.setText("");
+        myTextFieldYearOfProduction.setText("");
+        myTextFieldPriceForDay.setText("");
+    }
+}
+*/
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+
+
+public class AddCars extends JFrame implements ActionListener {
+
+    private JLabel labelMark, labelModel, labelYearOfProduction, labelPriceForDay;
+    private JTextField myTextFieldMark, myTextFieldModel, myTextFieldYearOfProduction, myTextFieldPriceForDay;
+    private JButton myButtonAdd;
+
+    private Connection connection;
+
+    public AddCars() {
+        try {
+            // Establish a connection to the PostgreSQL database
+            String url = "jdbc:postgresql://localhost/rental";
+            String username = "postgres";
+            String password = "1234";
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error connecting to the database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1); // Exit the program if there's an error connecting to the database
+        }
+
+        setTitle("Add Car");
+        setLayout(new GridLayout(5, 2));
+
+        labelMark = new JLabel("Mark: ");
+        add(labelMark);
+        myTextFieldMark = new JTextField(20);
+        add(myTextFieldMark);
+
+        labelModel = new JLabel("Model: ");
+        add(labelModel);
+        myTextFieldModel = new JTextField(20);
+        add(myTextFieldModel);
+
+        labelYearOfProduction = new JLabel("Year of Production: ");
+        add(labelYearOfProduction);
+        myTextFieldYearOfProduction = new JTextField(20);
+        add(myTextFieldYearOfProduction);
+
+        labelPriceForDay = new JLabel("Price for Day: ");
+        add(labelPriceForDay);
+        myTextFieldPriceForDay = new JTextField(20);
+        add(myTextFieldPriceForDay);
+
+        myButtonAdd = new JButton("Add");
+        add(myButtonAdd);
+        myButtonAdd.addActionListener(this);
+
+        setSize(400, 200);
+        setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == myButtonAdd) {
+            try {
+                addCarToDatabase();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error adding car to the database: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void addCarToDatabase() throws SQLException {
+        String make = myTextFieldMark.getText();
+        String model = myTextFieldModel.getText();
+        int yearOfProduction = Integer.parseInt(myTextFieldYearOfProduction.getText());
+        double priceForDay = Double.parseDouble(myTextFieldPriceForDay.getText());
+
+        String query = "INSERT INTO cars (make, model, year, rental_price) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, make);
+        preparedStatement.setString(2, model);
+        preparedStatement.setInt(3, yearOfProduction );
+        preparedStatement.setDouble(4, priceForDay);
+        preparedStatement.executeUpdate();
+
+        JOptionPane.showMessageDialog(this, "Car added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        clearFields();
+    }
+
+    private void clearFields() {
+        myTextFieldMark.setText("");
+        myTextFieldModel.setText("");
+        myTextFieldYearOfProduction.setText("");
+        myTextFieldPriceForDay.setText("");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new AddCars());
+    }
+}
+
