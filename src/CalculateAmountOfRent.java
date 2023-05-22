@@ -5,75 +5,60 @@ import java.awt.event.ActionListener;
 
 public class CalculateAmountOfRent implements ActionListener {
     private final MyFrame myFrameNext;
-    private final JTextField textFieldID;
-    private final JButton buttonIdPass;
-    private final JTextField textFieldDays;
-    private final JButton buttonCalculate;
-    private final JLabel labelCheck;
-    private final JLabel labelDays;
-    private final JLabel labelCost;
-    private final JButton buttonBack;
+    private final MyTextField textFieldID, textFieldDays;
+    private final MyButton buttonIdPass, buttonCalculate;
+    private final JLabel labelCheck, labelDays, labelCost;
+    private final MyButtonEnd buttonBack;
 
     CalculateAmountOfRent() {
+        //Initialization of variables
         myFrameNext = new MyFrame();
-        JLabel label = new JLabel("Oblicz kwote wynajmu: ");
         JPanel panelStart = new JPanel();
-        panelStart.setBackground(new Color(0, 200, 0));
-        panelStart.add(label, BorderLayout.CENTER);
-        myFrameNext.add(panelStart, BorderLayout.NORTH);
         JPanel panel = new JPanel();
+        JPanel panelEnd = new JPanel();
+        JLabel label = new JLabel("Oblicz kwote wynajmu: ");
+        JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
+        textFieldID = new MyTextField();
+        JLabel LB = new JLabel("");
+        buttonIdPass = new MyButton(" Sprawdz ");
+        labelCheck = new JLabel("");
+        buttonCalculate = new MyButton(" Oblicz ");
+        labelDays = new JLabel("");
+        labelCost = new JLabel("");
+        buttonBack = new MyButtonEnd(" Powrot ");
+        JLabel LBCalculate = new JLabel("");
+        //Changing elements in panelStart
+        panelStart.setBackground(new Color(0, 200, 0));
+        //Changing elements in panelMiddle
         panel.setBackground(new Color(0, 200, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel.setLayout(new GridLayout(0, 2, 10, 5));
-        JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
-        panel.add(LabelId);
-        textFieldID = new JTextField();
-        textFieldID.setSize(new Dimension(250, 40));
-        textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
-        textFieldID.setForeground(Color.GREEN);
-        textFieldID.setBackground(Color.BLACK);
-        textFieldID.setCaretColor(Color.WHITE);
-        panel.add(textFieldID);
-        JLabel LB = new JLabel("");
-        panel.add(LB);
-        buttonIdPass = new JButton(" Sprawdz ");
-        buttonIdPass.addActionListener(this);
-        buttonIdPass.setBorder(BorderFactory.createEtchedBorder());
         buttonIdPass.setBackground(new Color(50, 120, 200));
-        panel.add(buttonIdPass);
-        labelCheck = new JLabel("");
-        panel.add(labelCheck);
-        textFieldDays = new JTextField();
-        textFieldDays.setSize(new Dimension(250, 40));
-        textFieldDays.setFont(new Font("Arctic", Font.PLAIN, 50));
-        textFieldDays.setForeground(Color.GREEN);
-        textFieldDays.setBackground(Color.BLACK);
-        textFieldDays.setCaretColor(Color.WHITE);
+        textFieldDays = new MyTextField();
         textFieldDays.setVisible(false);
-        panel.add(textFieldDays);
-        JLabel LBCalculate = new JLabel("");
-        panel.add(LBCalculate);
-        buttonCalculate = new JButton(" Oblicz ");
-        buttonCalculate.addActionListener(this);
-        buttonCalculate.setBorder(BorderFactory.createEtchedBorder());
         buttonCalculate.setBackground(new Color(50, 120, 200));
         buttonCalculate.setVisible(false);
+        //Changing elements in panelEnd
+        panelEnd.setBackground(new Color(0, 200, 0));
+        panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
+        //Add elements to panels
+        panelStart.add(label, BorderLayout.CENTER);
+        panel.add(LabelId);
+        panel.add(textFieldID);
+        panel.add(LB);
+        panel.add(buttonIdPass);
+        panel.add(labelCheck);
+        panel.add(textFieldDays);
+        panel.add(LBCalculate);
         panel.add(buttonCalculate);
-        labelDays = new JLabel("");
         panel.add(labelDays);
-        labelCost = new JLabel("");
         panel.add(labelCost);
+        panelEnd.add(buttonBack);
+        //Add elements to frames
+        myFrameNext.add(panelStart, BorderLayout.NORTH);
         myFrameNext.add(panel, BorderLayout.CENTER);
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(new Color(0, 200, 0));
-        panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel2.setLayout(new GridLayout(0, 4, 10, 5));
-        buttonBack = new JButton(" Powrot ");
-        buttonBack.addActionListener(this);
-        buttonBack.setBackground(new Color(255,100,100));
-        buttonBack.setVisible(true);
-        panel2.add(buttonBack);
-        myFrameNext.add(panel2, BorderLayout.SOUTH);
+        myFrameNext.add(panelEnd, BorderLayout.SOUTH);
     }
 
     @Override

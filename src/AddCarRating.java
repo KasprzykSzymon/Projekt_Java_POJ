@@ -7,72 +7,62 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCarRating implements ActionListener {
     private final MyFrame myFrameNext;
-    private final JButton buttonAddRating;
-    private final JTextField textFieldID;
-    private final JButton buttonIdPassRating;
+    private final MyButton buttonIdPassRating, buttonAddRating;
+    private final MyTextField textFieldID;
     private final JLabel labelCheckIdRating;
     private final JComboBox comboBoxRating;
-    private final JButton buttonBack;
+    private final MyButtonEnd buttonBack;
     AddCarRating(){
+        //Initialization of variables
         myFrameNext = new MyFrame();
-        JLabel label = new JLabel("Dodaj ocene samochoduu: ");
         JPanel panelStart = new JPanel();
-        panelStart.setBackground(new Color(0, 200, 0));
-        panelStart.add(label, BorderLayout.CENTER);
-        myFrameNext.add(panelStart, BorderLayout.NORTH);
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(0, 200, 0));
-        panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel.setLayout(new GridLayout(0, 2, 10, 5));
+        JPanel panelMiddle = new JPanel();
+        JPanel panelEnd = new JPanel();
+        JLabel label = new JLabel("Dodaj ocene samochoduu: ");
         JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
-        panel.add(LabelId);
-        textFieldID = new JTextField();
-        textFieldID.setSize(new Dimension(250, 40));
-        textFieldID.setFont(new Font("Arctic", Font.PLAIN, 50));
-        textFieldID.setForeground(Color.GREEN);
-        textFieldID.setBackground(Color.BLACK);
-        textFieldID.setCaretColor(Color.WHITE);
-        panel.add(textFieldID);
+        textFieldID = new MyTextField();
         JLabel LB = new JLabel("");
-        panel.add(LB);
-        buttonIdPassRating = new JButton(" Sprawdz ");
-        buttonIdPassRating.addActionListener(this);
-        buttonIdPassRating.setBorder(BorderFactory.createEtchedBorder());
-        buttonIdPassRating.setBackground(new Color(50, 120, 200));
-        panel.add(buttonIdPassRating);
+        buttonIdPassRating = new MyButton(" Sprawdz ");
         labelCheckIdRating = new JLabel("");
-        panel.add(labelCheckIdRating);
         String[] rating1_5 = {"1","2","3","4","5"};
         comboBoxRating = new JComboBox<String>(rating1_5);
+        buttonBack = new MyButtonEnd(" Powrot ");
+        JLabel lb1 = new JLabel();
+        JLabel lb2 = new JLabel();
+        buttonAddRating = new MyButton(" Dodaj ocene: ");
+        //Changing elements in panelStart
+        panelStart.setBackground(new Color(0, 200, 0));
+        //Changing elements in panelMiddle
+        panelMiddle.setBackground(new Color(0, 200, 0));
+        panelMiddle.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panelMiddle.setLayout(new GridLayout(0, 2, 10, 5));
+        //Changing elements in panelEnd
+        buttonIdPassRating.setBackground(new Color(50, 120, 200));
         comboBoxRating.setBackground(Color.BLACK);
         comboBoxRating.setForeground(Color.GREEN);
         comboBoxRating.setFont(new Font("Arctic", Font.PLAIN, 50));
         comboBoxRating.setSize(new Dimension(250, 40));
         comboBoxRating.setVisible(false);
-        panel.add(comboBoxRating);
-//        JLabel labelCheckRating = new JLabel("");
-        myFrameNext.add(panel,BorderLayout.CENTER);
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(new Color(0, 200, 0));
-        panel2.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
-        panel2.setLayout(new GridLayout(0, 4, 10, 5));
-        buttonBack = new JButton(" Powrot ");
-        buttonBack.addActionListener(this);
-        buttonBack.setBackground(new Color(255,100,100));
-        buttonBack.setBorder(BorderFactory.createEtchedBorder());
-        panel2.add(buttonBack);
-        JLabel lb1 = new JLabel();
-        panel2.add(lb1);
-        JLabel lb2 = new JLabel();
-        panel2.add(lb2);
-        buttonAddRating = new JButton(" Dodaj ocene: ");
-        buttonAddRating.setBackground(new Color(0,255,0));
-        buttonAddRating.setBorder(BorderFactory.createEtchedBorder());
-        buttonAddRating.setSize(250,20);
-        buttonAddRating.addActionListener(this);
+        panelEnd.setBackground(new Color(0, 200, 0));
+        panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
+        panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
         buttonAddRating.setVisible(false);
-        panel2.add(buttonAddRating);
-        myFrameNext.add(panel2, BorderLayout.SOUTH);
+        //Add elements to panels
+        panelStart.add(label, BorderLayout.CENTER);
+        panelMiddle.add(LabelId);
+        panelMiddle.add(textFieldID);
+        panelMiddle.add(LB);
+        panelMiddle.add(buttonIdPassRating);
+        panelMiddle.add(labelCheckIdRating);
+        panelMiddle.add(comboBoxRating);
+        panelEnd.add(buttonBack);
+        panelEnd.add(lb1);
+        panelEnd.add(lb2);
+        panelEnd.add(buttonAddRating);
+        //Add elements to frames
+        myFrameNext.add(panelStart, BorderLayout.NORTH);
+        myFrameNext.add(panelMiddle,BorderLayout.CENTER);
+        myFrameNext.add(panelEnd, BorderLayout.SOUTH);
     }
 
 
