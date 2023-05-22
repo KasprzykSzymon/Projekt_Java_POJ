@@ -14,9 +14,8 @@ public class AddRentCar implements ActionListener {
     private final MyFrame myFrameNext;
     private final JLabel labelStart, labelRentCheck, labelStartRent, labelRentStart, labelRentEnd;
     private final MyTextField textFieldID, textFieldRentDays, textFieldStartRent;
-    private final MyButton buttonRentIdPass, buttonRentCalculate;
+    private final JButton buttonRentIdPass, buttonRentCalculate, buttonBack, buttonConfirm;
     private final JCheckBox checkBoxAddCarFromToday;
-    private final MyButtonEnd buttonBack, buttonConfirm;
 
     AddRentCar() {
         //Initialization of variables
@@ -27,19 +26,19 @@ public class AddRentCar implements ActionListener {
         labelStart = new JLabel("Rezerwuj samochod: ");
         JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         textFieldID = new MyTextField();
-        buttonRentIdPass = new MyButton(" Sprawdz dostepnosc samochodu ");
+        buttonRentIdPass = new JButton(" Sprawdz dostepnosc samochodu ");
         labelRentCheck = new JLabel("");
         textFieldRentDays = new MyTextField();
         checkBoxAddCarFromToday = new JCheckBox("Czy wypozyczasz od dziasiejszego dnia?");
         labelStartRent = new JLabel("*Data poczatkowa: (format daty dd.MM.yyyy)");
         textFieldStartRent = new MyTextField();
-        buttonRentCalculate = new MyButton(" Sprawdz dni w wypozyczeniu ");
+        buttonRentCalculate = new JButton(" Sprawdz dni w wypozyczeniu ");
         labelRentStart = new JLabel("");
         labelRentEnd = new JLabel("");
-        buttonBack = new MyButtonEnd(" Powrot ");
+        buttonBack = new JButton(" Powrot ");
         JLabel lb1 = new JLabel();
         JLabel lb2 = new JLabel();
-        buttonConfirm = new MyButtonEnd(" Dodaj rezerwacje ");
+        buttonConfirm = new JButton(" Dodaj rezerwacje ");
         //Changing elements in panelStart
         panelStart.setBackground(new Color(0, 200, 0));
         //Changing elements in panel
@@ -49,6 +48,9 @@ public class AddRentCar implements ActionListener {
         textFieldID.setSize(new Dimension(250, 50));
         textFieldID.setFont(new Font("Arctic", Font.PLAIN, 30));
         buttonRentIdPass.setBackground(new Color(50, 120, 200));
+        buttonRentIdPass.setBorder(BorderFactory.createEtchedBorder());
+        buttonRentIdPass.setSize(250,20);
+        buttonRentIdPass.addActionListener((ActionListener) this);
         textFieldRentDays.setSize(new Dimension(250, 50));
         textFieldRentDays.setFont(new Font("Arctic", Font.PLAIN, 30));
         textFieldRentDays.setVisible(false);
@@ -60,12 +62,22 @@ public class AddRentCar implements ActionListener {
         textFieldStartRent.setVisible(false);
         buttonRentCalculate.setSize(new Dimension(250, 20));
         buttonRentCalculate.setBackground(new Color(50, 120, 200));
+        buttonRentCalculate.setBorder(BorderFactory.createEtchedBorder());
+        buttonRentCalculate.setSize(250,20);
+        buttonRentCalculate.addActionListener((ActionListener) this);
         buttonRentCalculate.setVisible(false);
         //Changing elements in panelEnd
         panelEnd.setBackground(new Color(0, 200, 0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
+        buttonBack.addActionListener((ActionListener) this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
         buttonConfirm.setBackground(new Color(0, 255, 0));
+        buttonConfirm.addActionListener((ActionListener) this);
+        buttonConfirm.setBorder(BorderFactory.createEtchedBorder());
+        buttonConfirm.setSize(250,20);
         buttonConfirm.setVisible(false);
         //Add elements to panels
         panelStart.add(labelStart, BorderLayout.CENTER);

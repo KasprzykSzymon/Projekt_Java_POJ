@@ -6,9 +6,8 @@ import java.awt.event.ActionListener;
 public class CalculateAmountOfRent implements ActionListener {
     private final MyFrame myFrameNext;
     private final MyTextField textFieldID, textFieldDays;
-    private final MyButton buttonIdPass, buttonCalculate;
+    private final JButton buttonIdPass, buttonCalculate, buttonBack;
     private final JLabel labelCheck, labelDays, labelCost;
-    private final MyButtonEnd buttonBack;
 
     CalculateAmountOfRent() {
         //Initialization of variables
@@ -20,12 +19,12 @@ public class CalculateAmountOfRent implements ActionListener {
         JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         textFieldID = new MyTextField();
         JLabel LB = new JLabel("");
-        buttonIdPass = new MyButton(" Sprawdz ");
+        buttonIdPass = new JButton(" Sprawdz ");
         labelCheck = new JLabel("");
-        buttonCalculate = new MyButton(" Oblicz ");
+        buttonCalculate = new JButton(" Oblicz ");
         labelDays = new JLabel("");
         labelCost = new JLabel("");
-        buttonBack = new MyButtonEnd(" Powrot ");
+        buttonBack = new JButton(" Powrot ");
         JLabel LBCalculate = new JLabel("");
         //Changing elements in panelStart
         panelStart.setBackground(new Color(0, 200, 0));
@@ -34,14 +33,24 @@ public class CalculateAmountOfRent implements ActionListener {
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel.setLayout(new GridLayout(0, 2, 10, 5));
         buttonIdPass.setBackground(new Color(50, 120, 200));
+        buttonIdPass.setBorder(BorderFactory.createEtchedBorder());
+        buttonIdPass.setSize(250,20);
+        buttonIdPass.addActionListener((ActionListener) this);
         textFieldDays = new MyTextField();
         textFieldDays.setVisible(false);
         buttonCalculate.setBackground(new Color(50, 120, 200));
+        buttonCalculate.setBorder(BorderFactory.createEtchedBorder());
+        buttonCalculate.setSize(250,20);
+        buttonCalculate.addActionListener((ActionListener) this);
         buttonCalculate.setVisible(false);
         //Changing elements in panelEnd
         panelEnd.setBackground(new Color(0, 200, 0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
+        buttonBack.addActionListener((ActionListener) this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
         //Add elements to panels
         panelStart.add(label, BorderLayout.CENTER);
         panel.add(LabelId);

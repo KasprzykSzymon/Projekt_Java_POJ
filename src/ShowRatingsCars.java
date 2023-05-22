@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ShowRatingsCars implements ActionListener {
     private final MyFrame myFrameNext;
-    private final MyButtonEnd buttonBack;
+    private final JButton buttonBack;
     ShowRatingsCars(){
         //Initialization of variables
         myFrameNext = new MyFrame();
@@ -25,7 +25,11 @@ public class ShowRatingsCars implements ActionListener {
         panelEnd.setBackground(new Color(0,200,0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panelEnd.setLayout(new GridLayout(0,4,10,5));
-        buttonBack = new MyButtonEnd(" Powrot ");
+        buttonBack = new JButton(" Powrot ");
+        buttonBack.addActionListener((ActionListener) this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
         //Add elements to panels
         panelStart.add(centerLabel);
         for (String car : ratingCars){

@@ -10,7 +10,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class GUI{
     public static void main(String[] args){ new GUI(); }
     public GUI(){
-        Car.createDatabase();
+        //Car.createDatabase();
         new MenuGui();
     }
 
@@ -42,6 +42,7 @@ public class GUI{
             this.yearOfProduction = yearOfProduction;
             this.ratings = new ArrayList<>();
         }
+        /*
         public static void createDatabase() {
             try {
                 // Rejestrujemy sterownik JDBC
@@ -84,7 +85,8 @@ public class GUI{
 
             Car car = new Car(mark, model, price, yearOfProduction);
             car.insertIntoDatabase();
-        }
+        }*/
+
 
         public int getId() { return id; }
         public String getMark() {

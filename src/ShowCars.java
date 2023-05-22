@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class ShowCars implements ActionListener {
     private final MyFrame myFrameNext;
-    private final MyButtonEnd buttonBack;
+    private final JButton buttonBack;
     final ArrayList<String> listCars;
     final ArrayList<JLabel> labelListCars;
     ShowCars(){
@@ -18,7 +18,7 @@ public class ShowCars implements ActionListener {
         JLabel centerLabel = new JLabel("Obecne samochody:");
         listCars = funcShowCars();
         labelListCars = new ArrayList<>();
-        buttonBack = new MyButtonEnd(" Powrot ");
+        buttonBack = new JButton(" Powrot ");
         //Changing elements in panelStart
         panelStart.setBackground(Color.GREEN);
         //Changing elements in panel
@@ -28,6 +28,10 @@ public class ShowCars implements ActionListener {
         panelEnd.setBackground(new Color(0,200,0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
         panelEnd.setLayout(new GridLayout(0,4,10,5));
+        buttonBack.addActionListener((ActionListener) this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
         //Add elements to panels
         panelStart.add(centerLabel);
         for (String car : listCars) {

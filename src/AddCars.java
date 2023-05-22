@@ -9,7 +9,7 @@ public class AddCars implements ActionListener {
     private final MyFrame myFrameNext;
     private final MyTextField myTextFieldMark, myTextFieldModel, myTextFieldYearOfProduction, myTextFieldPriceForDay;
     private final JCheckBox checkBoxAddCar;
-    private final MyButtonEnd buttonConfirm, buttonBack;
+    private final JButton buttonConfirm, buttonBack;
 
     AddCars() {
         //Initialization of variables
@@ -27,10 +27,10 @@ public class AddCars implements ActionListener {
         JLabel Label3 = new JLabel("Podaj cene za dzien wynajmu: \t");
         myTextFieldPriceForDay = new MyTextField();
         checkBoxAddCar = new JCheckBox();
-        buttonBack = new MyButtonEnd(" Powrot ");
+        buttonBack = new JButton(" Powrot ");
         JLabel lb1 = new JLabel();
         JLabel lb2 = new JLabel();
-        buttonConfirm = new MyButtonEnd(" Zatwierdz ");
+        buttonConfirm = new JButton(" Zatwierdz ");
         //Changing elements in panelStart
         panelStart.setBackground(Color.GREEN);
         //Changing elements in panelMiddle
@@ -53,7 +53,14 @@ public class AddCars implements ActionListener {
         panelEnd.setBackground(new Color(0, 200, 0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
+        buttonBack.addActionListener((ActionListener) this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
         buttonConfirm.setBackground(new Color(0, 255, 0));
+        buttonConfirm.addActionListener((ActionListener) this);
+        buttonConfirm.setBorder(BorderFactory.createEtchedBorder());
+        buttonConfirm.setSize(250,20);
         //Add elements to panels
         panelStart.add(titleLabel);
         panelMiddle.add(Label1);

@@ -7,11 +7,11 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCarRating implements ActionListener {
     private final MyFrame myFrameNext;
-    private final MyButton buttonIdPassRating, buttonAddRating;
+    private final JButton buttonIdPassRating, buttonAddRating;
     private final MyTextField textFieldID;
     private final JLabel labelCheckIdRating;
     private final JComboBox comboBoxRating;
-    private final MyButtonEnd buttonBack;
+    private final JButton buttonBack;
     AddCarRating(){
         //Initialization of variables
         myFrameNext = new MyFrame();
@@ -22,14 +22,26 @@ public class AddCarRating implements ActionListener {
         JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         textFieldID = new MyTextField();
         JLabel LB = new JLabel("");
-        buttonIdPassRating = new MyButton(" Sprawdz ");
+        buttonIdPassRating = new JButton(" Sprawdz ");
+        buttonIdPassRating.setBackground(new Color(0,255,0));
+        buttonIdPassRating.setBorder(BorderFactory.createEtchedBorder());
+        buttonIdPassRating.setSize(250,20);
+        buttonIdPassRating.addActionListener((ActionListener) this);
         labelCheckIdRating = new JLabel("");
         String[] rating1_5 = {"1","2","3","4","5"};
         comboBoxRating = new JComboBox<String>(rating1_5);
-        buttonBack = new MyButtonEnd(" Powrot ");
+        buttonBack = new JButton(" Powrot ");
+        buttonBack.addActionListener((ActionListener) this);
+        buttonBack.setBackground(new Color(255,100,100));
+        buttonBack.setBorder(BorderFactory.createEtchedBorder());
+        buttonBack.setSize(250,20);
         JLabel lb1 = new JLabel();
         JLabel lb2 = new JLabel();
-        buttonAddRating = new MyButton(" Dodaj ocene: ");
+        buttonAddRating = new JButton(" Dodaj ocene: ");
+        buttonAddRating.setBackground(new Color(0,255,0));
+        buttonAddRating.setBorder(BorderFactory.createEtchedBorder());
+        buttonAddRating.setSize(250,20);
+        buttonAddRating.addActionListener((ActionListener) this);
         //Changing elements in panelStart
         panelStart.setBackground(new Color(0, 200, 0));
         //Changing elements in panelMiddle
