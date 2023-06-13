@@ -4,9 +4,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 public class MyFrame extends JFrame implements ActionListener  {
-    //ImageIcon image = new ImageIcon("TITLE OF FILE WITH LOGO (TITLE.png)"); //Create an ImageIcon
-//this.setIconImage(image.getImage());  //Change icon of frame
-//this.getContentPane().setBackground(new Color(0,200,0)); //change color of background
     final JMenu fileMenu;
     JMenu editMenu;
     JMenu aboutMenu;
@@ -22,6 +19,8 @@ public class MyFrame extends JFrame implements ActionListener  {
         this.pack();
         this.setVisible(true); //make frame visible
         this.setSize(600,600);
+        ImageIcon image = new ImageIcon("lib/Picture/TitlePicture.png"); //Create an ImageIcon
+        this.setIconImage(image.getImage());  //Change icon of frame
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
         editMenu = new JMenu("Edit");
@@ -52,10 +51,12 @@ public class MyFrame extends JFrame implements ActionListener  {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==loadItem)
+        if(e.getSource()==loadItem) {
             System.out.println("Miejsce na instrukcje wczytania pliku! ");
-        if(e.getSource()==saveItem)
+        }
+        if(e.getSource()==saveItem){
             System.out.println("Miejsce na instrukcje zapisu danych! ");
+        }
         if(e.getSource()==backItem)
             System.out.println("Miejsce na instrukcje powrotu! ");
         if(e.getSource()==aboutItem)
