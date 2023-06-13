@@ -10,6 +10,6 @@
 
 #### Do pierwszego uruchomienia GUI (Dwa pierwsze myślniki są dla tych co nie mają zainstalowanej javy):
  - Należy mieć pobrane i zaaktualizowane pliki programu.
- - Posiadać JDK 11 (lub nowszy) i wybrać go w środowisku.
+ - Posiadać JDK 20 (lub nowszy) i wybrać go w środowisku.
  - W środowisku IntelliJ IDEA prawym przyciskiem myszy wcisnąć plik GUI i wybrać 'Run 'GUI.main()''
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////
