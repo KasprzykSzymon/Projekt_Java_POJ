@@ -80,6 +80,7 @@ public class LoginWindow {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
+                    new MenuGui();
                     frame.dispose();
                 }
             }
@@ -97,4 +98,3 @@ public class LoginWindow {
         LoginWindow loginWindow = new LoginWindow();
     }
 }
-
