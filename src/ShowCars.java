@@ -5,33 +5,26 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ShowCars implements ActionListener {
-    private final MyFrame myFrameNext;
-    private final JButton buttonBack;
+    private final MyFrame myFrameNext = new MyFrame();
+    MyLoverPanel panelEnd;
     final ArrayList<String> listCars;
     final ArrayList<JLabel> labelListCars;
     ShowCars(){
         //Initialization of variables
-        myFrameNext = new MyFrame();
+        myFrameNext.backItem.addActionListener(this);
         JPanel panelStart = new JPanel();
         JPanel panelMiddle = new JPanel();
-        JPanel panelEnd = new JPanel();
+        panelEnd = new MyLoverPanel();
         JLabel centerLabel = new JLabel("Obecne samochody:");
         listCars = funcShowCars();
         labelListCars = new ArrayList<>();
-        buttonBack = new JButton(" Powrot ");
         //Changing elements in panelStart
         panelStart.setBackground(Color.GREEN);
         //Changing elements in panel
         panelMiddle.setBackground(Color.GREEN);
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.Y_AXIS));
         //Changing elements in panelEnd
-        panelEnd.setBackground(new Color(0,200,0));
-        panelEnd.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-        panelEnd.setLayout(new GridLayout(0,4,10,5));
-        buttonBack.addActionListener((ActionListener) this);
-        buttonBack.setBackground(new Color(255,100,100));
-        buttonBack.setBorder(BorderFactory.createEtchedBorder());
-        buttonBack.setSize(250,20);
+        panelEnd.buttonBack.addActionListener((ActionListener) this);
         //Add elements to panels
         panelStart.add(centerLabel);
         for (String car : listCars) {
@@ -39,7 +32,7 @@ public class ShowCars implements ActionListener {
             labelListCars.add(labelCar);
             panelMiddle.add(labelCar);
         }
-        panelEnd.add(buttonBack);
+        panelEnd.add(panelEnd.buttonBack);
         //Add elements to frames
         myFrameNext.add(panelStart, BorderLayout.NORTH);
         myFrameNext.add(panelMiddle,BorderLayout.CENTER);
@@ -58,7 +51,11 @@ public class ShowCars implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e){
-        if(e.getSource()==buttonBack){
+        if(e.getSource() == myFrameNext.backItem){
+            myFrameNext.dispose();
+            new MenuGui();
+        }
+        if(e.getSource()==panelEnd.buttonBack){
             myFrameNext.dispose();
             new MenuGui();
         }

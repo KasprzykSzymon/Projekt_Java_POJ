@@ -5,14 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ShowRatingsCars implements ActionListener {
-    private final MyFrame myFrameNext;
-    private final JButton buttonBack;
+    private final MyFrame myFrameNext = new MyFrame();
+    private final MyLoverPanel panelEnd;
     ShowRatingsCars(){
         //Initialization of variables
-        myFrameNext = new MyFrame();
+        myFrameNext.backItem.addActionListener(this);
         JPanel panelStart = new JPanel();
         JPanel panelMiddle = new JPanel();
-        JPanel panelEnd = new JPanel();
+        panelEnd = new MyLoverPanel();
         JLabel centerLabel = new JLabel("Oceny samochodow:");
         ArrayList<String> ratingCars = funcRatingsCars();
         ArrayList<JLabel> labelRatingsCars = new ArrayList<>();
@@ -22,14 +22,7 @@ public class ShowRatingsCars implements ActionListener {
         panelMiddle.setBackground(Color.GREEN);
         panelMiddle.setLayout(new BoxLayout(panelMiddle,BoxLayout.Y_AXIS));
         //Changing elements in panelEnd
-        panelEnd.setBackground(new Color(0,200,0));
-        panelEnd.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
-        panelEnd.setLayout(new GridLayout(0,4,10,5));
-        buttonBack = new JButton(" Powrot ");
-        buttonBack.addActionListener((ActionListener) this);
-        buttonBack.setBackground(new Color(255,100,100));
-        buttonBack.setBorder(BorderFactory.createEtchedBorder());
-        buttonBack.setSize(250,20);
+        panelEnd.buttonBack.addActionListener(this);
         //Add elements to panels
         panelStart.add(centerLabel);
         for (String car : ratingCars){
@@ -37,7 +30,6 @@ public class ShowRatingsCars implements ActionListener {
             labelRatingsCars.add(labelRatingCar);
             panelMiddle.add(labelRatingCar);
         }
-        panelEnd.add(buttonBack);
         //Add elements to frames
         myFrameNext.add(panelStart, BorderLayout.NORTH);
         myFrameNext.add(panelMiddle,BorderLayout.CENTER);
@@ -59,7 +51,11 @@ public class ShowRatingsCars implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e){
-        if(e.getSource()==buttonBack){
+        if(e.getSource() == myFrameNext.backItem){
+            myFrameNext.dispose();
+            new MenuGui();
+        }
+        if(e.getSource()==panelEnd.buttonBack){
             myFrameNext.dispose();
             new MenuGui();
         }

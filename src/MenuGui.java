@@ -8,6 +8,7 @@ public class MenuGui implements ActionListener {
     private final JButton buttonAddCar,buttonShowCar,buttonReserveACars,buttonCalculateCost,buttonAddRatingCar,buttonShowCarsRating,exitButton;
     MenuGui() {
         myFrameGUI = new MyFrame();
+        myFrameGUI.editMenu.setVisible(false);
         JLabel label = new JLabel("Wypozyczalnia samochodow firmy: Firma ");
         buttonAddCar = new JButton("Dodaj samochod");
         buttonShowCar = new JButton("Wyswietl samochody");

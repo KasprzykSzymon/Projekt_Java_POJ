@@ -6,17 +6,18 @@ import java.awt.event.ActionListener;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCars implements ActionListener {
-    private final MyFrame myFrameNext;
+    private final MyFrame myFrameNext= new MyFrame();
+    private final MyLoverPanel panelEnd;
     private final MyTextField myTextFieldMark, myTextFieldModel, myTextFieldYearOfProduction, myTextFieldPriceForDay;
     private final JCheckBox checkBoxAddCar;
-    private final JButton buttonConfirm, buttonBack;
+//    private final MyButton buttonConfirm, buttonBack;
 
     AddCars() {
         //Initialization of variables
-        myFrameNext = new MyFrame();
+        myFrameNext.backItem.addActionListener(this);
         JPanel panelStart = new JPanel();
         JPanel panelMiddle = new JPanel();
-        JPanel panelEnd = new JPanel();
+        panelEnd = new MyLoverPanel(" Zatwierdz ");
         JLabel titleLabel = new JLabel("Podaj parametry samochodu:");
         JLabel Label1 = new JLabel("Podaj marke samochoduu:  \t");
         myTextFieldMark = new MyTextField();
@@ -27,10 +28,6 @@ public class AddCars implements ActionListener {
         JLabel Label3 = new JLabel("Podaj cene za dzien wynajmu: \t");
         myTextFieldPriceForDay = new MyTextField();
         checkBoxAddCar = new JCheckBox();
-        buttonBack = new JButton(" Powrot ");
-        JLabel lb1 = new JLabel();
-        JLabel lb2 = new JLabel();
-        buttonConfirm = new JButton(" Zatwierdz ");
         //Changing elements in panelStart
         panelStart.setBackground(Color.GREEN);
         //Changing elements in panelMiddle
@@ -53,14 +50,8 @@ public class AddCars implements ActionListener {
         panelEnd.setBackground(new Color(0, 200, 0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
-        buttonBack.addActionListener((ActionListener) this);
-        buttonBack.setBackground(new Color(255,100,100));
-        buttonBack.setBorder(BorderFactory.createEtchedBorder());
-        buttonBack.setSize(250,20);
-        buttonConfirm.setBackground(new Color(0, 255, 0));
-        buttonConfirm.addActionListener((ActionListener) this);
-        buttonConfirm.setBorder(BorderFactory.createEtchedBorder());
-        buttonConfirm.setSize(250,20);
+        panelEnd.buttonBack.addActionListener(this);
+       panelEnd.buttonSecond.addActionListener((ActionListener) this);
         //Add elements to panels
         panelStart.add(titleLabel);
         panelMiddle.add(Label1);
@@ -72,10 +63,6 @@ public class AddCars implements ActionListener {
         panelMiddle.add(Label3);
         panelMiddle.add(myTextFieldPriceForDay);
         panelMiddle.add(checkBoxAddCar);
-        panelEnd.add(buttonBack);
-        panelEnd.add(lb1);
-        panelEnd.add(lb2);
-        panelEnd.add(buttonConfirm);
         //Add elements to frames
         myFrameNext.add(panelStart, BorderLayout.NORTH);
         myFrameNext.add(panelMiddle, BorderLayout.CENTER);
@@ -90,7 +77,12 @@ public class AddCars implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == buttonConfirm) {
+        if(e.getSource() == myFrameNext.backItem){
+            System.out.println("Nie powiodło sie");
+            myFrameNext.dispose();
+            new MenuGui();
+        }
+        if (e.getSource()==panelEnd.buttonSecond) {
             if (!(!checkBoxAddCar.isSelected() | myTextFieldMark.getText().isEmpty() | myTextFieldModel.getText().isEmpty() | myTextFieldYearOfProduction.getText().isEmpty() | myTextFieldPriceForDay.getText().isEmpty())) {
                 double price = Double.parseDouble(myTextFieldPriceForDay.getText());
                 short year = Short.parseShort(myTextFieldYearOfProduction.getText());
@@ -101,7 +93,7 @@ public class AddCars implements ActionListener {
             } else
                 JOptionPane.showMessageDialog(myFrameNext,"Uzupelnij puste pola");
         }
-        if(e.getSource()==buttonBack){
+        if(e.getSource()==panelEnd.buttonBack){
             myFrameNext.dispose();
             new MenuGui();
         }

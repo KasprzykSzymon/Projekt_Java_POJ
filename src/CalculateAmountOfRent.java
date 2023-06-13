@@ -4,27 +4,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CalculateAmountOfRent implements ActionListener {
-    private final MyFrame myFrameNext;
+    private final MyFrame myFrameNext = new MyFrame();
+    private final MyLoverPanel panelEnd;
     private final MyTextField textFieldID, textFieldDays;
-    private final JButton buttonIdPass, buttonCalculate, buttonBack;
+    private final MyButton buttonIdPass;
     private final JLabel labelCheck, labelDays, labelCost;
 
     CalculateAmountOfRent() {
         //Initialization of variables
-        myFrameNext = new MyFrame();
+        myFrameNext.backItem.addActionListener(this);
         JPanel panelStart = new JPanel();
         JPanel panel = new JPanel();
-        JPanel panelEnd = new JPanel();
+        panelEnd = new MyLoverPanel(" Oblicz ");
         JLabel label = new JLabel("Oblicz kwote wynajmu: ");
         JLabel LabelId = new JLabel("Wybierz ID samochodu: ");
         textFieldID = new MyTextField();
         JLabel LB = new JLabel("");
-        buttonIdPass = new JButton(" Sprawdz ");
+        buttonIdPass = new MyButton(" Sprawdz ");
         labelCheck = new JLabel("");
-        buttonCalculate = new JButton(" Oblicz ");
         labelDays = new JLabel("");
         labelCost = new JLabel("");
-        buttonBack = new JButton(" Powrot ");
         JLabel LBCalculate = new JLabel("");
         //Changing elements in panelStart
         panelStart.setBackground(new Color(0, 200, 0));
@@ -32,25 +31,16 @@ public class CalculateAmountOfRent implements ActionListener {
         panel.setBackground(new Color(0, 200, 0));
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panel.setLayout(new GridLayout(0, 2, 10, 5));
-        buttonIdPass.setBackground(new Color(50, 120, 200));
-        buttonIdPass.setBorder(BorderFactory.createEtchedBorder());
-        buttonIdPass.setSize(250,20);
         buttonIdPass.addActionListener((ActionListener) this);
         textFieldDays = new MyTextField();
         textFieldDays.setVisible(false);
-        buttonCalculate.setBackground(new Color(50, 120, 200));
-        buttonCalculate.setBorder(BorderFactory.createEtchedBorder());
-        buttonCalculate.setSize(250,20);
-        buttonCalculate.addActionListener((ActionListener) this);
-        buttonCalculate.setVisible(false);
+        panelEnd.buttonSecond.addActionListener((ActionListener) this);
+        panelEnd.buttonSecond.setVisible(false);
         //Changing elements in panelEnd
         panelEnd.setBackground(new Color(0, 200, 0));
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
-        buttonBack.addActionListener((ActionListener) this);
-        buttonBack.setBackground(new Color(255,100,100));
-        buttonBack.setBorder(BorderFactory.createEtchedBorder());
-        buttonBack.setSize(250,20);
+        panelEnd.buttonBack.addActionListener((ActionListener) this);
         //Add elements to panels
         panelStart.add(label, BorderLayout.CENTER);
         panel.add(LabelId);
@@ -59,11 +49,8 @@ public class CalculateAmountOfRent implements ActionListener {
         panel.add(buttonIdPass);
         panel.add(labelCheck);
         panel.add(textFieldDays);
-        panel.add(LBCalculate);
-        panel.add(buttonCalculate);
         panel.add(labelDays);
         panel.add(labelCost);
-        panelEnd.add(buttonBack);
         //Add elements to frames
         myFrameNext.add(panelStart, BorderLayout.NORTH);
         myFrameNext.add(panel, BorderLayout.CENTER);
@@ -72,10 +59,14 @@ public class CalculateAmountOfRent implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == myFrameNext.backItem){
+            myFrameNext.dispose();
+            new MenuGui();
+        }
         if(e.getSource()==buttonIdPass) {
             if (textFieldID.getText().isEmpty()) {
                 textFieldDays.setVisible(false);
-                buttonCalculate.setVisible(false);
+                panelEnd.buttonSecond.setVisible(false);
                 labelCheck.setText("Podaj liczbe identyfikatora");
                 labelDays.setText("");
                 labelCost.setText("");
@@ -86,19 +77,19 @@ public class CalculateAmountOfRent implements ActionListener {
 
                     labelCheck.setText("Na ile dni chcesz wypozyczyc: ");
                     textFieldDays.setVisible(true);
-                    buttonCalculate.setVisible(true);
+                    panelEnd.buttonSecond.setVisible(true);
 
                 }
                 else {
                     labelCheck.setText("Nie ma takiego ID ");
                     textFieldDays.setVisible(false);
-                    buttonCalculate.setVisible(false);
+                    panelEnd.buttonSecond.setVisible(false);
                     labelDays.setText("");
                     labelCost.setText("");
                 }
             }
         }
-        if(e.getSource()==buttonCalculate){
+        if(e.getSource()==panelEnd.buttonSecond){
             int ID = Integer.parseInt(textFieldID.getText());
             GUI.Car Car = GUI.funcSearchCar(ID);
             int days = Integer.parseInt(textFieldDays.getText());
@@ -106,7 +97,7 @@ public class CalculateAmountOfRent implements ActionListener {
             labelDays.setText("Kwota za " + Car.getMark() + " " + Car.getModel() + " wynosi: ");
             labelCost.setText(String.format("%.2f PLN", price));
         }
-        if(e.getSource()==buttonBack){
+        if(e.getSource()==panelEnd.buttonBack){
             myFrameNext.dispose();
             new MenuGui();
         }

@@ -57,8 +57,6 @@ public class MyFrame extends JFrame implements ActionListener  {
         if(e.getSource()==saveItem){
             System.out.println("Miejsce na instrukcje zapisu danych! ");
         }
-        if(e.getSource()==backItem)
-            System.out.println("Miejsce na instrukcje powrotu! ");
         if(e.getSource()==aboutItem)
             about();
         if(e.getSource()==exitItem)
