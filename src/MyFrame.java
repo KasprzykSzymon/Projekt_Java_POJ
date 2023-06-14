@@ -3,10 +3,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 public class MyFrame extends JFrame implements ActionListener  {
     private static int currentCarNumber = 1;
@@ -14,7 +13,7 @@ public class MyFrame extends JFrame implements ActionListener  {
     JMenu editMenu;
     JMenu aboutMenu;
     JMenuBar menuBar;
-    JMenuItem loadItem;
+//    JMenuItem loadItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
     JMenuItem backItem;
@@ -31,14 +30,14 @@ public class MyFrame extends JFrame implements ActionListener  {
         fileMenu = new JMenu("File");
         editMenu = new JMenu("Edit");
         aboutMenu = new JMenu("About");
-        loadItem = new JMenuItem("Load");
+//        loadItem = new JMenuItem("Load");
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
-        loadItem.addActionListener(this);
+//        loadItem.addActionListener(this);
         saveItem.addActionListener(this);
         exitItem.addActionListener(this);
         saveItem.setMnemonic(KeyEvent.VK_S & KeyEvent.VK_CONTROL);
-        fileMenu.add(loadItem);
+//        fileMenu.add(loadItem);
         fileMenu.add(saveItem);
         fileMenu.add(exitItem);
         backItem = new JMenuItem("Back");
@@ -57,22 +56,24 @@ public class MyFrame extends JFrame implements ActionListener  {
     }
     private static void saveCarToFile() {
         try {
-            String ratingStr="", rentStr="";
-            BufferedWriter writer = new BufferedWriter(new FileWriter("samochody.txt", true));
+            File file = new File("samochody.txt");
+            file.delete(); // Delete the existing file
+            BufferedWriter writer = new BufferedWriter(new FileWriter("samochody.txt",true));
             for (GUI.Car car: GUI.Cars) {
-//                if(car.ratings.isEmpty())
-//                    ratingStr = "0";
-//                else
-//                    for (Integer rating : car.ratings) {
-//                        ratingStr += ",," + rating.toString();
-//                    }
-//                if(car.rentCar.isEmpty())
-//                    rentStr = "0";
-//                else
-//                    for (String rent : car.rentCar){
-//                        rentStr += ",," + rent.substring(28);
-//                    }
-                writer.write(car.getMark() + "," + car.getModel() + "," + car.getPrice() + "," + car.getYearOfProduction() + "," +ratingStr + ","+rentStr);
+                String ratingStr = "", rentStr = "";
+                if(car.ratings.isEmpty())
+                    ratingStr = "";
+                else
+                    for (Integer rating : car.ratings) {
+                        ratingStr += "//" + rating.toString();
+                    }
+                if(car.rentCar.isEmpty())
+                    rentStr = "";
+                else
+                    for (String rent : car.rentCar){
+                        rentStr += ",," + rent;
+                    }
+                writer.write(car.getMark() + "`" + car.getModel() + "`" + car.getPrice() + "`" + car.getYearOfProduction() + "`" +ratingStr + "`"+rentStr);
                 writer.newLine();
             }
             writer.close();
@@ -81,39 +82,13 @@ public class MyFrame extends JFrame implements ActionListener  {
             ex.printStackTrace();
         }
     }
-    private static void loadDataFromFile() {
-        try {
-            String[] parametrs, ratings, rents;
-            BufferedReader reader = new BufferedReader(new FileReader("samochody.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                parametrs = line.split(",");
-                GUI.Car Car = new GUI.Car(parametrs[0], parametrs[1], Double.parseDouble(parametrs[2]), Short.parseShort(parametrs[3]));
-                GUI.Cars.add(Car);
-//                if(parametrs.length > 4) {
-//                    ratings = parametrs[4].split(",,");
-//                    for (int i = 0; i < ratings.length - 1; i++)
-//                        Car.addRating(Integer.parseInt(ratings[i]));
-//                    if(parametrs.length > 5){
-//                        rents = parametrs[5].split((".."));
-//                        for (int i = 0; i < rents.length - 1; i++){
-//                            Car.AddRentCarFromLoad(rents[i].substring(0,10), Integer.parseInt(rents[i].substring(11,14)));
-//                        }
-//                    }
-                }
-//            }
-            reader.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==loadItem) {
-            loadDataFromFile();
-        }
+        //Autostart when application is started
+//        if(e.getSource()==loadItem) {
+////            loadDataFromFile();
+//            System.out.println("Instruction to ");
+//        }
         if(e.getSource()==saveItem){
             saveCarToFile();
         }

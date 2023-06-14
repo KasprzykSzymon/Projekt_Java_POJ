@@ -2,9 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class MenuGui implements ActionListener {
-    private final MyFrame myFrameGUI;
+    private static MyFrame myFrameGUI;
     private final JButton buttonAddCar,buttonShowCar,buttonReserveACars,buttonCalculateCost,buttonAddRatingCar,buttonShowCarsRating,exitButton;
     MenuGui() {
         myFrameGUI = new MyFrame();
@@ -51,6 +54,41 @@ public class MenuGui implements ActionListener {
         exitButton.addActionListener(this);
         exitButton.setBorder(BorderFactory.createEtchedBorder());
         exitButton.setBackground(new Color(50, 120, 200));
+    }
+    protected static void loadDataFromFile() {
+        try {
+            String[] parametrs, ratings, rents;
+            BufferedReader reader = new BufferedReader(new FileReader("samochody.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                parametrs = line.split("`");
+                GUI.Car Car = new GUI.Car(parametrs[0], parametrs[1], Double.parseDouble(parametrs[2]), Short.parseShort(parametrs[3]));
+                GUI.Cars.add(Car);
+                if(parametrs.length > 4 & parametrs[4]!="") {
+                    ratings = parametrs[4].split("//");
+                    for (int i = 0; i < ratings.length; i++) {
+                        Car.addRating(Integer.parseInt(ratings[i]));
+                    }
+                    if(parametrs.length > 5& parametrs[5]!=""){
+                        rents = parametrs[5].split(",,");
+                        for(int i = 0; i< rents.length;i++)
+                            Car.AddRentCar(myFrameGUI ,rents[i].substring(0,10), stringToInteger(rents[i].substring(11,15)));
+                    }
+                }
+            }
+            reader.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    protected static int stringToInteger(String S){
+        char numbers[] = {'1','2','3','4','5','6','7','8','9','0'};
+        for (int i = 0; i<S.length()-1;i++){
+            for(char s : numbers)
+                if(S.charAt(i) == s)
+                    return Integer.valueOf(S.substring(i,S.length()));
+        }
+        return 0;
     }
     @Override
     public void actionPerformed(ActionEvent e) {

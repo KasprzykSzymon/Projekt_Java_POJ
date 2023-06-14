@@ -11,6 +11,7 @@ public class GUI{
     public static void main(String[] args){ new GUI(); }
     public GUI(){
         //Car.createDatabase();
+        MenuGui.loadDataFromFile();
         new MenuGui();
     }
     public static ArrayList<Car> Cars = new ArrayList<>();
@@ -122,41 +123,36 @@ public class GUI{
             }
             return sum / ratings.size();
         }
-        public void AddRentCarFromLoad(String rentDays, int days){
-            String add = rentDays + " " + String.format("%4d", days);
-            System.out.println(add.length());
-            rentCar.add(add);
-        }
-    public void AddRentCar(MyFrame frame, String rentDays, int days){
-            for(String daysInRent : rentCar){
-                if(checkTheDate(frame, daysInRent)){
-                    String rent = daysInRent;
-                    showMessageDialog(frame, rent);
-                  return;
+    public boolean AddRentCar(MyFrame frame, String rentDays, int days){
+            for(String dayInRent : rentCar){
+                if(checkTheDate(frame, dayInRent)){
+                    String[] rent = AddRentCar.funcRentCar(true ,dayInRent.substring(0,10), dayInRent.substring(11));
+                    showMessageDialog(frame, rent[0]+ " do "+rent[1] + "\nTen termin jest zajety!");
+                  return false;
                 }
             }
             String add = rentDays + " " + String.format("%4d", days);
         rentCar.add(add);
-    }
-
-    public boolean checkTheDate(MyFrame frame,String startRentDays){
-        String start = startRentDays.substring(0, 10);
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date startDate = null;
-        try {
-            startDate = dateFormat.parse(startRentDays.substring(0, 10));
-        }
-        catch (ParseException e) {
-            showMessageDialog(frame, "Ten termin jest zajety!");
-            throw new RuntimeException(e);
-        }
-        Calendar endDate = (Calendar) startDate.clone();
-        int days = Integer.parseInt(startRentDays.substring(startRentDays. length() - 4));
-        endDate.add(Calendar.DATE, days);
-        for(int i=0;i<days;i++){
-            endDate.add(Calendar.DATE, 1);
-        }
         return true;
     }
+        public boolean checkTheDate(MyFrame frame, String startRentDays) {
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date startDate = null;
+            try {
+                startDate = dateFormat.parse(startRentDays.substring(0, 10));
+            }
+            catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            Calendar endDate = Calendar.getInstance();
+            endDate.setTime(startDate);
+            int days = MenuGui.stringToInteger(startRentDays.substring(startRentDays.length() - 4));
+            endDate.add(Calendar.DATE, days);
+            for (int i = 0; i < days; i++) {
+                endDate.add(Calendar.DATE, 1);
+            }
+            return true;
+        }
+
     }
 }

@@ -17,7 +17,6 @@ public class AddRentCar implements ActionListener {
     private final MyTextField textFieldID, textFieldRentDays, textFieldStartRent;
     private final MyButton buttonRentIdPass, buttonRentCalculate;
     private final JCheckBox checkBoxAddCarFromToday;
-
     AddRentCar() {
         //Initialization of variables
         myFrameNext.backItem.addActionListener(this);
@@ -81,7 +80,7 @@ public class AddRentCar implements ActionListener {
         myFrameNext.add(panelMiddle, BorderLayout.CENTER);
         myFrameNext.add(panelEnd, BorderLayout.SOUTH);
     }
-    private String[] funcRentCar(Boolean fromToday,String textFieldStartRent, String day) {
+    protected static String[] funcRentCar(Boolean fromToday, String textFieldStartRent, String day) {
         Calendar startDate = Calendar.getInstance();
         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         int days;
@@ -89,7 +88,7 @@ public class AddRentCar implements ActionListener {
             days=0;
         }
         else {
-            days = Integer.parseInt(day);
+            days = MenuGui.stringToInteger(day);
         }
         if (fromToday){}
         else{
@@ -98,7 +97,6 @@ public class AddRentCar implements ActionListener {
                 startDate.setTime(date);
             }
             catch (ParseException e) {
-                showMessageDialog(myFrameNext,"Nieprawidlowy format daty!");
                 return null;
             }
         }
@@ -106,7 +104,6 @@ public class AddRentCar implements ActionListener {
         endDate.add(Calendar.DATE, days);
         return new String[] {dateFormat.format(startDate.getTime()), dateFormat.format(endDate.getTime())};
     }
-
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() ==myFrameNext.backItem){
@@ -127,7 +124,6 @@ public class AddRentCar implements ActionListener {
                 labelRentEnd.setText("");
                 if (textFieldID.getText().isEmpty()) {
                     labelRentCheck.setText("Podaj liczbe identyfikatora");
-
                 }
                 else {
                     int ID = Integer.parseInt(textFieldID.getText());
@@ -150,9 +146,7 @@ public class AddRentCar implements ActionListener {
                 showMessageDialog(myFrameNext, "To nie jest liczba!");
                 throw new RuntimeException(e1);
             }
-
         }
-
         if(e.getSource()==buttonRentCalculate){
             panelEnd.buttonSecond.setVisible(false);
             if(textFieldRentDays.getText().isEmpty()){
@@ -178,8 +172,8 @@ public class AddRentCar implements ActionListener {
         if (e.getSource() == panelEnd.buttonSecond) {
             int ID = Integer.parseInt(textFieldID.getText());
             GUI.Car car = GUI.funcSearchCar(ID);
-            car.AddRentCar(myFrameNext,labelRentStart.getText(),Integer.parseInt(textFieldRentDays.getText()));
-            showMessageDialog(myFrameNext,"Dodano rezerwacje! ");
+            if(car.AddRentCar(myFrameNext,labelRentStart.getText(),Integer.parseInt(textFieldRentDays.getText())))
+                showMessageDialog(myFrameNext,"Dodano rezerwacje! ");
             myFrameNext.dispose();
             new MenuGui();
         }
