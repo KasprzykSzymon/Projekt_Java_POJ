@@ -56,31 +56,23 @@ public class MenuGui implements ActionListener {
         exitButton.setBackground(new Color(50, 120, 200));
     }
     protected static void loadDataFromFile() {
-
         try {
             String[] parametrs, ratings, rents;
             BufferedReader reader = new BufferedReader(new FileReader("samochody.txt"));
             String line;
             while ((line = reader.readLine()) != null) {
                 parametrs = line.split("`");
-                GUI.Car car = new GUI.Car(parametrs[0], parametrs[1], Double.parseDouble(parametrs[2]), Short.parseShort(parametrs[3]));
-                GUI.Cars.add(car);
-                if (parametrs.length > 4 && !parametrs[4].isEmpty()) {
+                GUI.Car Car = new GUI.Car(parametrs[0], parametrs[1], Double.parseDouble(parametrs[2]), Short.parseShort(parametrs[3]));
+                GUI.Cars.add(Car);
+                if(parametrs.length > 4 & parametrs[4]!="") {
                     ratings = parametrs[4].split("//");
-                    for (String rating : ratings) {
-                        if (!rating.isEmpty()) {
-                            car.addRating(Integer.parseInt(rating));
-                        }
+                    for (int i = 0; i < ratings.length; i++) {
+                        Car.addRating(Integer.parseInt(ratings[i]));
                     }
-                    if (parametrs.length > 5 && !parametrs[5].isEmpty()) {
+                    if(parametrs.length > 5& parametrs[5]!=""){
                         rents = parametrs[5].split(",,");
-                        for (String rent : rents) {
-                            if (!rent.isEmpty()) {
-                                String date = rent.substring(0, 10);
-                                int duration = stringToInteger(rent.substring(11, 15));
-                                car.AddRentCar(myFrameGUI, date, duration);
-                            }
-                        }
+                        for(int i = 0; i< rents.length;i++)
+                            Car.AddRentCar(myFrameGUI ,rents[i].substring(0,10), stringToInteger(rents[i].substring(11,15)));
                     }
                 }
             }
@@ -89,31 +81,6 @@ public class MenuGui implements ActionListener {
             ex.printStackTrace();
         }
     }
-    /*  try {
-          String[] parametrs, ratings, rents;
-          BufferedReader reader = new BufferedReader(new FileReader("samochody.txt"));
-          String line;
-          while ((line = reader.readLine()) != null) {
-              parametrs = line.split("`");
-              GUI.Car Car = new GUI.Car(parametrs[0], parametrs[1], Double.parseDouble(parametrs[2]), Short.parseShort(parametrs[3]));
-              GUI.Cars.add(Car);
-              if(parametrs.length > 4 & parametrs[4]!="") {
-                  ratings = parametrs[4].split("//");
-                  for (int i = 0; i < ratings.length; i++) {
-                      Car.addRating(Integer.parseInt(ratings[i]));
-                  }
-                  if(parametrs.length > 5& parametrs[5]!=""){
-                      rents = parametrs[5].split(",,");
-                      for(int i = 0; i< rents.length;i++)
-                          Car.AddRentCar(myFrameGUI ,rents[i].substring(0,10), stringToInteger(rents[i].substring(11,15)));
-                  }
-              }
-          }
-          reader.close();
-      } catch (IOException ex) {
-          ex.printStackTrace();
-      }
-  }*/
     protected static int stringToInteger(String S){
         char numbers[] = {'1','2','3','4','5','6','7','8','9','0'};
         for (int i = 0; i<S.length()-1;i++){
