@@ -13,7 +13,7 @@ public class MyFrame extends JFrame implements ActionListener  {
     JMenu editMenu;
     JMenu aboutMenu;
     JMenuBar menuBar;
-//    JMenuItem loadItem;
+    //    JMenuItem loadItem;
     JMenuItem saveItem;
     JMenuItem exitItem;
     JMenuItem backItem;
@@ -59,7 +59,7 @@ public class MyFrame extends JFrame implements ActionListener  {
             File file = new File("samochody.txt");
             file.delete(); // Delete the existing file
             BufferedWriter writer = new BufferedWriter(new FileWriter("samochody.txt",true));
-            for (GUI.Car car: GUI.Cars) {
+           /* for (GUI.Car car: GUI.Cars) {
                 String ratingStr = "", rentStr = "";
                 if(car.ratings.isEmpty())
                     ratingStr = "";
@@ -74,6 +74,28 @@ public class MyFrame extends JFrame implements ActionListener  {
                         rentStr += ",," + rent;
                     }
                 writer.write(car.getMark() + "`" + car.getModel() + "`" + car.getPrice() + "`" + car.getYearOfProduction() + "`" +ratingStr + "`"+rentStr);
+                writer.newLine();
+            }*/
+            for (GUI.Car car : GUI.Cars) {
+                String ratingStr = "";
+                if (!car.ratings.isEmpty()) {
+                    StringBuilder ratingBuilder = new StringBuilder();
+                    for (Integer rating : car.ratings) {
+                        ratingBuilder.append("`").append(rating);
+                    }
+                    ratingStr = ratingBuilder.toString();
+                }
+                ratingStr = ratingStr.replace("//", "`"); // Replace forward slashes with backticks
+                String rentStr = "";
+                if (!car.rentCar.isEmpty()) {
+                    StringBuilder rentBuilder = new StringBuilder();
+                    for (String rent : car.rentCar) {
+                        rentBuilder.append("`").append(rent);
+                    }
+                    rentStr = rentBuilder.toString();
+                }
+                String carData = car.getMark() + "`" + car.getModel() + "`" + car.getPrice() + "`" + car.getYearOfProduction() + ratingStr + rentStr;
+                writer.write(carData);
                 writer.newLine();
             }
             writer.close();
