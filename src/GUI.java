@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +42,85 @@ public class GUI{
             this.price = price;
             this.yearOfProduction = yearOfProduction;
             this.ratings = new ArrayList<>();
+        }
+        public int getId() { return id; }
+        public String getMark() {
+            return mark;
+        }
+        public String getModel() {
+            return model;
+        }
+        public double getPrice() {
+            return price;
+        }
+        public short getYearOfProduction() { return  yearOfProduction;}
+        public double funcCalculateTheCostOfRent(MyFrame frame, int days) {
+            if(days < 7) return price * days;
+            if(days < 14){
+                String messege = "Dodano rabat 10%. Za wynajem na "  + days +  " dni  ";
+                showMessageDialog(frame, messege);
+                return price * days * 0.9;
+            }
+            String messege = "Dodano rabat 15%. Za wynajem na " + days + " dni";
+            showMessageDialog(frame, messege);
+            return price * days * 0.85;
+        }
+        public void addRating(int rating) {
+            ratings.add(rating);
+        }
+        public double averageRating() {
+            if (ratings.isEmpty()) {
+                return 0;
+            }
+            double sum = 0;
+            for (int price : ratings) {
+                sum += price;
+            }
+            return sum / ratings.size();
+        }
+    public boolean AddRentCar(MyFrame frame, String rentDays, int days){
+            for(String dayInRent : rentCar){
+                if(checkTheDate(dayInRent,rentDays,days)){
+                    String[] rent = AddRentCar.funcRentCar(true ,dayInRent.substring(0,10), dayInRent.substring(11));
+                    showMessageDialog(frame, rent[0]+ " do "+rent[1] + "\nTen termin jest zajety!");
+                    return false;
+                }
+            }
+            String add = rentDays + " " + String.format("%4d", days);
+        rentCar.add(add);
+        return true;
+    }
+        public boolean checkTheDate(String startRentDays, String checkDate, int d2) {
+            int d1 = MenuGui.stringToInteger(startRentDays.substring(11));
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            Date startDate = null;
+            Date start2Date = null;
+            try {
+                startDate = dateFormat.parse(startRentDays.substring(0, 10));
+                start2Date = dateFormat.parse(checkDate);
+            }
+            catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            Calendar startDate1 = Calendar.getInstance();
+            startDate1.setTime(startDate);
+            for (int i = 0; i < d1; i++) {
+                startDate1.add(Calendar.DATE,1);
+                Calendar startDate2 = Calendar.getInstance();
+                startDate2.setTime(start2Date);
+                for (int j = 0; j < d2; j++) {
+                    startDate2.add(Calendar.DATE, 1);
+                    if(check(startDate1.getTime(),startDate2.getTime()))
+                        return true;
+                }
+            }
+            return false;
+        }
+        private boolean check(Date d1, Date d2){
+            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            String strD1 = dateFormat.format(d1);
+            String strD2 = dateFormat.format(d2);
+            return strD1.equals(strD2);
         }
         /*
         public static void createDatabase() {
@@ -86,73 +166,5 @@ public class GUI{
             Car car = new Car(mark, model, price, yearOfProduction);
             car.insertIntoDatabase();
         }*/
-
-
-        public int getId() { return id; }
-        public String getMark() {
-            return mark;
-        }
-        public String getModel() {
-            return model;
-        }
-        public double getPrice() {
-            return price;
-        }
-        public short getYearOfProduction() { return  yearOfProduction;}
-        public double funcCalculateTheCostOfRent(MyFrame frame, int days) {
-            if(days < 7) return price * days;
-            if(days < 14){
-                String messege = "Dodano rabat 10%. Za wynajem na "  + days +  " dni  ";
-                showMessageDialog(frame, messege);
-                return price * days * 0.9;
-            }
-            String messege = "Dodano rabat 15%. Za wynajem na " + days + " dni";
-            showMessageDialog(frame, messege);
-            return price * days * 0.85;
-        }
-        public void addRating(int rating) {
-            ratings.add(rating);
-        }
-        public double averageRating() {
-            if (ratings.isEmpty()) {
-                return 0;
-            }
-            double sum = 0;
-            for (int price : ratings) {
-                sum += price;
-            }
-            return sum / ratings.size();
-        }
-    public boolean AddRentCar(MyFrame frame, String rentDays, int days){
-            for(String dayInRent : rentCar){
-                if(checkTheDate(frame, dayInRent)){
-                    String[] rent = AddRentCar.funcRentCar(true ,dayInRent.substring(0,10), dayInRent.substring(11));
-                    showMessageDialog(frame, rent[0]+ " do "+rent[1] + "\nTen termin jest zajety!");
-                  return false;
-                }
-            }
-            String add = rentDays + " " + String.format("%4d", days);
-        rentCar.add(add);
-        return true;
-    }
-        public boolean checkTheDate(MyFrame frame, String startRentDays) {
-            DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-            Date startDate = null;
-            try {
-                startDate = dateFormat.parse(startRentDays.substring(0, 10));
-            }
-            catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-            Calendar endDate = Calendar.getInstance();
-            endDate.setTime(startDate);
-            int days = MenuGui.stringToInteger(startRentDays.substring(startRentDays.length() - 4));
-            endDate.add(Calendar.DATE, days);
-            for (int i = 0; i < days; i++) {
-                endDate.add(Calendar.DATE, 1);
-            }
-            return true;
-        }
-
     }
 }

@@ -172,7 +172,7 @@ public class AddRentCar implements ActionListener {
         if (e.getSource() == panelEnd.buttonSecond) {
             int ID = Integer.parseInt(textFieldID.getText());
             GUI.Car car = GUI.funcSearchCar(ID);
-            if(car.AddRentCar(myFrameNext,labelRentStart.getText(),Integer.parseInt(textFieldRentDays.getText())))
+            if(car.AddRentCar(myFrameNext,labelRentStart.getText().substring(28),Integer.parseInt(textFieldRentDays.getText())))
                 showMessageDialog(myFrameNext,"Dodano rezerwacje! ");
             myFrameNext.dispose();
             new MenuGui();
