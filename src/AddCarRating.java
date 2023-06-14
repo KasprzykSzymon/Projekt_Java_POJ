@@ -42,8 +42,6 @@ public class AddCarRating implements ActionListener {
         comboBoxRating.setVisible(false);
         //Changing elements in panelEnd
         panelEnd.buttonBack.addActionListener(this);
-        JLabel lb1 = new JLabel();
-        JLabel lb2 = new JLabel();
         panelEnd.buttonSecond.addActionListener( this);
         panelEnd.buttonSecond.setVisible(false);
         //Add elements to panels

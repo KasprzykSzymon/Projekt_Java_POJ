@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AddCars implements ActionListener {
@@ -10,8 +10,6 @@ public class AddCars implements ActionListener {
     private final MyLoverPanel panelEnd;
     private final MyTextField myTextFieldMark, myTextFieldModel, myTextFieldYearOfProduction, myTextFieldPriceForDay;
     private final JCheckBox checkBoxAddCar;
-//    private final MyButton buttonConfirm, buttonBack;
-
     AddCars() {
         //Initialization of variables
         myFrameNext.backItem.addActionListener(this);
@@ -35,13 +33,13 @@ public class AddCars implements ActionListener {
         panelMiddle.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelMiddle.setLayout(new GridLayout(0, 2, 10, 5));
         Label1.setBackground(Color.GREEN);
-        myTextFieldMark.setText("OPEL");
+//        myTextFieldMark.setText("OPEL");
         Label2.setBackground(Color.GREEN);
-        myTextFieldModel.setText("ASTRA");
+//        myTextFieldModel.setText("ASTRA");
         Label4.setBackground(Color.GREEN);
-        myTextFieldYearOfProduction.setText("2020");
+//        myTextFieldYearOfProduction.setText("2020");
         Label3.setBackground(Color.GREEN);
-        myTextFieldPriceForDay.setText("100");
+//        myTextFieldPriceForDay.setText("100");
         checkBoxAddCar.setText("Nie jestem robotem :)");
         checkBoxAddCar.setBackground(Color.GREEN);
         checkBoxAddCar.setFocusable(false);
@@ -51,7 +49,7 @@ public class AddCars implements ActionListener {
         panelEnd.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
         panelEnd.setLayout(new GridLayout(0, 4, 10, 5));
         panelEnd.buttonBack.addActionListener(this);
-       panelEnd.buttonSecond.addActionListener((ActionListener) this);
+        panelEnd.buttonSecond.addActionListener((ActionListener) this);
         //Add elements to panels
         panelStart.add(titleLabel);
         panelMiddle.add(Label1);
@@ -68,13 +66,11 @@ public class AddCars implements ActionListener {
         myFrameNext.add(panelMiddle, BorderLayout.CENTER);
         myFrameNext.add(panelEnd, BorderLayout.SOUTH);
     }
-
     public static void funcAddCar(String mark, String model, double price, short yearOfProduction, MyFrame frame) {
         GUI.Car Car = new GUI.Car(mark, model, price, yearOfProduction);
         GUI.Cars.add(Car);
         showMessageDialog(frame,"Dodano samochod do bazy");
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == myFrameNext.backItem){

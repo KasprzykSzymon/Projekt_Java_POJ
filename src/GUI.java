@@ -13,7 +13,6 @@ public class GUI{
         //Car.createDatabase();
         new MenuGui();
     }
-
     public static ArrayList<Car> Cars = new ArrayList<>();
     private static int nextId = 1;
 
@@ -32,8 +31,8 @@ public class GUI{
         private final String model;
         private final double price;
         private final short yearOfProduction;
-        private final ArrayList<Integer> ratings;
-        private ArrayList<String> rentCar = new ArrayList<>();
+        public final ArrayList<Integer> ratings;
+        public ArrayList<String> rentCar = new ArrayList<>();
         public Car(String mark, String model, double price, short yearOfProduction) {
             this.id = nextId++;
             this.mark = mark;
@@ -123,7 +122,11 @@ public class GUI{
             }
             return sum / ratings.size();
         }
-
+        public void AddRentCarFromLoad(String rentDays, int days){
+            String add = rentDays + " " + String.format("%4d", days);
+            System.out.println(add.length());
+            rentCar.add(add);
+        }
     public void AddRentCar(MyFrame frame, String rentDays, int days){
             for(String daysInRent : rentCar){
                 if(checkTheDate(frame, daysInRent)){

@@ -1,6 +1,7 @@
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
 
 public class MyButton extends JButton {
     MyButton(String text){
