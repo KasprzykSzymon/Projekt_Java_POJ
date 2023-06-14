@@ -5,7 +5,7 @@
  - Szymon Kasprzyk Lead
  - Michał Gruszczyński Help Desk
  - Oskar Pytlewski Help Hand
- - Klaudia Iwanowicz (Próżniak)
+ - Klaudia Iwanowicz
 
 
 #### Do pierwszego uruchomienia GUI (Dwa pierwsze myślniki są dla tych co nie mają zainstalowanej javy):
