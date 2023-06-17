@@ -29,7 +29,7 @@ public class AddRentCar implements ActionListener {
         buttonRentIdPass = new MyButton(" Sprawdz dostepnosc samochodu ");
         labelRentCheck = new JLabel("");
         textFieldRentDays = new MyTextField();
-        checkBoxAddCarFromToday = new JCheckBox("Czy wypozyczasz od dziasiejszego dnia?");
+        checkBoxAddCarFromToday = new JCheckBox("Czy wypozyczasz nie od dziasiejszego dnia?");
         labelStartRent = new JLabel("*Data poczatkowa: (format daty dd.MM.yyyy)");
         textFieldStartRent = new MyTextField();
         buttonRentCalculate = new MyButton(" Sprawdz dni w wypozyczeniu ");
